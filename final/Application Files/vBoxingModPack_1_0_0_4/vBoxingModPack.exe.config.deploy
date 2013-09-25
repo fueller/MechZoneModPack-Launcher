@@ -17,7 +17,7 @@
                 <value />
             </setting>
             <setting name="nickname" serializeAs="String">
-                <value>xx</value>
+                <value />
             </setting>
             <setting name="width" serializeAs="String">
                 <value>1280</value>
@@ -41,7 +41,7 @@
                 <value>1</value>
             </setting>
             <setting name="noServerCheck" serializeAs="String">
-                <value>True</value>
+                <value>False</value>
             </setting>
         </vBoxingModPack.Properties.Settings>
     </userSettings>
