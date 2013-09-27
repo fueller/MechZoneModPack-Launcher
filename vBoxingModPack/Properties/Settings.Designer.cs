@@ -154,5 +154,29 @@ namespace vBoxingModPack.Properties {
                 this["noServerCheck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int numDownFiles {
+            get {
+                return ((int)(this["numDownFiles"]));
+            }
+            set {
+                this["numDownFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int numFinFiles {
+            get {
+                return ((int)(this["numFinFiles"]));
+            }
+            set {
+                this["numFinFiles"] = value;
+            }
+        }
     }
 }

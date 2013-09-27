@@ -62,6 +62,7 @@
             this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogBrowser = new System.Windows.Forms.WebBrowser();
             this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
@@ -418,12 +419,23 @@
             this.button1.TabIndex = 20;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(396, 356);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "label3";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 488);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.infosMain);
             this.Controls.Add(this.mojangStatus);
@@ -501,6 +513,7 @@
         private System.Windows.Forms.WebBrowser infosBrowser;
         private System.Windows.Forms.WebBrowser changelogBrowser;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Label label3;
 	}
 }
 

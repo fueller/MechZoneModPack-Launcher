@@ -26,11 +26,11 @@ namespace vBoxingModPack
 		{            
             monitor.Start();
             InitializeComponent();
-            MessageBox.Show(monitor.Status.Connectivity.ToString());
 		}
 
         private void mainForm_Load(object sender, EventArgs e)
         {
+            
             ToolTip.SetToolTip(websiteStatus, "Website Status\r\nGerade Offline\r\n");
             ToolTip.SetToolTip(loginStatus, "Login Server Status\r\nGerade Offline\r\n");
             ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\nGerade Offline\r\n");
@@ -55,7 +55,7 @@ namespace vBoxingModPack
                status();
             }
 
-            if (Properties.Settings.Default.nickname != "" || Properties.Settings.Default.nickname != null || Properties.Settings.Default.nickname != "xx")
+            if (Properties.Settings.Default.nickname != "xx")
             {
                 welcomeMessage.Text = "Willkommen zurück " + Properties.Settings.Default.nickname;
             }
@@ -352,6 +352,18 @@ namespace vBoxingModPack
         private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             monitor.Stop();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.numDownFiles = 20;
+            Properties.Settings.Default.numFinFiles = 0;
+            for (int i = 0; i < 20; i++)
+            {
+                vb.downloadFile("http://lawall.funpic.de/modpack/files/file1.txt", vb.appdata() + "\\.vboxing\\files\\file" + i + ".txt");
+            }
+            
+            
         }
 	}
 }

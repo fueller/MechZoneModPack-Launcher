@@ -67,11 +67,22 @@ namespace vBoxingModPack
         {
             if (!File.Exists(save))
             {
-                WebClient client = new WebClient();
-                client.DownloadFileAsync(new Uri(url), save);
+                try
+                {
+                    //MessageBox.Show("StartDownload");
+                    WebClient client = new WebClient();
+                    client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
+                    client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+                    client.DownloadFileAsync(new Uri(url), save);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {
+
                 if (checkMD5(save, getMD5(null)))
 	            {
 		            //datei ist aktuell
@@ -82,6 +93,17 @@ namespace vBoxingModPack
                 }
             }
         }
+
+        public static void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            //Console.WriteLine("DownloadFinished");
+        }
+
+        private static void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            Properties.Settings.Default.numFinFiles++;
+        }
+
         #endregion
 
         #region appdata
@@ -148,7 +170,5 @@ namespace vBoxingModPack
             }
         }
         #endregion
-
-        
     }
 }
