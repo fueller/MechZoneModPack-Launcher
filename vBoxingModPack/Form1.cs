@@ -13,16 +13,20 @@ using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using EQATEC.Analytics.Monitor;
 
 namespace vBoxingModPack
 {
 	public partial class mainForm : Form
 	{
         List<string> output = new List<string>();
+        public static IAnalyticsMonitor monitor = AnalyticsMonitorFactory.CreateMonitor("A645BAB7505648C3AE67645A9DB77EF7");
         
         public mainForm()
-		{
-			InitializeComponent();
+		{            
+            monitor.Start();
+            InitializeComponent();
+            MessageBox.Show(monitor.Status.Connectivity.ToString());
 		}
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -77,6 +81,7 @@ namespace vBoxingModPack
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            monitor.TrackFeature("login");
             string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
             if (session == "error")
             {
@@ -155,6 +160,7 @@ namespace vBoxingModPack
 
         private void status()
         {
+            monitor.TrackFeature("updateStartus");
             dynamic data = vb.getServerStatus();
 
             if (data != null)
@@ -245,6 +251,7 @@ namespace vBoxingModPack
         {
             Properties.Settings.Default.options = optionEnable.Checked;
             Properties.Settings.Default.Save();
+            monitor.TrackFeature("optionEnable");
             if (optionEnable.Checked)
             {
                 optionenPanel.Enabled = true;
@@ -266,6 +273,7 @@ namespace vBoxingModPack
         {
             Properties.Settings.Default.ram = ramComb.Checked;
             Properties.Settings.Default.Save();
+            monitor.TrackFeature("ramComb");
             if (ramComb.Checked)
             {
                 ramSelect.Enabled = true;
@@ -280,6 +288,7 @@ namespace vBoxingModPack
         {
             Properties.Settings.Default.resolution = resolutionComb.Checked;
             Properties.Settings.Default.Save();
+            monitor.TrackFeature("resolutionComb");
             if (resolutionComb.Checked)
             {
                 resWidth.Enabled = true;
@@ -326,6 +335,7 @@ namespace vBoxingModPack
 
         private void noServerCheckOnStart_CheckedChanged(object sender, EventArgs e)
         {
+            monitor.TrackFeature("noServerCheck");
             if (noServerCheckOnStart.Checked)
             {
                 Properties.Settings.Default.noServerCheck = true;                
@@ -337,6 +347,11 @@ namespace vBoxingModPack
 
             Properties.Settings.Default.Save();
 
+        }
+
+        private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            monitor.Stop();
         }
 	}
 }

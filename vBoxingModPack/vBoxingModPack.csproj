@@ -32,7 +32,7 @@
     <PublisherName>vBoxing</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.php</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -93,6 +93,9 @@
     <AssemblyOriginatorKeyFile>ModPackKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EQATEC.Analytics.Monitor">
+      <HintPath>..\..\..\..\Downloads\AnalyticsMonitorDotNet_3_2_1\EQATEC.Analytics.Monitor.dll</HintPath>
+    </Reference>
     <Reference Include="JsonFx">
       <HintPath>..\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -115,7 +118,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

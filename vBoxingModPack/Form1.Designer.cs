@@ -42,6 +42,7 @@
             this.loginStatus = new System.Windows.Forms.PictureBox();
             this.websiteStatus = new System.Windows.Forms.PictureBox();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.noServerCheckOnStart = new System.Windows.Forms.CheckBox();
             this.process1 = new System.Diagnostics.Process();
             this.showConsole = new System.Windows.Forms.CheckBox();
             this.updateStatus = new System.Windows.Forms.Button();
@@ -55,12 +56,12 @@
             this.resolutionComb = new System.Windows.Forms.CheckBox();
             this.optionEnable = new System.Windows.Forms.CheckBox();
             this.mojangStatus = new System.Windows.Forms.Label();
-            this.noServerCheckOnStart = new System.Windows.Forms.CheckBox();
             this.infosMain = new System.Windows.Forms.TabControl();
             this.infosTabPage = new System.Windows.Forms.TabPage();
-            this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.infosBrowser = new System.Windows.Forms.WebBrowser();
+            this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogBrowser = new System.Windows.Forms.WebBrowser();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
@@ -178,6 +179,19 @@
             // ToolTip
             // 
             this.ToolTip.IsBalloon = true;
+            // 
+            // noServerCheckOnStart
+            // 
+            this.noServerCheckOnStart.AutoSize = true;
+            this.noServerCheckOnStart.Location = new System.Drawing.Point(3, 125);
+            this.noServerCheckOnStart.Name = "noServerCheckOnStart";
+            this.noServerCheckOnStart.Size = new System.Drawing.Size(175, 17);
+            this.noServerCheckOnStart.TabIndex = 21;
+            this.noServerCheckOnStart.Text = "Kein Server Check beim starten";
+            this.ToolTip.SetToolTip(this.noServerCheckOnStart, "Checkt beim starten nicht ob die Minecraft Server Online sind\r\n(Das Programm star" +
+        "tet schneller)");
+            this.noServerCheckOnStart.UseVisualStyleBackColor = true;
+            this.noServerCheckOnStart.CheckedChanged += new System.EventHandler(this.noServerCheckOnStart_CheckedChanged);
             // 
             // process1
             // 
@@ -345,19 +359,6 @@
             this.mojangStatus.Size = new System.Drawing.Size(184, 39);
             this.mojangStatus.TabIndex = 18;
             // 
-            // noServerCheckOnStart
-            // 
-            this.noServerCheckOnStart.AutoSize = true;
-            this.noServerCheckOnStart.Location = new System.Drawing.Point(3, 125);
-            this.noServerCheckOnStart.Name = "noServerCheckOnStart";
-            this.noServerCheckOnStart.Size = new System.Drawing.Size(175, 17);
-            this.noServerCheckOnStart.TabIndex = 21;
-            this.noServerCheckOnStart.Text = "Kein Server Check beim starten";
-            this.ToolTip.SetToolTip(this.noServerCheckOnStart, "Checkt beim starten nicht ob die Minecraft Server Online sind\r\n(Das Programm star" +
-        "tet schneller)");
-            this.noServerCheckOnStart.UseVisualStyleBackColor = true;
-            this.noServerCheckOnStart.CheckedChanged += new System.EventHandler(this.noServerCheckOnStart_CheckedChanged);
-            // 
             // infosMain
             // 
             this.infosMain.Controls.Add(this.infosTabPage);
@@ -380,6 +381,15 @@
             this.infosTabPage.Text = "Infos";
             this.infosTabPage.UseVisualStyleBackColor = true;
             // 
+            // infosBrowser
+            // 
+            this.infosBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.infosBrowser.Location = new System.Drawing.Point(3, 3);
+            this.infosBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.infosBrowser.Name = "infosBrowser";
+            this.infosBrowser.Size = new System.Drawing.Size(739, 192);
+            this.infosBrowser.TabIndex = 0;
+            // 
             // changelogTabPage
             // 
             this.changelogTabPage.Controls.Add(this.changelogBrowser);
@@ -391,15 +401,6 @@
             this.changelogTabPage.Text = "Changelog";
             this.changelogTabPage.UseVisualStyleBackColor = true;
             // 
-            // infosBrowser
-            // 
-            this.infosBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.infosBrowser.Location = new System.Drawing.Point(3, 3);
-            this.infosBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.infosBrowser.Name = "infosBrowser";
-            this.infosBrowser.Size = new System.Drawing.Size(739, 192);
-            this.infosBrowser.TabIndex = 0;
-            // 
             // changelogBrowser
             // 
             this.changelogBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -409,11 +410,21 @@
             this.changelogBrowser.Size = new System.Drawing.Size(739, 192);
             this.changelogBrowser.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(396, 332);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 488);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.infosMain);
             this.Controls.Add(this.mojangStatus);
             this.Controls.Add(this.optionEnable);
@@ -437,6 +448,7 @@
             this.Name = "mainForm";
             this.ShowIcon = false;
             this.Text = "vBoxing.de Mod Pack";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
             this.Load += new System.EventHandler(this.mainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).EndInit();
@@ -488,6 +500,7 @@
         private System.Windows.Forms.TabPage changelogTabPage;
         private System.Windows.Forms.WebBrowser infosBrowser;
         private System.Windows.Forms.WebBrowser changelogBrowser;
+        private System.Windows.Forms.Button button1;
 	}
 }
 

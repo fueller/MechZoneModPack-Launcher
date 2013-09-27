@@ -13,18 +13,18 @@ using System.Windows.Forms;
 using vBoxingModPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using EQATEC.Analytics.Monitor;
 
 namespace vBoxingModPack
 {
     class vb
     {
         #region get Session Key
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Objekte nicht mehrmals verwerfen")]
         public static string getSessionKey(string username, string password)
         {
             try
             {
+                vBoxingModPack.mainForm.monitor.TrackFeatureStart("getSessionKey");
                 WebRequest.DefaultWebProxy = null;
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://authserver.mojang.com/authenticate");
                 
@@ -47,6 +47,7 @@ namespace vBoxingModPack
                         var j = JsonConvert.DeserializeObject<jsonClasses.minecraftLogonJson1>(response);
                         Properties.Settings.Default.nickname = j.selectedProfile.name;
                         Properties.Settings.Default.Save();
+                        vBoxingModPack.mainForm.monitor.TrackFeatureStop("getSessionKey");
                         return "token:" + j.accessToken + ":" + j.selectedProfile.id;
                     }
                 
@@ -54,6 +55,8 @@ namespace vBoxingModPack
             catch (Exception ex)
             {
                 MessageBox.Show("Benutzername oder Passwort stimmt nicht\n" + ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                vBoxingModPack.mainForm.monitor.TrackFeatureCancel("getSessionKey");
+                vBoxingModPack.mainForm.monitor.TrackException(ex, "noLogin");
                 return "error";
             }
         }
@@ -128,17 +131,19 @@ namespace vBoxingModPack
         {
             try
             {
+                vBoxingModPack.mainForm.monitor.TrackFeatureStart("getServerStatus");
                 WebClient client = new WebClient();
                 client.Proxy = null;
                 var response = client.DownloadString(new Uri("http://xpaw.ru/mcstatus/status.json"));
                 dynamic data = new JsonFx.Json.JsonReader().Read(response);
-                
+                vBoxingModPack.mainForm.monitor.TrackFeatureStop("getServerStatus");
                 return data;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                //throw;
+                vBoxingModPack.mainForm.monitor.TrackFeatureCancel("getServerStatus");
+                vBoxingModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
                 return null;
             }
         }
