@@ -1,0 +1,15 @@
+{
+	"files":
+	[
+		{
+		"url": "http://lawall.funpic.de/modpack/files/file1.txt",
+		"path": "\\files\\file1.txt",
+		"md5": ""
+		},
+		{
+		"url": "http://lawall.funpic.de/modpack/files/file2.txt",
+		"path": "\\files\\file2.txt",
+		"md5": ""
+		}
+	]
+}

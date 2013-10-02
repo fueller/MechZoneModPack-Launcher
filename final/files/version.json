@@ -1,0 +1,8 @@
+{
+	"mods": "0.0.1",
+	"config": "0.0.1",
+	"libraries": "1.6.4",
+	"natives": "1.6.4",
+	"minecraft": "1.6.4",
+	"forge": "9.11.0.884"
+}
