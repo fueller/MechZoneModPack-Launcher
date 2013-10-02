@@ -21,7 +21,7 @@ namespace vBoxingModPack
 	{
         List<string> output = new List<string>();
         public static IAnalyticsMonitor monitor = AnalyticsMonitorFactory.CreateMonitor("A645BAB7505648C3AE67645A9DB77EF7");
-        
+                
         public mainForm()
 		{            
             monitor.Start();
@@ -82,74 +82,79 @@ namespace vBoxingModPack
         private void loginButton_Click(object sender, EventArgs e)
         {
             monitor.TrackFeature("login");
-            string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
-            if (session == "error")
-            {
+            status st = new status();
+            st.stat = "login";
+            var statResult = st.ShowDialog();
 
-            }
-            else
+            if (st.canceled == false)
             {
-                //MessageBox.Show(session);
-                if (showConsole.Checked)
+                string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
+                if (session == "error")
                 {
-                    process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "java.exe";
+
                 }
                 else
                 {
-                    process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
-                }
-                process1.StartInfo.WorkingDirectory = vb.appdata() + "\\.vboxing";
-                string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
-                
-                if (ramComb.Checked)
-	            {
-                    arguments += "-Xmx" + ramSelect.Text.Replace(" MB", "") + "M";                         
-                }
-                else
-                {
-                    arguments += "-Xmx1G";
-                }
+                    //MessageBox.Show(session);
+                    if (showConsole.Checked)
+                    {
+                        process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "java.exe";
+                    }
+                    else
+                    {
+                        process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
+                    }
+                    process1.StartInfo.WorkingDirectory = vb.appdata() + "";
+                    string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
 
-                arguments += " -Djava.library.path=" 
-                    + vb.appdata() + "\\.vboxing\\versions\\1.6.4-Forge9.11.0.883\\1.6.4-Forge-natives -cp " 
-                    + vb.appdata() + "\\.vboxing\\libraries\\net\\minecraftforge\\minecraftforge\\9.11.0.883\\minecraftforge-9.11.0.883.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\net\\minecraft\\launchwrapper\\1.7\\launchwrapper-1.7.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\org\\ow2\\asm\\asm-all\\4.1\\asm-all-4.1.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\org\\scala-lang\\scala-library\\2.10.2\\scala-library-2.10.2.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\org\\scala-lang\\scala-compiler\\2.10.2\\scala-compiler-2.10.2.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\lzma\\lzma\\0.0.1\\lzma-0.0.1.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\net\\sf\\jopt-simple\\jopt-simple\\4.5\\jopt-simple-4.5.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\com\\paulscode\\codecjorbis\\20101023\\codecjorbis-20101023.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\com\\paulscode\\codecwav\\20101023\\codecwav-20101023.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\com\\paulscode\\libraryjavasound\\20101123\\libraryjavasound-20101123.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\com\\paulscode\\librarylwjglopenal\\20100824\\librarylwjglopenal-20100824.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\com\\paulscode\\soundsystem\\20120107\\soundsystem-20120107.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\argo\\argo\\2.25_fixed\\argo-2.25_fixed.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\org\\bouncycastle\\bcprov-jdk15on\\1.47\\bcprov-jdk15on-1.47.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\com\\google\\guava\\guava\\14.0\\guava-14.0.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\commons-io\\commons-io\\2.4\\commons-io-2.4.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\net\\java\\jinput\\jinput\\2.0.5\\jinput-2.0.5.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\net\\java\\jutils\\jutils\\1.0.0\\jutils-1.0.0.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\com\\google\\code\\gson\\gson\\2.2.2\\gson-2.2.2.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\org\\lwjgl\\lwjgl\\lwjgl\\2.9.0\\lwjgl-2.9.0.jar;" 
-                    + vb.appdata() + "\\.vboxing\\libraries\\org\\lwjgl\\lwjgl\\lwjgl_util\\2.9.0\\lwjgl_util-2.9.0.jar;" 
-                    + vb.appdata() + "\\.vboxing\\versions\\1.6.4-Forge9.11.0.883\\1.6.4-Forge9.11.0.883.jar net.minecraft.launchwrapper.Launch "
-                    + "--username " + Properties.Settings.Default.nickname + " --session " + session + " --version 1.6.4-Forge9.11.0.883 --gameDir " 
-                    + vb.appdata() + "\\.vboxing --assetsDir " 
-                    + vb.appdata() + "\\.vboxing\\assets --tweakClass cpw.mods.fml.common.launcher.FMLTweaker";
-                
-                if (resolutionComb.Checked)
-                {
-                    arguments += " --width " + resWidth.Value + " --height " + resHeight.Value;
-                }
+                    if (ramComb.Checked)
+                    {
+                        arguments += "-Xmx" + ramSelect.Text.Replace(" MB", "") + "M";
+                    }
+                    else
+                    {
+                        arguments += "-Xmx1G";
+                    }
 
-                process1.StartInfo.Arguments = arguments;
-                //process1.StartInfo.RedirectStandardOutput = true;
-                //process1.StartInfo.UseShellExecute = false;
-                process1.Start();
-                
-                //process1.WaitForExit();
+                    arguments += " -Djava.library.path="
+                        + vb.appdata() + "\\versions\\1.6.4-Forge9.11.0.883\\1.6.4-Forge-natives -cp "
+                        + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\9.11.0.883\\minecraftforge-9.11.0.883.jar;"
+                        + vb.appdata() + "\\libraries\\net\\minecraft\\launchwrapper\\1.7\\launchwrapper-1.7.jar;"
+                        + vb.appdata() + "\\libraries\\org\\ow2\\asm\\asm-all\\4.1\\asm-all-4.1.jar;"
+                        + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-library\\2.10.2\\scala-library-2.10.2.jar;"
+                        + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-compiler\\2.10.2\\scala-compiler-2.10.2.jar;"
+                        + vb.appdata() + "\\libraries\\lzma\\lzma\\0.0.1\\lzma-0.0.1.jar;"
+                        + vb.appdata() + "\\libraries\\net\\sf\\jopt-simple\\jopt-simple\\4.5\\jopt-simple-4.5.jar;"
+                        + vb.appdata() + "\\libraries\\com\\paulscode\\codecjorbis\\20101023\\codecjorbis-20101023.jar;"
+                        + vb.appdata() + "\\libraries\\com\\paulscode\\codecwav\\20101023\\codecwav-20101023.jar;"
+                        + vb.appdata() + "\\libraries\\com\\paulscode\\libraryjavasound\\20101123\\libraryjavasound-20101123.jar;"
+                        + vb.appdata() + "\\libraries\\com\\paulscode\\librarylwjglopenal\\20100824\\librarylwjglopenal-20100824.jar;"
+                        + vb.appdata() + "\\libraries\\com\\paulscode\\soundsystem\\20120107\\soundsystem-20120107.jar;"
+                        + vb.appdata() + "\\libraries\\argo\\argo\\2.25_fixed\\argo-2.25_fixed.jar;"
+                        + vb.appdata() + "\\libraries\\org\\bouncycastle\\bcprov-jdk15on\\1.47\\bcprov-jdk15on-1.47.jar;"
+                        + vb.appdata() + "\\libraries\\com\\google\\guava\\guava\\14.0\\guava-14.0.jar;"
+                        + vb.appdata() + "\\libraries\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar;"
+                        + vb.appdata() + "\\libraries\\commons-io\\commons-io\\2.4\\commons-io-2.4.jar;"
+                        + vb.appdata() + "\\libraries\\net\\java\\jinput\\jinput\\2.0.5\\jinput-2.0.5.jar;"
+                        + vb.appdata() + "\\libraries\\net\\java\\jutils\\jutils\\1.0.0\\jutils-1.0.0.jar;"
+                        + vb.appdata() + "\\libraries\\com\\google\\code\\gson\\gson\\2.2.2\\gson-2.2.2.jar;"
+                        + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl\\2.9.0\\lwjgl-2.9.0.jar;"
+                        + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl_util\\2.9.0\\lwjgl_util-2.9.0.jar;"
+                        + vb.appdata() + "\\versions\\1.6.4-Forge9.11.0.883\\1.6.4-Forge9.11.0.883.jar net.minecraft.launchwrapper.Launch "
+                        + "--username " + Properties.Settings.Default.nickname + " --session " + session + " --version 1.6.4-Forge9.11.0.883 --gameDir "
+                        + vb.appdata() + " --assetsDir "
+                        + vb.appdata() + "\\assets --tweakClass cpw.mods.fml.common.launcher.FMLTweaker";
+
+                    if (resolutionComb.Checked)
+                    {
+                        arguments += " --width " + resWidth.Value + " --height " + resHeight.Value;
+                    }
+
+                    process1.StartInfo.Arguments = arguments;
+                    //process1.StartInfo.RedirectStandardOutput = true;
+                    //process1.StartInfo.UseShellExecute = false;
+                    process1.Start();
+                } 
             }
         }
 
@@ -356,14 +361,47 @@ namespace vBoxingModPack
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.numDownFiles = 20;
-            Properties.Settings.Default.numFinFiles = 0;
-            for (int i = 0; i < 20; i++)
+            try
             {
-                vb.downloadFile("http://lawall.funpic.de/modpack/files/file1.txt", vb.appdata() + "\\.vboxing\\files\\file" + i + ".txt");
+                WebClient client = new WebClient();
+                client.Proxy = null;
+                File.Delete(vb.appdata() + "\\temp\\files.json");
+                client.DownloadFile("http://lawall.funpic.de/modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
+                var j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\files.json"));
+
+                for (int i = 0; i < j.files.Count; i++)
+                {
+                    vb.downloadFile(j.files[i].url, vb.appdata() + j.files[i].path, j.files[i].md5);
+                }
             }
-            
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //vb.getNatives();
+            vb.getLibraries();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            vb.deleteLibraries();
+        }
+
+        private void mainForm_Shown(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.noServerCheck == false)
+            {
+                status();
+            }
+        }
+
+        private void UpdateProgress(int ProgressPercentage)
+        {
+
         }
 	}
 }

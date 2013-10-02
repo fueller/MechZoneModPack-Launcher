@@ -1,6 +1,6 @@
 ﻿namespace vBoxingModPack
 {
-    partial class downloadMsg
+    partial class status
     {
         /// <summary>
         /// Required designer variable.
@@ -28,47 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.cancel = new System.Windows.Forms.Button();
-            this.progress = new System.Windows.Forms.ProgressBar();
-            this.downloadFiles = new System.Windows.Forms.Label();
+            this.doing = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(13, 13);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(374, 23);
+            this.progressBar1.TabIndex = 0;
             // 
             // cancel
             // 
-            this.cancel.Location = new System.Drawing.Point(303, 42);
+            this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancel.Location = new System.Drawing.Point(311, 48);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
-            this.cancel.TabIndex = 0;
+            this.cancel.TabIndex = 1;
             this.cancel.Text = "Abbrechen";
             this.cancel.UseVisualStyleBackColor = true;
             this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
-            // progress
+            // doing
             // 
-            this.progress.Location = new System.Drawing.Point(13, 13);
-            this.progress.Name = "progress";
-            this.progress.Size = new System.Drawing.Size(365, 23);
-            this.progress.TabIndex = 1;
+            this.doing.AutoSize = true;
+            this.doing.Location = new System.Drawing.Point(13, 48);
+            this.doing.Name = "doing";
+            this.doing.Size = new System.Drawing.Size(0, 13);
+            this.doing.TabIndex = 2;
             // 
-            // downloadFiles
-            // 
-            this.downloadFiles.AutoSize = true;
-            this.downloadFiles.Location = new System.Drawing.Point(13, 43);
-            this.downloadFiles.Name = "downloadFiles";
-            this.downloadFiles.Size = new System.Drawing.Size(0, 13);
-            this.downloadFiles.TabIndex = 2;
-            // 
-            // downloadMsg
+            // status
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 76);
-            this.Controls.Add(this.downloadFiles);
-            this.Controls.Add(this.progress);
+            this.ClientSize = new System.Drawing.Size(399, 83);
+            this.Controls.Add(this.doing);
             this.Controls.Add(this.cancel);
+            this.Controls.Add(this.progressBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "downloadMsg";
+            this.Name = "status";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Download";
+            this.Load += new System.EventHandler(this.Download_Load);
+            this.Shown += new System.EventHandler(this.status_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -76,8 +80,8 @@
 
         #endregion
 
+        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button cancel;
-        private System.Windows.Forms.ProgressBar progress;
-        private System.Windows.Forms.Label downloadFiles;
+        private System.Windows.Forms.Label doing;
     }
 }

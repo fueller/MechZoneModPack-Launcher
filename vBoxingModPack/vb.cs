@@ -14,11 +14,26 @@ using vBoxingModPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using EQATEC.Analytics.Monitor;
+using System.Security.Cryptography;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace vBoxingModPack
 {
-    class vb
+    public class vb
     {
+        public event Action<int> ProgressChanged;
+        internal delegate void UpdateProgressDelegate(int ProgressPercentage);
+        internal event UpdateProgressDelegate UpdateProgress;
+
+        private void OnProgressChanged(int progress)
+        {
+            var eh = ProgressChanged;
+            if (eh != null)
+            {
+                eh(progress);
+            }
+        }
+
         #region get Session Key
         public static string getSessionKey(string username, string password)
         {
@@ -63,12 +78,18 @@ namespace vBoxingModPack
         #endregion
 
         #region downlaod File
-        public static void downloadFile(string url, string save)
+        public static void downloadFile(string url, string save, string md5)
         {
             if (!File.Exists(save))
             {
                 try
                 {
+                    string outputFolder = Path.GetDirectoryName(save);
+                    if (!Directory.Exists(outputFolder))
+                    {
+                        Directory.CreateDirectory(outputFolder);
+                    }
+                    
                     //MessageBox.Show("StartDownload");
                     WebClient client = new WebClient();
                     client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
@@ -83,25 +104,43 @@ namespace vBoxingModPack
             else
             {
 
-                if (checkMD5(save, getMD5(null)))
-	            {
-		            //datei ist aktuell
-                }
-                else
+                if (md5 != null)
                 {
-                    //datei stimmt nicht / ist veraltet
+                    if (checkMD5(md5, getMD5fromFile(save)))
+                    {
+                        //datei ist aktuell
+                        MessageBox.Show("Datei " + save + " ist aktuell");
+                    }
+                    else
+                    {
+                        //datei stimmt nicht / ist veraltet
+                        MessageBox.Show("Datei " + save + " ist veraltet");
+                        File.Delete(save);
+                        vb.downloadFile(url, save, md5);
+                    } 
                 }
             }
         }
 
-        public static void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        internal void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             //Console.WriteLine("DownloadFinished");
+            //Console.WriteLine(e.ProgressPercentage);
+            UpdateProgress(e.ProgressPercentage);
         }
 
         private static void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            Properties.Settings.Default.numFinFiles++;
+                       
+            if (e.Error != null)
+            {
+                Console.WriteLine(e.Error.Message);
+                Console.WriteLine(e.Error.HelpLink);
+            }
+            else
+            {
+                Console.WriteLine("Download finished"); 
+            }
         }
 
         #endregion
@@ -109,29 +148,43 @@ namespace vBoxingModPack
         #region appdata
         public static string appdata(/*string file*/)
         {
-            string pfad = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            string pfad = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.vboxing");
             return pfad;
         }
         #endregion
 
         #region checkMD5
-        public static bool checkMD5(string file, string md5)
+        public static bool checkMD5(string onlineMd5, string fileMd5)
         {
-            return true;
+            if (onlineMd5 == fileMd5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 
-        #region getMD5
-        public static string getMD5(string url)
+        #region getMD5fromFile
+        public static string getMD5fromFile(string path)
         {
-            return null;
+            System.IO.FileStream FileCheck = System.IO.File.OpenRead(path);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] md5Hash = md5.ComputeHash(FileCheck);
+            FileCheck.Close();
+            return BitConverter.ToString(md5Hash).Replace("-", "").ToLower();
         }
         #endregion
 
-        #region getUrls
-        public static void getUrls()
+        #region create Folders
+        public static void createFolders(string path)
         {
-
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
         #endregion
 
@@ -170,5 +223,165 @@ namespace vBoxingModPack
             }
         }
         #endregion
+
+        #region getLibraries
+        public static void getLibraries()
+        {
+
+            try
+            {
+                var j = JsonConvert.DeserializeObject<jsonClasses.minecraftDetails>(File.ReadAllText(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge.json"));
+                for (int i = 0; i < j.libraries.Count(); i++)
+                {
+                    string[] temp = j.libraries[i].name.Split(':');
+                    string file = "http://s3.amazonaws.com/Minecraft.Download/libraries/";
+                    file += temp[0].Replace('.', '/');
+                    file += "/";
+                    file += temp[1];
+                    file += "/";
+                    file += temp[2];
+                    file += "/";
+                    file += temp[1];
+                    file += "-";
+                    file += temp[2];
+                    if (j.libraries[i].natives != null)
+                    {
+                        file += "-";
+                        file += j.libraries[i].natives.windows;
+                    }
+
+                    file += ".jar";
+
+                    //Console.WriteLine("[" + i + "] " + file);
+
+                    string save = vb.appdata() + "\\libraries\\";
+                    save += temp[0].Replace('.', '\\');
+                    save += "\\";
+                    save += temp[1];
+                    save += "\\";
+                    save += temp[2];
+                    save += "\\";
+                    save += temp[1];
+                    save += "-";
+                    save += temp[2];
+                    if (j.libraries[i].natives != null)
+                    {
+                        save += "-";
+                        save += j.libraries[i].natives.windows;
+                    }
+                    save += ".jar";
+                    //Console.WriteLine(save);
+
+                    
+                    string os = "";
+                    string action = "allow";
+
+                    try
+                    {
+                        os = j.libraries[i].rules[0].os.name.ToString();
+                        action = j.libraries[i].rules[0].action.ToString();                        
+                    }catch (Exception){}
+
+                    Console.WriteLine("[" + i + "] " + os + " " + action);
+                    
+                    if (os == "" && action == "allow")
+                    {
+                        Console.WriteLine("dl File " + i);
+                        vb.downloadFile(file, save, null); 
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region getNative
+        public static void getNatives()
+        {
+            WebClient client = new WebClient();
+            client.Proxy = null;
+            client.DownloadFile("http://s3.amazonaws.com/MinecraftDownload/windows_natives.jar", vb.appdata() + "\\temp\\windows_natives.jar");
+            string jarPath = vb.appdata() + "\\temp\\windows_natives.jar";
+            string saveFolderPath = vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\";
+            FastZip fz = new FastZip();
+            fz.ExtractZip(jarPath, saveFolderPath, "");
+            System.Diagnostics.Process.Start("explorer", saveFolderPath);
+            try
+            {
+                Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\META-INF\\", true);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        #endregion
+
+        #region delete libraries
+        public static void deleteLibraries()
+        {
+            try
+            {
+                Directory.Delete(vb.appdata() + "\\libraries", true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        public static Dictionary<string, bool> checkVersion()
+        {
+            Dictionary<string, bool> versions = new Dictionary<string, bool>();
+            versions.Add("mods", false);
+            versions.Add("config", false);
+            versions.Add("libraries", false);
+            versions.Add("natives", false);
+            versions.Add("minecraft", false);
+            versions.Add("forge", false);
+            
+            try
+            {
+                WebClient client = new WebClient();
+                client.Proxy = null;
+                client.DownloadFile("http://lawall.punpic.de/modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
+                var j = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(vb.appdata() + "\\temp\\version.json"));
+                if (j.mods == "")
+                {
+                    versions["mods"] = true;
+                }
+                if (j.config == "")
+                {
+                    versions["config"] = true;
+                }
+                if (j.libraries == "")
+                {
+                    versions["libraries"] = true;
+                }
+                if (j.natives == "")
+                {
+                    versions["natives"] = true;
+                }
+                if (j.minecraft == "")
+                {
+                    versions["minecraft"] = true;
+                }
+                if (j.forge == "")
+                {
+                    versions["forge"] = true;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Konnte Version nicht prüfen!\nBenutze letzte heruntergeladene");
+            }
+
+            return versions;
+        }
     }
 }

@@ -178,5 +178,17 @@ namespace vBoxingModPack.Properties {
                 this["numFinFiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.6.4")]
+        public string minecraftVersion {
+            get {
+                return ((string)(this["minecraftVersion"]));
+            }
+            set {
+                this["minecraftVersion"] = value;
+            }
+        }
     }
 }
