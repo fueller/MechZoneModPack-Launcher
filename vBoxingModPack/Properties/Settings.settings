@@ -35,10 +35,10 @@
     <Setting Name="noServerCheck" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="numDownFiles" Type="System.Int32" Scope="User">
+    <Setting Name="toDownloadFiles" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="numFinFiles" Type="System.Int32" Scope="User">
+    <Setting Name="finishedFiles" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="minecraftVersion" Type="System.String" Scope="User">

@@ -50,10 +50,10 @@ namespace vBoxingModPack
             showConsole.Checked = Properties.Settings.Default.console;
             noServerCheckOnStart.Checked = Properties.Settings.Default.noServerCheck;
 
-            if (Properties.Settings.Default.noServerCheck == false)
-            {
-               status();
-            }
+            //if (Properties.Settings.Default.noServerCheck == false)
+            //{
+            //   status();
+            //}
 
             if (Properties.Settings.Default.nickname != "xx")
             {
@@ -73,22 +73,13 @@ namespace vBoxingModPack
                 
         }
 
-        private void usernameText_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.email = usernameText.Text;
-            Properties.Settings.Default.Save();
-        }
+        
 
         private void loginButton_Click(object sender, EventArgs e)
         {
             monitor.TrackFeature("login");
-            status st = new status();
-            st.stat = "login";
-            var statResult = st.ShowDialog();
-
-            if (st.canceled == false)
-            {
-                string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
+           
+            string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
                 if (session == "error")
                 {
 
@@ -155,12 +146,6 @@ namespace vBoxingModPack
                     //process1.StartInfo.UseShellExecute = false;
                     process1.Start();
                 } 
-            }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            status();   
         }
 
         private void status()
@@ -176,10 +161,10 @@ namespace vBoxingModPack
                 }
                 else
                 {
+                    updateStatus.Location = new Point(778, 89);
+                    mojangStatus.Visible = true;
                     try
-                    {
-                        updateStatus.Location = new Point(778, 89);
-                        mojangStatus.Visible = true;
+                    {                        
                         mojangStatus.Text = data.psa;
                     }
                     catch (Exception)
@@ -252,6 +237,13 @@ namespace vBoxingModPack
             }
         }
 
+        #region options
+
+        private void usernameText_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.email = usernameText.Text;
+            Properties.Settings.Default.Save();
+        }
         private void optionEnable_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.options = optionEnable.Checked;
@@ -340,68 +332,42 @@ namespace vBoxingModPack
 
         private void noServerCheckOnStart_CheckedChanged(object sender, EventArgs e)
         {
-            monitor.TrackFeature("noServerCheck");
+            
             if (noServerCheckOnStart.Checked)
             {
-                Properties.Settings.Default.noServerCheck = true;                
+                Properties.Settings.Default.noServerCheck = true;
+                monitor.TrackFeature("noServerCheckOn");
             }
             else
             {
                 Properties.Settings.Default.noServerCheck = false;
+                monitor.TrackFeature("noServerCheckOff");
             }
 
             Properties.Settings.Default.Save();
 
         }
 
+        #endregion
+
         private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (Directory.Exists(vb.appdata() + "\\temp\\"))
+            {
+                Directory.Delete(vb.appdata() + "\\temp\\", true);
+            }            
             monitor.Stop();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                WebClient client = new WebClient();
-                client.Proxy = null;
-                File.Delete(vb.appdata() + "\\temp\\files.json");
-                client.DownloadFile("http://lawall.funpic.de/modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
-                var j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\files.json"));
-
-                for (int i = 0; i < j.files.Count; i++)
-                {
-                    vb.downloadFile(j.files[i].url, vb.appdata() + j.files[i].path, j.files[i].md5);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //vb.getNatives();
-            vb.getLibraries();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            vb.deleteLibraries();
         }
 
         private void mainForm_Shown(object sender, EventArgs e)
         {
+            this.Update();
             if (Properties.Settings.Default.noServerCheck == false)
             {
                 status();
+                
             }
-        }
-
-        private void UpdateProgress(int ProgressPercentage)
-        {
-
+            vb.checkVersion();
         }
 	}
 }

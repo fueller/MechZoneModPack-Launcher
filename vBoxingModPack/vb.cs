@@ -21,19 +21,6 @@ namespace vBoxingModPack
 {
     public class vb
     {
-        public event Action<int> ProgressChanged;
-        internal delegate void UpdateProgressDelegate(int ProgressPercentage);
-        internal event UpdateProgressDelegate UpdateProgress;
-
-        private void OnProgressChanged(int progress)
-        {
-            var eh = ProgressChanged;
-            if (eh != null)
-            {
-                eh(progress);
-            }
-        }
-
         #region get Session Key
         public static string getSessionKey(string username, string password)
         {
@@ -84,7 +71,9 @@ namespace vBoxingModPack
             {
                 try
                 {
+                    Properties.Settings.Default.finishedFiles++;
                     string outputFolder = Path.GetDirectoryName(save);
+                                      
                     if (!Directory.Exists(outputFolder))
                     {
                         Directory.CreateDirectory(outputFolder);
@@ -98,35 +87,39 @@ namespace vBoxingModPack
                 }
                 catch (Exception ex)
                 {
+                    Properties.Settings.Default.finishedFiles++;
                     MessageBox.Show(ex.Message);
                 }
             }
             else
             {
-
+                
                 if (md5 != null)
                 {
                     if (checkMD5(md5, getMD5fromFile(save)))
                     {
-                        //datei ist aktuell
                         MessageBox.Show("Datei " + save + " ist aktuell");
+                        Properties.Settings.Default.finishedFiles++;
                     }
                     else
                     {
-                        //datei stimmt nicht / ist veraltet
                         MessageBox.Show("Datei " + save + " ist veraltet");
                         File.Delete(save);
                         vb.downloadFile(url, save, md5);
-                    } 
+                        Properties.Settings.Default.finishedFiles++;
+                    }
+                }
+                else
+                {
+                    Properties.Settings.Default.finishedFiles++;
                 }
             }
         }
 
-        internal void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private static void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             //Console.WriteLine("DownloadFinished");
             //Console.WriteLine(e.ProgressPercentage);
-            UpdateProgress(e.ProgressPercentage);
         }
 
         private static void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
@@ -136,10 +129,12 @@ namespace vBoxingModPack
             {
                 Console.WriteLine(e.Error.Message);
                 Console.WriteLine(e.Error.HelpLink);
+                ++Properties.Settings.Default.finishedFiles;
             }
             else
             {
-                Console.WriteLine("Download finished"); 
+                Console.WriteLine("Download finished");
+                ++Properties.Settings.Default.finishedFiles;
             }
         }
 
@@ -335,8 +330,24 @@ namespace vBoxingModPack
         }
         #endregion
 
+        #region delete natives
+        public static void deleteNatives()
+        {
+            try
+            {
+                Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-Natives", true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region check Version
         public static Dictionary<string, bool> checkVersion()
         {
+            
             Dictionary<string, bool> versions = new Dictionary<string, bool>();
             versions.Add("mods", false);
             versions.Add("config", false);
@@ -347,41 +358,65 @@ namespace vBoxingModPack
             
             try
             {
+                vBoxingModPack.mainForm.monitor.TrackFeatureStart("checkVersion");
                 WebClient client = new WebClient();
                 client.Proxy = null;
-                client.DownloadFile("http://lawall.punpic.de/modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
+                if (Directory.Exists(Path.Combine(vb.appdata(), "temp")))
+                {
+                    Directory.Delete(Path.Combine(vb.appdata(), "temp"), true);
+                    Directory.CreateDirectory(Path.Combine(vb.appdata(), "temp"));
+                }
+                Directory.CreateDirectory(Path.Combine(vb.appdata(), "temp"));
+                Properties.Settings.Default.toDownloadFiles = 2;
+                Properties.Settings.Default.finishedFiles = 0;
+                client.DownloadFile("http://lawall.funpic.de/modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
+                client.DownloadFile("http://lawall.funpic.de/modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
+                
+                
                 var j = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(vb.appdata() + "\\temp\\version.json"));
-                if (j.mods == "")
+                
+
+                if (j.mods == "0.0.1")
                 {
                     versions["mods"] = true;
+                    Properties.version.Default.mods = j.mods;
                 }
-                if (j.config == "")
+                if (j.config == "0.0.1")
                 {
                     versions["config"] = true;
+                    Properties.version.Default.config = j.config;
                 }
-                if (j.libraries == "")
+                if (j.libraries == "1.6.4")
                 {
                     versions["libraries"] = true;
+                    Properties.version.Default.libraries = j.libraries;
                 }
-                if (j.natives == "")
+                if (j.natives == "1.6.4")
                 {
                     versions["natives"] = true;
+                    Properties.version.Default.natives = j.natives;
                 }
-                if (j.minecraft == "")
+                if (j.minecraft == "1.6.4")
                 {
                     versions["minecraft"] = true;
+                    Properties.version.Default.minecraft = j.minecraft;
                 }
-                if (j.forge == "")
+                if (j.forge == "9.11.0.884")
                 {
                     versions["forge"] = true;
+                    Properties.version.Default.forge = j.forge;
                 }
+                vBoxingModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                vBoxingModPack.mainForm.monitor.TrackFeatureCancel("checkVersion");
                 MessageBox.Show("Konnte Version nicht prüfen!\nBenutze letzte heruntergeladene");
+                MessageBox.Show(ex.Message);
             }
 
             return versions;
         }
+        #endregion
     }
 }

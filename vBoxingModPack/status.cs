@@ -54,10 +54,5 @@ namespace vBoxingModPack
             progressBar1.Value = progress;
         }
 
-        public void UpdateProgress(int ProgressPercentage)
-        {
-
-        }
-
     }
 }

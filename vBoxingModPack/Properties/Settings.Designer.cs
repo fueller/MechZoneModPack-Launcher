@@ -158,24 +158,24 @@ namespace vBoxingModPack.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int numDownFiles {
+        public int toDownloadFiles {
             get {
-                return ((int)(this["numDownFiles"]));
+                return ((int)(this["toDownloadFiles"]));
             }
             set {
-                this["numDownFiles"] = value;
+                this["toDownloadFiles"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int numFinFiles {
+        public int finishedFiles {
             get {
-                return ((int)(this["numFinFiles"]));
+                return ((int)(this["finishedFiles"]));
             }
             set {
-                this["numFinFiles"] = value;
+                this["finishedFiles"] = value;
             }
         }
         

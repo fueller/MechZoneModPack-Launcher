@@ -220,13 +220,12 @@
             // 
             // updateStatus
             // 
-            this.updateStatus.Location = new System.Drawing.Point(778, 89);
+            this.updateStatus.Location = new System.Drawing.Point(778, 50);
             this.updateStatus.Name = "updateStatus";
             this.updateStatus.Size = new System.Drawing.Size(184, 23);
             this.updateStatus.TabIndex = 14;
             this.updateStatus.Text = "Update Server Status";
             this.updateStatus.UseVisualStyleBackColor = true;
-            this.updateStatus.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // welcomeMessage
             // 
@@ -421,7 +420,6 @@
             this.button1.TabIndex = 20;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -440,7 +438,6 @@
             this.button2.TabIndex = 22;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -450,7 +447,6 @@
             this.button3.TabIndex = 23;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // mainForm
             // 
@@ -462,7 +458,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.infosMain);
-            this.Controls.Add(this.mojangStatus);
             this.Controls.Add(this.optionEnable);
             this.Controls.Add(this.optionenPanel);
             this.Controls.Add(this.welcomeMessage);
@@ -478,6 +473,7 @@
             this.Controls.Add(this.usernameText);
             this.Controls.Add(this.passwordText);
             this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.mojangStatus);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
