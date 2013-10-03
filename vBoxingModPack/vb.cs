@@ -35,7 +35,7 @@ namespace vBoxingModPack
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    string json = "{\"agent\":{\"name\":\"Minecraft\",\"version\":1},\"username\":\"" + username + "\",\"password\":\"" + password + "\",\"clientToken\":\"vBoxingModPack\"}";
+                    string json = "{\"agent\":{\"name\":\"Minecraft\",\"version\":1},\"username\":\"" + username + "\",\"password\":\"" + password + "\",\"clientToken\":\"vBoxingModPack" + vb.RandomString(4) + vb.RandomString(4) + vb.RandomString(4) + "\"}";
                     //MessageBox.Show(json);
                     streamWriter.Write(json);
                     streamWriter.Flush();
@@ -71,7 +71,6 @@ namespace vBoxingModPack
             {
                 try
                 {
-                    Properties.Settings.Default.finishedFiles++;
                     string outputFolder = Path.GetDirectoryName(save);
                                       
                     if (!Directory.Exists(outputFolder))
@@ -83,7 +82,7 @@ namespace vBoxingModPack
                     WebClient client = new WebClient();
                     client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
                     client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
-                    client.DownloadFileAsync(new Uri(url), save);
+                    client.DownloadFile(new Uri(url), save);
                 }
                 catch (Exception ex)
                 {
@@ -98,15 +97,12 @@ namespace vBoxingModPack
                 {
                     if (checkMD5(md5, getMD5fromFile(save)))
                     {
-                        MessageBox.Show("Datei " + save + " ist aktuell");
-                        Properties.Settings.Default.finishedFiles++;
                     }
                     else
                     {
                         MessageBox.Show("Datei " + save + " ist veraltet");
                         File.Delete(save);
                         vb.downloadFile(url, save, md5);
-                        Properties.Settings.Default.finishedFiles++;
                     }
                 }
                 else
@@ -186,12 +182,21 @@ namespace vBoxingModPack
         #region getJavaPath
         public static string GetJavaInstallationPath()
         {
-            String javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
-            using (var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey(javaKey))
+            try
             {
-                String currentVersion = baseKey.GetValue("CurrentVersion").ToString();
-                using (var homeKey = baseKey.OpenSubKey(currentVersion))
-                    return homeKey.GetValue("JavaHome").ToString() + "\\bin\\";
+                String javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
+                using (var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey(javaKey))
+                {
+                    String currentVersion = baseKey.GetValue("CurrentVersion").ToString();
+                    using (var homeKey = baseKey.OpenSubKey(currentVersion))
+                        return homeKey.GetValue("JavaHome").ToString() + "\\bin\\";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                vBoxingModPack.mainForm.monitor.TrackException(ex, "GetJavaPath");
+                return null;
             }
         }
         #endregion
@@ -223,11 +228,15 @@ namespace vBoxingModPack
         public static void getLibraries()
         {
 
-            try
-            {
+            //try
+            //{
+                jsonClasses.filesList list = new jsonClasses.filesList();
+                string[] output = new string[21];
+
                 var j = JsonConvert.DeserializeObject<jsonClasses.minecraftDetails>(File.ReadAllText(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge.json"));
                 for (int i = 0; i < j.libraries.Count(); i++)
                 {
+                    jsonClasses.files2 list2 = new jsonClasses.files2();
                     string[] temp = j.libraries[i].name.Split(':');
                     string file = "http://s3.amazonaws.com/Minecraft.Download/libraries/";
                     file += temp[0].Replace('.', '/');
@@ -282,32 +291,46 @@ namespace vBoxingModPack
                     if (os == "" && action == "allow")
                     {
                         Console.WriteLine("dl File " + i);
-                        vb.downloadFile(file, save, null); 
+                        list2.url = file;
+                        list2.path = save;
+                        
+                        vb.downloadFile(file, save, null);
+                        list2.md5 = vb.getMD5fromFile(save);
                     }
+                    output[i] = JsonConvert.SerializeObject(list2);
+
+                    
+                    //vb.downloadFile("http://files.minecraftforge.net/minecraftforge/minecraftforge-universal-" + Properties.version.Default.minecraftVer + "-" + Properties.version.Default.forgeVer + ".jar", vb.appdata() + "\\libraries\\minecraftforge\\minecraftforge\\minecraftforge-" + Properties.version.Default.forgeVer + ".jar", null);
                     
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                StreamWriter fileXY = new StreamWriter(vb.appdata() + "\\temp\\test.json");
+                foreach (string str in output)
+                {
+                    fileXY.WriteLine(str);
+                }
+                fileXY.Close();
+                
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
         #endregion
 
         #region getNative
-        public static void getNatives()
+        public static void getNatives(string version)
         {
-            WebClient client = new WebClient();
-            client.Proxy = null;
-            client.DownloadFile("http://s3.amazonaws.com/MinecraftDownload/windows_natives.jar", vb.appdata() + "\\temp\\windows_natives.jar");
+            vb.downloadFile("http://s3.amazonaws.com/MinecraftDownload/windows_natives.jar", vb.appdata() + "\\temp\\windows_natives.jar", null);
             string jarPath = vb.appdata() + "\\temp\\windows_natives.jar";
-            string saveFolderPath = vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\";
+            string saveFolderPath = vb.appdata() + "\\versions\\" + version + "\\" + version + "-natives\\";
+            Directory.CreateDirectory(saveFolderPath);
             FastZip fz = new FastZip();
             fz.ExtractZip(jarPath, saveFolderPath, "");
-            System.Diagnostics.Process.Start("explorer", saveFolderPath);
             try
             {
                 Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\META-INF\\", true);
+                File.Delete(vb.appdata() + "\\temp\\windows_natives.jar");
             }
             catch (Exception e)
             {
@@ -379,33 +402,70 @@ namespace vBoxingModPack
                 if (j.mods == "0.0.1")
                 {
                     versions["mods"] = true;
-                    Properties.version.Default.mods = j.mods;
+                    Properties.version.Default.modsVer = j.mods;
+                    Properties.version.Default.mods = true;
                 }
+                else
+                {
+                    Properties.version.Default.mods = false;
+                }
+
                 if (j.config == "0.0.1")
                 {
                     versions["config"] = true;
-                    Properties.version.Default.config = j.config;
+                    Properties.version.Default.configVer = j.config;
+                    Properties.version.Default.config = true;
                 }
+                else
+                {
+                    Properties.version.Default.config = false;
+                }
+
                 if (j.libraries == "1.6.4")
                 {
                     versions["libraries"] = true;
-                    Properties.version.Default.libraries = j.libraries;
+                    Properties.version.Default.librariesVer = j.libraries;
+                    Properties.version.Default.libraries = true;
                 }
+                else
+                {
+                    Properties.version.Default.libraries = false;
+                }
+
                 if (j.natives == "1.6.4")
                 {
                     versions["natives"] = true;
-                    Properties.version.Default.natives = j.natives;
+                    Properties.version.Default.nativesVer = j.natives;
+                    Properties.version.Default.natives = true;
                 }
+                else
+                {
+                    Properties.version.Default.natives = false;
+                }
+
                 if (j.minecraft == "1.6.4")
                 {
                     versions["minecraft"] = true;
-                    Properties.version.Default.minecraft = j.minecraft;
+                    Properties.version.Default.minecraftVer = j.minecraft;
+                    Properties.version.Default.minecraft = true;
                 }
-                if (j.forge == "9.11.0.884")
+                else
+                {
+                    Properties.version.Default.minecraft = false;
+                }
+
+                if (j.forge == "9.11.1.916")
                 {
                     versions["forge"] = true;
-                    Properties.version.Default.forge = j.forge;
+                    Properties.version.Default.forgeVer = j.forge;
+                    Properties.version.Default.forge = true;
                 }
+                else
+                {
+                    Properties.version.Default.forge = false;
+                }
+                Properties.version.Default.update = j.update;
+                Properties.version.Default.Save();
                 vBoxingModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
             }
             catch (Exception ex)
@@ -418,5 +478,53 @@ namespace vBoxingModPack
             return versions;
         }
         #endregion
+
+        #region random string
+        private static Random random = new Random((int)DateTime.Now.Ticks);//thanks to McAden
+        public static string RandomString(int size)
+        {
+            StringBuilder builder = new StringBuilder();
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+
+            return builder.ToString();
+        }
+        #endregion
+
+        #region getFiles
+        public static void getFiles()
+        {
+            vBoxingModPack.mainForm.monitor.TrackFeatureStart("downloadFiles");
+            var j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\files.json"));
+            for (int i = 0; i < j.files.Count(); i++)
+            {
+                vb.downloadFile(j.files[i].url, vb.appdata() + j.files[i].path, j.files[i].md5);
+            }
+
+            /*if (Directory.Exists(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-Natives\\"))
+            {
+                Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-Natives\\",true);
+            }
+            /*string jarPath = vb.appdata() + "\\temp\\windows_natives.jar";
+            string saveFolderPath = vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\";
+            Directory.CreateDirectory(saveFolderPath);
+            FastZip fz = new FastZip();
+            fz.ExtractZip(jarPath, saveFolderPath, "");
+            try
+            {
+                Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\META-INF\\", true);
+                File.Delete(vb.appdata() + "\\temp\\windows_natives.jar");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }*/
+            vBoxingModPack.mainForm.monitor.TrackFeatureStop("downloadFiles");
+        }
+        #endregion        
     }
 }

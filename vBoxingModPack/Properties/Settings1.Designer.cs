@@ -190,5 +190,17 @@ namespace vBoxingModPack.Properties {
                 this["minecraftVersion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool savePassword {
+            get {
+                return ((bool)(this["savePassword"]));
+            }
+            set {
+                this["savePassword"] = value;
+            }
+        }
     }
 }

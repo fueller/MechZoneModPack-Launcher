@@ -44,5 +44,8 @@
     <Setting Name="minecraftVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.6.4</Value>
     </Setting>
+    <Setting Name="savePassword" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

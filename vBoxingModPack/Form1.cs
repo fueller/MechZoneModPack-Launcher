@@ -38,7 +38,7 @@ namespace vBoxingModPack
             ToolTip.SetToolTip(realmStatus, "Realms Server Status\r\nGerade Offline\r\n");
             ToolTip.SetToolTip(usernameText, "Deinen Benutzernamen\r\noder deine Mojang Email");
             ToolTip.SetToolTip(passwordText, "Dein Minecraft Passwort oder\r\nMojang Passwort");
-            ToolTip.SetToolTip(savePasswordCheck, "Speichere Passwort\r\n(noch nicht verfügbar");
+            ToolTip.SetToolTip(savePasswordCheck, "Speichere Passwort\r\nACHTUNG: Speichert Passwort unverschlüsselt!");
 
             usernameText.Text = Properties.Settings.Default.email;
             resHeight.Value = Properties.Settings.Default.height;
@@ -70,7 +70,10 @@ namespace vBoxingModPack
             }
 
             ramSelect.SelectedIndex = Properties.Settings.Default.ramLast;
-                
+
+            savePasswordCheck.Checked = Properties.Settings.Default.savePassword;
+            passwordText.Text = Properties.Settings.Default.password;
+            //MessageBox.Show(Properties.Settings.Default.password.ToString());
         }
 
         
@@ -78,15 +81,24 @@ namespace vBoxingModPack
         private void loginButton_Click(object sender, EventArgs e)
         {
             monitor.TrackFeature("login");
-           
-            string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
+            try
+            {
+                monitor.TrackFeatureStart("loginProzedure");
+                string version = Properties.version.Default.minecraftVer;
+                string name = Properties.version.Default.minecraftVer + "-Forge";
+
+                vb.getFiles();
+
+
+                string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
                 if (session == "error")
                 {
-
+                    monitor.TrackFeatureCancel("loginProzedure");
                 }
                 else
                 {
                     //MessageBox.Show(session);
+                    //MessageBox.Show(vb.GetJavaInstallationPath().ToString());
                     if (showConsole.Checked)
                     {
                         process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "java.exe";
@@ -108,9 +120,9 @@ namespace vBoxingModPack
                     }
 
                     arguments += " -Djava.library.path="
-                        + vb.appdata() + "\\versions\\1.6.4-Forge9.11.0.883\\1.6.4-Forge-natives -cp "
-                        + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\9.11.0.883\\minecraftforge-9.11.0.883.jar;"
-                        + vb.appdata() + "\\libraries\\net\\minecraft\\launchwrapper\\1.7\\launchwrapper-1.7.jar;"
+                        + vb.appdata() + "\\versions\\" + name + "\\" + name + "-natives -cp "
+                        + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\9.11.1.916\\minecraftforge-9.11.1.916.jar;"
+                        + vb.appdata() + "\\libraries\\net\\minecraft\\launchwrapper\\1.8\\launchwrapper-1.8.jar;"
                         + vb.appdata() + "\\libraries\\org\\ow2\\asm\\asm-all\\4.1\\asm-all-4.1.jar;"
                         + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-library\\2.10.2\\scala-library-2.10.2.jar;"
                         + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-compiler\\2.10.2\\scala-compiler-2.10.2.jar;"
@@ -131,8 +143,8 @@ namespace vBoxingModPack
                         + vb.appdata() + "\\libraries\\com\\google\\code\\gson\\gson\\2.2.2\\gson-2.2.2.jar;"
                         + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl\\2.9.0\\lwjgl-2.9.0.jar;"
                         + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl_util\\2.9.0\\lwjgl_util-2.9.0.jar;"
-                        + vb.appdata() + "\\versions\\1.6.4-Forge9.11.0.883\\1.6.4-Forge9.11.0.883.jar net.minecraft.launchwrapper.Launch "
-                        + "--username " + Properties.Settings.Default.nickname + " --session " + session + " --version 1.6.4-Forge9.11.0.883 --gameDir "
+                        + vb.appdata() + "\\versions\\" + name + "\\" + name + ".jar net.minecraft.launchwrapper.Launch "
+                        + "--username " + Properties.Settings.Default.nickname + " --session " + session + " --version " + name + " --gameDir "
                         + vb.appdata() + " --assetsDir "
                         + vb.appdata() + "\\assets --tweakClass cpw.mods.fml.common.launcher.FMLTweaker";
 
@@ -141,13 +153,22 @@ namespace vBoxingModPack
                         arguments += " --width " + resWidth.Value + " --height " + resHeight.Value;
                     }
 
+                    //MessageBox.Show(arguments);
                     process1.StartInfo.Arguments = arguments;
                     //process1.StartInfo.RedirectStandardOutput = true;
                     //process1.StartInfo.UseShellExecute = false;
+                    monitor.TrackFeatureStop("loginProzedure");
                     process1.Start();
-                } 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                monitor.TrackException(ex, "loginButton");
+            } 
         }
 
+        #region status
         private void status()
         {
             monitor.TrackFeature("updateStartus");
@@ -236,6 +257,7 @@ namespace vBoxingModPack
                 }
             }
         }
+        #endregion
 
         #region options
 
@@ -368,6 +390,42 @@ namespace vBoxingModPack
                 
             }
             vb.checkVersion();
+        }
+
+        private void updateStatus_Click(object sender, EventArgs e)
+        {
+            status();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            vb.getLibraries();
+        }
+
+        private void savePasswordCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.savePassword = savePasswordCheck.Checked;
+            if (savePasswordCheck.Checked)
+            {
+                Properties.Settings.Default.password = passwordText.Text;
+            }
+            else
+            {
+                Properties.Settings.Default.password = "";
+            }
+            Properties.Settings.Default.Save();
+        }
+
+        private void passwordText_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.password = passwordText.Text;
+            
+            if (!savePasswordCheck.Checked)
+            {
+                Properties.Settings.Default.password = "";
+            }
+            
+            Properties.Settings.Default.Save();
         }
 	}
 }

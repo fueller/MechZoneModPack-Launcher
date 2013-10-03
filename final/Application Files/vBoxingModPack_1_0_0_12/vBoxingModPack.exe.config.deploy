@@ -121,7 +121,4 @@
       </setting>
     </vBoxingModPack.Properties.Settings>
   </userSettings>
-  <connectionStrings>
-    <add name="DefaultConnection" connectionString="Data Source = |SQL/CE|" />
-  </connectionStrings>
 </configuration>

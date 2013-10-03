@@ -34,7 +34,6 @@ namespace vBoxingModPack
         public class filesList
         {
             public List<files2> files { get; set; }
-            public List<files3> folders { get; set; }
         }
 
         public class files2
@@ -42,11 +41,6 @@ namespace vBoxingModPack
             public string url { get; set; }
             public string path { get; set; }
             public string md5 { get; set; }
-        }
-
-        public class files3
-        {
-            public string path { get; set; }
         }
         #endregion
 
@@ -112,6 +106,7 @@ namespace vBoxingModPack
             public string libraries { get; set; }
             public string forge { get; set; }
             public string minecraft { get; set; }
+            public bool update { get; set; }
         }
         #endregion
     }

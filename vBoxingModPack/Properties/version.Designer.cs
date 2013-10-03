@@ -25,10 +25,10 @@ namespace vBoxingModPack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("na")]
-        public string mods {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool mods {
             get {
-                return ((string)(this["mods"]));
+                return ((bool)(this["mods"]));
             }
             set {
                 this["mods"] = value;
@@ -37,10 +37,10 @@ namespace vBoxingModPack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("na")]
-        public string config {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool config {
             get {
-                return ((string)(this["config"]));
+                return ((bool)(this["config"]));
             }
             set {
                 this["config"] = value;
@@ -49,10 +49,10 @@ namespace vBoxingModPack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("na")]
-        public string libraries {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool libraries {
             get {
-                return ((string)(this["libraries"]));
+                return ((bool)(this["libraries"]));
             }
             set {
                 this["libraries"] = value;
@@ -61,10 +61,10 @@ namespace vBoxingModPack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("na")]
-        public string natives {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool natives {
             get {
-                return ((string)(this["natives"]));
+                return ((bool)(this["natives"]));
             }
             set {
                 this["natives"] = value;
@@ -73,10 +73,10 @@ namespace vBoxingModPack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("na")]
-        public string minecraft {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool minecraft {
             get {
-                return ((string)(this["minecraft"]));
+                return ((bool)(this["minecraft"]));
             }
             set {
                 this["minecraft"] = value;
@@ -85,13 +85,97 @@ namespace vBoxingModPack.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("na")]
-        public string forge {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool forge {
             get {
-                return ((string)(this["forge"]));
+                return ((bool)(this["forge"]));
             }
             set {
                 this["forge"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string modsVer {
+            get {
+                return ((string)(this["modsVer"]));
+            }
+            set {
+                this["modsVer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string configVer {
+            get {
+                return ((string)(this["configVer"]));
+            }
+            set {
+                this["configVer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string librariesVer {
+            get {
+                return ((string)(this["librariesVer"]));
+            }
+            set {
+                this["librariesVer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string nativesVer {
+            get {
+                return ((string)(this["nativesVer"]));
+            }
+            set {
+                this["nativesVer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string minecraftVer {
+            get {
+                return ((string)(this["minecraftVer"]));
+            }
+            set {
+                this["minecraftVer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string forgeVer {
+            get {
+                return ((string)(this["forgeVer"]));
+            }
+            set {
+                this["forgeVer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool update {
+            get {
+                return ((bool)(this["update"]));
+            }
+            set {
+                this["update"] = value;
             }
         }
     }
