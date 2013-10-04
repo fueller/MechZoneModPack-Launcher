@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using EQATEC.Analytics.Monitor;
+using System.Deployment.Application;
+using System.Reflection;
 
 namespace vBoxingModPack
 {
@@ -39,7 +41,9 @@ namespace vBoxingModPack
             ToolTip.SetToolTip(usernameText, "Deinen Benutzernamen\r\noder deine Mojang Email");
             ToolTip.SetToolTip(passwordText, "Dein Minecraft Passwort oder\r\nMojang Passwort");
             ToolTip.SetToolTip(savePasswordCheck, "Speichere Passwort\r\nACHTUNG: Speichert Passwort unverschlüsselt!");
-
+            
+            this.Text = "vBoxing Mod Pack v." + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            
             usernameText.Text = Properties.Settings.Default.email;
             resHeight.Value = Properties.Settings.Default.height;
             resWidth.Value = Properties.Settings.Default.width;
@@ -87,7 +91,10 @@ namespace vBoxingModPack
                 string version = Properties.version.Default.minecraftVer;
                 string name = Properties.version.Default.minecraftVer + "-Forge";
 
-                vb.getFiles();
+                //vb.getFiles();
+
+                Download dl = new Download();
+                dl.ShowDialog();
 
 
                 string session = vb.getSessionKey(usernameText.Text, passwordText.Text);

@@ -33,7 +33,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.php</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -98,6 +98,9 @@
     <Reference Include="EQATEC.Analytics.Monitor">
       <HintPath>..\..\..\..\Downloads\AnalyticsMonitorDotNet_3_2_1\EQATEC.Analytics.Monitor.dll</HintPath>
     </Reference>
+    <Reference Include="fNbt">
+      <HintPath>..\..\..\..\Downloads\fNbt_v0.5.0\fNbt.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\..\..\Downloads\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -130,11 +133,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="status.cs">
+    <Compile Include="Download.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="status.Designer.cs">
-      <DependentUpon>status.cs</DependentUpon>
+    <Compile Include="Download.Designer.cs">
+      <DependentUpon>Download.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -152,8 +155,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>version.settings</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="status.resx">
-      <DependentUpon>status.cs</DependentUpon>
+    <EmbeddedResource Include="Download.resx">
+      <DependentUpon>Download.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
