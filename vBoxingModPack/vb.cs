@@ -394,7 +394,7 @@ namespace vBoxingModPack
                 Properties.Settings.Default.finishedFiles = 0;
                 client.DownloadFile("http://lawall.funpic.de/modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
                 client.DownloadFile("http://lawall.funpic.de/modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
-                
+                client.DownloadFile("http://lawall.funpic.de/modpack/files/mods.json", vb.appdata() + "\\temp\\mods.json");
                 
                 var j = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(vb.appdata() + "\\temp\\version.json"));
                 

@@ -32,16 +32,30 @@ namespace vBoxingModPack
         {
             this.Update();
             vBoxingModPack.mainForm.monitor.TrackFeatureStart("downloadFiles");
-            var j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\files.json"));
-            progressBar1.Maximum = j.files.Count;
-            for (int i = 0; i < j.files.Count(); i++)
+
+            var mods = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
+            progressBar1.Maximum = mods.files.Count;
+            for (int i = 0; i < mods.files.Count(); i++)
             {
                 progressBar2.Value = 0;
-                label2.Text = "Lade Datei " + i + " von " + j.files.Count() + " Dateien herunter!";
-                label1.Text = j.files[i].path;
+                label2.Text = "Lade Mod " + i + " von " + mods.files.Count() + " Mods herunter!";
+                label1.Text = mods.files[i].path;
                 progressBar1.Value = i;
                 this.Update();
-                vb.downloadFile(j.files[i].url, vb.appdata() + j.files[i].path, j.files[i].md5);                
+                vb.downloadFile(mods.files[i].url, vb.appdata() + mods.files[i].path, mods.files[i].md5);
+            }
+
+
+            var files = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\files.json"));
+            progressBar1.Maximum = files.files.Count;
+            for (int i = 0; i < files.files.Count(); i++)
+            {
+                progressBar2.Value = 0;
+                label2.Text = "Lade Datei " + i + " von " + files.files.Count() + " Dateien herunter!";
+                label1.Text = files.files[i].path;
+                progressBar1.Value = i;
+                this.Update();
+                vb.downloadFile(files.files[i].url, vb.appdata() + files.files[i].path, files.files[i].md5);                
             }
             this.Close();
         }
