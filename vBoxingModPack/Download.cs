@@ -39,7 +39,8 @@ namespace vBoxingModPack
             for (int i = 0; i < mods.files.Count(); i++)
             {
                 progressBar2.Value = 0;
-                label2.Text = "Lade Mod " + i+1 + " von " + mods.files.Count() + " Mods herunter!";
+                int j = i + 1;
+                label2.Text = "Lade Mod " + j + " von " + mods.files.Count() + " Mods herunter!";
                 label1.Text = mods.files[i].path;
                 progressBar1.Value = i;
                 this.Update();
@@ -50,7 +51,8 @@ namespace vBoxingModPack
             for (int i = 0; i < files.files.Count(); i++)
             {
                 progressBar2.Value = 0;
-                label2.Text = "Lade Datei " + i+1 + " von " + files.files.Count() + " Dateien herunter!";
+                int j = i + 1;
+                label2.Text = "Lade Datei " + j + " von " + files.files.Count() + " Dateien herunter!";
                 label1.Text = files.files[i].path;
                 progressBar1.Value = i;
                 this.Update();

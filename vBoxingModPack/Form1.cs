@@ -88,8 +88,8 @@ namespace vBoxingModPack
             try
             {
                 monitor.TrackFeatureStart("loginProzedure");
-                string version = Properties.version.Default.minecraftVer;
-                string name = Properties.version.Default.minecraftVer + "-Forge";
+                string version = "1.6.4";
+                string name = "1.6.4-Forge";
 
                 //vb.getFiles();
 
@@ -466,6 +466,11 @@ namespace vBoxingModPack
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/fueller/vBoxingModPack/issues");
+        }
+
+        private void openDirectory_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", vb.appdata());
         }
 	}
 }

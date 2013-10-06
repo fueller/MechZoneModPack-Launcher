@@ -66,15 +66,16 @@
             this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.website = new System.Windows.Forms.DataGridViewLinkColumn();
             this.contactTabPage = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.label8 = new System.Windows.Forms.Label();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.openDirectory = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
@@ -400,6 +401,7 @@
             // 
             // optionTabPage
             // 
+            this.optionTabPage.Controls.Add(this.openDirectory);
             this.optionTabPage.Controls.Add(this.noServerCheckOnStart);
             this.optionTabPage.Controls.Add(this.showConsole);
             this.optionTabPage.Controls.Add(this.ramSelect);
@@ -486,61 +488,25 @@
             this.contactTabPage.Text = "Kontakt / Bug Reports";
             this.contactTabPage.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // linkLabel3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(361, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Dieses Programm wurde für den Minecraft Server vBoxing.de Programmiert.";
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(143, 102);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(64, 13);
+            this.linkLabel3.TabIndex = 7;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "über GitHub";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
-            // label4
+            // label8
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(202, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Jede andere Benutzung ist nicht zulässig!";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 59);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Kontakt:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 76);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Email:";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(35, 76);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(98, 13);
-            this.linkLabel1.TabIndex = 3;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "fueller@vboxing.de";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 89);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(105, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "GitHub SourceCode:";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 102);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(143, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Bug-Reports: Per Email oder ";
             // 
             // linkLabel2
             // 
@@ -553,25 +519,71 @@
             this.linkLabel2.Text = "GitHub";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // label8
+            // label7
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 102);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(143, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Bug-Reports: Per Email oder ";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 89);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(105, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "GitHub SourceCode:";
             // 
-            // linkLabel3
+            // linkLabel1
             // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(143, 102);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(64, 13);
-            this.linkLabel3.TabIndex = 7;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "über GitHub";
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(35, 76);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(98, 13);
+            this.linkLabel1.TabIndex = 3;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "fueller@vboxing.de";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Email:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Kontakt:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(202, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Jede andere Benutzung ist nicht zulässig!";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(361, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Dieses Programm wurde für den Minecraft Server vBoxing.de Programmiert.";
+            // 
+            // openDirectory
+            // 
+            this.openDirectory.Location = new System.Drawing.Point(12, 148);
+            this.openDirectory.Name = "openDirectory";
+            this.openDirectory.Size = new System.Drawing.Size(108, 23);
+            this.openDirectory.TabIndex = 22;
+            this.openDirectory.Text = "Installations Ordner";
+            this.openDirectory.UseVisualStyleBackColor = true;
+            this.openDirectory.Click += new System.EventHandler(this.openDirectory_Click);
             // 
             // mainForm
             // 
@@ -670,6 +682,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button openDirectory;
 	}
 }
 
