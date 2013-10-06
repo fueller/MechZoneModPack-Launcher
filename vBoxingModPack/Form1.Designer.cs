@@ -47,31 +47,48 @@
             this.showConsole = new System.Windows.Forms.CheckBox();
             this.updateStatus = new System.Windows.Forms.Button();
             this.welcomeMessage = new System.Windows.Forms.Label();
-            this.optionenPanel = new System.Windows.Forms.Panel();
             this.ramComb = new System.Windows.Forms.CheckBox();
             this.ramSelect = new System.Windows.Forms.ComboBox();
             this.resX = new System.Windows.Forms.Label();
             this.resHeight = new System.Windows.Forms.NumericUpDown();
             this.resWidth = new System.Windows.Forms.NumericUpDown();
             this.resolutionComb = new System.Windows.Forms.CheckBox();
-            this.optionEnable = new System.Windows.Forms.CheckBox();
             this.mojangStatus = new System.Windows.Forms.Label();
             this.infosMain = new System.Windows.Forms.TabControl();
             this.infosTabPage = new System.Windows.Forms.TabPage();
             this.infosBrowser = new System.Windows.Forms.WebBrowser();
             this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogBrowser = new System.Windows.Forms.WebBrowser();
+            this.optionTabPage = new System.Windows.Forms.TabPage();
+            this.modlistTabPage = new System.Windows.Forms.TabPage();
+            this.modListTable = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.website = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.contactTabPage = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.websiteStatus)).BeginInit();
-            this.optionenPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
             this.infosMain.SuspendLayout();
             this.infosTabPage.SuspendLayout();
             this.changelogTabPage.SuspendLayout();
+            this.optionTabPage.SuspendLayout();
+            this.modlistTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modListTable)).BeginInit();
+            this.contactTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // loginButton
@@ -183,7 +200,7 @@
             // noServerCheckOnStart
             // 
             this.noServerCheckOnStart.AutoSize = true;
-            this.noServerCheckOnStart.Location = new System.Drawing.Point(3, 125);
+            this.noServerCheckOnStart.Location = new System.Drawing.Point(12, 124);
             this.noServerCheckOnStart.Name = "noServerCheckOnStart";
             this.noServerCheckOnStart.Size = new System.Drawing.Size(175, 17);
             this.noServerCheckOnStart.TabIndex = 21;
@@ -207,7 +224,7 @@
             // showConsole
             // 
             this.showConsole.AutoSize = true;
-            this.showConsole.Location = new System.Drawing.Point(5, 3);
+            this.showConsole.Location = new System.Drawing.Point(12, 6);
             this.showConsole.Name = "showConsole";
             this.showConsole.Size = new System.Drawing.Size(94, 17);
             this.showConsole.TabIndex = 12;
@@ -236,28 +253,10 @@
             this.welcomeMessage.Text = "mmmmmmmmmmmmmmmmmmm";
             this.welcomeMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // optionenPanel
-            // 
-            this.optionenPanel.AutoScroll = true;
-            this.optionenPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.optionenPanel.Controls.Add(this.noServerCheckOnStart);
-            this.optionenPanel.Controls.Add(this.ramComb);
-            this.optionenPanel.Controls.Add(this.ramSelect);
-            this.optionenPanel.Controls.Add(this.resX);
-            this.optionenPanel.Controls.Add(this.resHeight);
-            this.optionenPanel.Controls.Add(this.resWidth);
-            this.optionenPanel.Controls.Add(this.resolutionComb);
-            this.optionenPanel.Controls.Add(this.showConsole);
-            this.optionenPanel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.optionenPanel.Location = new System.Drawing.Point(12, 327);
-            this.optionenPanel.Name = "optionenPanel";
-            this.optionenPanel.Size = new System.Drawing.Size(200, 149);
-            this.optionenPanel.TabIndex = 16;
-            // 
             // ramComb
             // 
             this.ramComb.AutoSize = true;
-            this.ramComb.Location = new System.Drawing.Point(4, 78);
+            this.ramComb.Location = new System.Drawing.Point(12, 78);
             this.ramComb.Name = "ramComb";
             this.ramComb.Size = new System.Drawing.Size(98, 17);
             this.ramComb.TabIndex = 20;
@@ -269,7 +268,7 @@
             // 
             this.ramSelect.Enabled = false;
             this.ramSelect.FormattingEnabled = true;
-            this.ramSelect.Location = new System.Drawing.Point(21, 100);
+            this.ramSelect.Location = new System.Drawing.Point(22, 97);
             this.ramSelect.Name = "ramSelect";
             this.ramSelect.Size = new System.Drawing.Size(121, 21);
             this.ramSelect.TabIndex = 19;
@@ -281,7 +280,7 @@
             // 
             this.resX.AutoSize = true;
             this.resX.Enabled = false;
-            this.resX.Location = new System.Drawing.Point(72, 52);
+            this.resX.Location = new System.Drawing.Point(65, 54);
             this.resX.Name = "resX";
             this.resX.Size = new System.Drawing.Size(12, 13);
             this.resX.TabIndex = 18;
@@ -290,7 +289,7 @@
             // resHeight
             // 
             this.resHeight.Enabled = false;
-            this.resHeight.Location = new System.Drawing.Point(87, 50);
+            this.resHeight.Location = new System.Drawing.Point(83, 52);
             this.resHeight.Maximum = new decimal(new int[] {
             2160,
             0,
@@ -309,7 +308,7 @@
             // resWidth
             // 
             this.resWidth.Enabled = false;
-            this.resWidth.Location = new System.Drawing.Point(21, 50);
+            this.resWidth.Location = new System.Drawing.Point(12, 52);
             this.resWidth.Maximum = new decimal(new int[] {
             3840,
             0,
@@ -328,27 +327,13 @@
             // resolutionComb
             // 
             this.resolutionComb.AutoSize = true;
-            this.resolutionComb.Location = new System.Drawing.Point(4, 27);
+            this.resolutionComb.Location = new System.Drawing.Point(12, 29);
             this.resolutionComb.Name = "resolutionComb";
             this.resolutionComb.Size = new System.Drawing.Size(73, 17);
             this.resolutionComb.TabIndex = 13;
             this.resolutionComb.Text = "Auflösung";
             this.resolutionComb.UseVisualStyleBackColor = true;
             this.resolutionComb.CheckedChanged += new System.EventHandler(this.resolutionComb_CheckedChanged);
-            // 
-            // optionEnable
-            // 
-            this.optionEnable.AutoSize = true;
-            this.optionEnable.Checked = true;
-            this.optionEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.optionEnable.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.optionEnable.Location = new System.Drawing.Point(53, 293);
-            this.optionEnable.Name = "optionEnable";
-            this.optionEnable.Size = new System.Drawing.Size(115, 28);
-            this.optionEnable.TabIndex = 17;
-            this.optionEnable.Text = "Optionen";
-            this.optionEnable.UseVisualStyleBackColor = true;
-            this.optionEnable.CheckedChanged += new System.EventHandler(this.optionEnable_CheckedChanged);
             // 
             // mojangStatus
             // 
@@ -363,11 +348,14 @@
             // 
             this.infosMain.Controls.Add(this.infosTabPage);
             this.infosMain.Controls.Add(this.changelogTabPage);
+            this.infosMain.Controls.Add(this.optionTabPage);
+            this.infosMain.Controls.Add(this.modlistTabPage);
+            this.infosMain.Controls.Add(this.contactTabPage);
             this.infosMain.ItemSize = new System.Drawing.Size(58, 18);
             this.infosMain.Location = new System.Drawing.Point(19, 63);
             this.infosMain.Name = "infosMain";
             this.infosMain.SelectedIndex = 0;
-            this.infosMain.Size = new System.Drawing.Size(753, 224);
+            this.infosMain.Size = new System.Drawing.Size(753, 361);
             this.infosMain.TabIndex = 19;
             // 
             // infosTabPage
@@ -376,7 +364,7 @@
             this.infosTabPage.Location = new System.Drawing.Point(4, 22);
             this.infosTabPage.Name = "infosTabPage";
             this.infosTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.infosTabPage.Size = new System.Drawing.Size(745, 198);
+            this.infosTabPage.Size = new System.Drawing.Size(745, 335);
             this.infosTabPage.TabIndex = 0;
             this.infosTabPage.Text = "Infos";
             this.infosTabPage.UseVisualStyleBackColor = true;
@@ -387,7 +375,7 @@
             this.infosBrowser.Location = new System.Drawing.Point(3, 3);
             this.infosBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.infosBrowser.Name = "infosBrowser";
-            this.infosBrowser.Size = new System.Drawing.Size(739, 192);
+            this.infosBrowser.Size = new System.Drawing.Size(739, 329);
             this.infosBrowser.TabIndex = 0;
             // 
             // changelogTabPage
@@ -396,7 +384,7 @@
             this.changelogTabPage.Location = new System.Drawing.Point(4, 22);
             this.changelogTabPage.Name = "changelogTabPage";
             this.changelogTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.changelogTabPage.Size = new System.Drawing.Size(745, 198);
+            this.changelogTabPage.Size = new System.Drawing.Size(745, 335);
             this.changelogTabPage.TabIndex = 1;
             this.changelogTabPage.Text = "Changelog";
             this.changelogTabPage.UseVisualStyleBackColor = true;
@@ -407,8 +395,183 @@
             this.changelogBrowser.Location = new System.Drawing.Point(3, 3);
             this.changelogBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.changelogBrowser.Name = "changelogBrowser";
-            this.changelogBrowser.Size = new System.Drawing.Size(739, 192);
+            this.changelogBrowser.Size = new System.Drawing.Size(739, 329);
             this.changelogBrowser.TabIndex = 0;
+            // 
+            // optionTabPage
+            // 
+            this.optionTabPage.Controls.Add(this.noServerCheckOnStart);
+            this.optionTabPage.Controls.Add(this.showConsole);
+            this.optionTabPage.Controls.Add(this.ramSelect);
+            this.optionTabPage.Controls.Add(this.ramComb);
+            this.optionTabPage.Controls.Add(this.resolutionComb);
+            this.optionTabPage.Controls.Add(this.resWidth);
+            this.optionTabPage.Controls.Add(this.resHeight);
+            this.optionTabPage.Controls.Add(this.resX);
+            this.optionTabPage.Location = new System.Drawing.Point(4, 22);
+            this.optionTabPage.Name = "optionTabPage";
+            this.optionTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.optionTabPage.Size = new System.Drawing.Size(745, 335);
+            this.optionTabPage.TabIndex = 2;
+            this.optionTabPage.Text = "Optionen";
+            this.optionTabPage.UseVisualStyleBackColor = true;
+            // 
+            // modlistTabPage
+            // 
+            this.modlistTabPage.Controls.Add(this.modListTable);
+            this.modlistTabPage.Location = new System.Drawing.Point(4, 22);
+            this.modlistTabPage.Name = "modlistTabPage";
+            this.modlistTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.modlistTabPage.Size = new System.Drawing.Size(745, 335);
+            this.modlistTabPage.TabIndex = 4;
+            this.modlistTabPage.Text = "Mod List";
+            this.modlistTabPage.UseVisualStyleBackColor = true;
+            // 
+            // modListTable
+            // 
+            this.modListTable.AllowUserToAddRows = false;
+            this.modListTable.AllowUserToDeleteRows = false;
+            this.modListTable.AllowUserToResizeColumns = false;
+            this.modListTable.AllowUserToResizeRows = false;
+            this.modListTable.BackgroundColor = System.Drawing.Color.White;
+            this.modListTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.modListTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.modListTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.name,
+            this.version,
+            this.website});
+            this.modListTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modListTable.Location = new System.Drawing.Point(3, 3);
+            this.modListTable.Name = "modListTable";
+            this.modListTable.ReadOnly = true;
+            this.modListTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.modListTable.ShowEditingIcon = false;
+            this.modListTable.Size = new System.Drawing.Size(739, 329);
+            this.modListTable.TabIndex = 0;
+            this.modListTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.modListTable_CellContentClick);
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // version
+            // 
+            this.version.HeaderText = "Version";
+            this.version.Name = "version";
+            this.version.ReadOnly = true;
+            // 
+            // website
+            // 
+            this.website.HeaderText = "Website";
+            this.website.Name = "website";
+            this.website.ReadOnly = true;
+            // 
+            // contactTabPage
+            // 
+            this.contactTabPage.Controls.Add(this.linkLabel3);
+            this.contactTabPage.Controls.Add(this.label8);
+            this.contactTabPage.Controls.Add(this.linkLabel2);
+            this.contactTabPage.Controls.Add(this.label7);
+            this.contactTabPage.Controls.Add(this.linkLabel1);
+            this.contactTabPage.Controls.Add(this.label6);
+            this.contactTabPage.Controls.Add(this.label5);
+            this.contactTabPage.Controls.Add(this.label4);
+            this.contactTabPage.Controls.Add(this.label3);
+            this.contactTabPage.Location = new System.Drawing.Point(4, 22);
+            this.contactTabPage.Name = "contactTabPage";
+            this.contactTabPage.Size = new System.Drawing.Size(745, 335);
+            this.contactTabPage.TabIndex = 5;
+            this.contactTabPage.Text = "Kontakt / Bug Reports";
+            this.contactTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(361, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Dieses Programm wurde für den Minecraft Server vBoxing.de Programmiert.";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(202, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Jede andere Benutzung ist nicht zulässig!";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 59);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Kontakt:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Email:";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(35, 76);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(98, 13);
+            this.linkLabel1.TabIndex = 3;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "fueller@vboxing.de";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(4, 89);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(105, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "GitHub SourceCode:";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(105, 89);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(40, 13);
+            this.linkLabel2.TabIndex = 5;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "GitHub";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 102);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(143, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Bug-Reports: Per Email oder ";
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(143, 102);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(64, 13);
+            this.linkLabel3.TabIndex = 7;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "über GitHub";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // mainForm
             // 
@@ -416,8 +579,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 488);
             this.Controls.Add(this.infosMain);
-            this.Controls.Add(this.optionEnable);
-            this.Controls.Add(this.optionenPanel);
             this.Controls.Add(this.welcomeMessage);
             this.Controls.Add(this.updateStatus);
             this.Controls.Add(this.websiteStatus);
@@ -446,13 +607,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.websiteStatus)).EndInit();
-            this.optionenPanel.ResumeLayout(false);
-            this.optionenPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).EndInit();
             this.infosMain.ResumeLayout(false);
             this.infosTabPage.ResumeLayout(false);
             this.changelogTabPage.ResumeLayout(false);
+            this.optionTabPage.ResumeLayout(false);
+            this.optionTabPage.PerformLayout();
+            this.modlistTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.modListTable)).EndInit();
+            this.contactTabPage.ResumeLayout(false);
+            this.contactTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,8 +641,6 @@
         private System.Windows.Forms.CheckBox showConsole;
         private System.Windows.Forms.Button updateStatus;
         private System.Windows.Forms.Label welcomeMessage;
-        private System.Windows.Forms.Panel optionenPanel;
-        private System.Windows.Forms.CheckBox optionEnable;
         private System.Windows.Forms.Label resX;
         private System.Windows.Forms.NumericUpDown resHeight;
         private System.Windows.Forms.NumericUpDown resWidth;
@@ -491,6 +654,22 @@
         private System.Windows.Forms.TabPage changelogTabPage;
         private System.Windows.Forms.WebBrowser infosBrowser;
         private System.Windows.Forms.WebBrowser changelogBrowser;
+        private System.Windows.Forms.TabPage optionTabPage;
+        private System.Windows.Forms.TabPage modlistTabPage;
+        private System.Windows.Forms.DataGridView modListTable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn version;
+        private System.Windows.Forms.DataGridViewLinkColumn website;
+        private System.Windows.Forms.TabPage contactTabPage;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.Label label8;
 	}
 }
 

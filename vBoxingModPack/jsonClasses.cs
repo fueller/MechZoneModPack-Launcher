@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace vBoxingModPack
 {
-    class jsonClasses
+    public class jsonClasses
     {
         #region Minecraft Login
         public class minecraftLogonJson1
@@ -38,6 +38,10 @@ namespace vBoxingModPack
 
         public class files2
         {
+            public string name { get; set; }
+            public string forumLink { get; set; }
+            public string version { get; set; }
+            public bool config { get; set; }
             public string url { get; set; }
             public string path { get; set; }
             public string md5 { get; set; }

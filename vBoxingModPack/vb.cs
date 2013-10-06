@@ -368,7 +368,7 @@ namespace vBoxingModPack
         #endregion
 
         #region check Version
-        public static Dictionary<string, bool> checkVersion()
+        public static jsonClasses.filesList checkVersion()
         {
             
             Dictionary<string, bool> versions = new Dictionary<string, bool>();
@@ -395,11 +395,14 @@ namespace vBoxingModPack
                 client.DownloadFile("http://lawall.funpic.de/modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
                 client.DownloadFile("http://lawall.funpic.de/modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
                 client.DownloadFile("http://lawall.funpic.de/modpack/files/mods.json", vb.appdata() + "\\temp\\mods.json");
-                
-                var j = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(vb.appdata() + "\\temp\\version.json"));
+
+                jsonClasses.filesList j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
+
+
+                //var j = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(vb.appdata() + "\\temp\\version.json"));
                 
 
-                if (j.mods == "0.0.1")
+                /*if (j.mods == "0.0.1")
                 {
                     versions["mods"] = true;
                     Properties.version.Default.modsVer = j.mods;
@@ -463,19 +466,22 @@ namespace vBoxingModPack
                 else
                 {
                     Properties.version.Default.forge = false;
-                }
-                Properties.version.Default.update = j.update;
-                Properties.version.Default.Save();
+                }*/
+
+                //Properties.version.Default.update = j.update;
+                //Properties.version.Default.Save();
                 vBoxingModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
+                return j;
             }
             catch (Exception ex)
             {
                 vBoxingModPack.mainForm.monitor.TrackFeatureCancel("checkVersion");
                 MessageBox.Show("Konnte Version nicht prüfen!\nBenutze letzte heruntergeladene");
                 MessageBox.Show(ex.Message);
+                return null;
             }
 
-            return versions;
+            //return versions;
         }
         #endregion
 

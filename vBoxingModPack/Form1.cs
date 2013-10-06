@@ -16,6 +16,7 @@ using System.Net;
 using EQATEC.Analytics.Monitor;
 using System.Deployment.Application;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace vBoxingModPack
 {
@@ -40,7 +41,7 @@ namespace vBoxingModPack
             ToolTip.SetToolTip(realmStatus, "Realms Server Status\r\nGerade Offline\r\n");
             ToolTip.SetToolTip(usernameText, "Deinen Benutzernamen\r\noder deine Mojang Email");
             ToolTip.SetToolTip(passwordText, "Dein Minecraft Passwort oder\r\nMojang Passwort");
-            ToolTip.SetToolTip(savePasswordCheck, "Speichere Passwort\r\nACHTUNG: Speichert Passwort unverschlüsselt!");
+            ToolTip.SetToolTip(savePasswordCheck, "Speichere Passwort\r\nACHTUNG: Speichert Passwort unverschlüsselt!\r\nFunktioniert noch nicht");
             
             this.Text = "vBoxing Mod Pack v." + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString());
             
@@ -48,7 +49,6 @@ namespace vBoxingModPack
             resHeight.Value = Properties.Settings.Default.height;
             resWidth.Value = Properties.Settings.Default.width;
             
-            optionEnable.Checked = Properties.Settings.Default.options;
             ramComb.Checked = Properties.Settings.Default.ram;
             resolutionComb.Checked = Properties.Settings.Default.resolution;
             showConsole.Checked = Properties.Settings.Default.console;
@@ -166,6 +166,18 @@ namespace vBoxingModPack
                     //process1.StartInfo.UseShellExecute = false;
                     monitor.TrackFeatureStop("loginProzedure");
                     process1.Start();
+                    
+                    /*using (Process process = Process.Start(process1))
+                    {
+                        using (StreamReader reader = process.StandardOutput)
+                        {
+                            string result = reader.ReadToEnd();
+                            //Console.WriteLine(result);
+                            richTextBox1.AppendText(result);
+                            Application.DoEvents();
+                            this.Update();
+                        }
+                    }*/
                 }
             }
             catch (Exception ex)
@@ -273,27 +285,6 @@ namespace vBoxingModPack
             Properties.Settings.Default.email = usernameText.Text;
             Properties.Settings.Default.Save();
         }
-        private void optionEnable_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.options = optionEnable.Checked;
-            Properties.Settings.Default.Save();
-            monitor.TrackFeature("optionEnable");
-            if (optionEnable.Checked)
-            {
-                optionenPanel.Enabled = true;
-                optionenPanel.Visible = true;
-                optionEnable.Location = new Point(53, 293);
-                infosMain.Size = new System.Drawing.Size(753, 224);
-                
-            }
-            else
-            {
-                optionenPanel.Enabled = false;
-                optionenPanel.Visible = false;
-                optionEnable.Location = new Point(53, 448);
-                infosMain.Size = new System.Drawing.Size(753, 360);
-            }
-        }
 
         private void ramComb_CheckedChanged(object sender, EventArgs e)
         {
@@ -396,7 +387,25 @@ namespace vBoxingModPack
                 status();
                 
             }
-            vb.checkVersion();
+            jsonClasses.filesList j = vb.checkVersion();
+
+            //modListTable.Columns.Add("name", "Name");
+            //modListTable.Columns.Add("version", "Version");
+            //modListTable.Columns.Add("forumLink", "Website");
+
+            try
+            {
+                for (int i = 0; i < j.files.Count; i++)
+                {
+                    if (!j.files[i].config)
+                    {
+                        modListTable.Rows.Add(j.files[i].name, j.files[i].version, j.files[i].forumLink); 
+                    }
+                }
+            }
+            catch (Exception){}
+            modListTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
         }
 
         private void updateStatus_Click(object sender, EventArgs e)
@@ -433,6 +442,30 @@ namespace vBoxingModPack
             }
             
             Properties.Settings.Default.Save();
+        }
+
+        private void modListTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            {
+                //MessageBox.Show(modListTable[e.ColumnIndex, e.RowIndex].Value.ToString());
+                Process.Start(modListTable[e.ColumnIndex, e.RowIndex].Value.ToString());
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("mailto://fueller@vboxing.de");
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/fueller/vBoxingModPack");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/fueller/vBoxingModPack/issues");
         }
 	}
 }
