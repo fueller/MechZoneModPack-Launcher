@@ -33,7 +33,9 @@ namespace vBoxingModPack
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            
+
+            this.themeSelecter.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.ramSelect.DropDownStyle = ComboBoxStyle.DropDownList;
             ToolTip.SetToolTip(websiteStatus, "Website Status\r\nGerade Offline\r\n");
             ToolTip.SetToolTip(loginStatus, "Login Server Status\r\nGerade Offline\r\n");
             ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\nGerade Offline\r\n");
@@ -88,7 +90,7 @@ namespace vBoxingModPack
             try
             {
                 monitor.TrackFeatureStart("loginProzedure");
-                string version = "1.6.4";
+                //string version = "1.6.4";
                 string name = "1.6.4-Forge";
 
                 //vb.getFiles();
@@ -471,6 +473,28 @@ namespace vBoxingModPack
         private void openDirectory_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", vb.appdata());
+        }
+
+        private void themeSelecter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Console.WriteLine(themeSelecter.SelectedIndex.ToString());
+            switch (themeSelecter.SelectedIndex)
+            {
+                case 0:
+                    this.BackgroundImage = Properties.Resources.T_nw;
+                    this.Update();
+                    break;
+                case 1:
+                    this.BackgroundImage = Properties.Resources.B_nw;
+                    this.Update();
+                    break;
+                case 2:
+                    this.BackgroundImage = null;
+                    this.Update();
+                    break;
+                default:
+                    break;
+            }
         }
 	}
 }

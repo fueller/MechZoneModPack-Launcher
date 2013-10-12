@@ -61,6 +61,16 @@ namespace vBoxingModPack.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap B_nw {
+            get {
+                object obj = ResourceManager.GetObject("B_nw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
         internal static byte[] JsonFx {
@@ -106,6 +116,16 @@ namespace vBoxingModPack.Properties {
         internal static System.Drawing.Bitmap statusOn {
             get {
                 object obj = ResourceManager.GetObject("statusOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap T_nw {
+            get {
+                object obj = ResourceManager.GetObject("T_nw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

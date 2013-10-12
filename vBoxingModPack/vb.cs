@@ -100,7 +100,21 @@ namespace vBoxingModPack
                     }
                     else
                     {
-                        MessageBox.Show("Datei " + save + " ist veraltet");
+                        DialogResult result = MessageBox.Show("Datei " + save + " ist veraltet\nMöchtest du ein Backup machen bevor die Datei überschrieben wird?","Error",MessageBoxButtons.YesNo,MessageBoxIcon.Error);
+                        if (result == DialogResult.Yes)
+                        {
+                            
+                            string path = (vb.appdata() + "\\backup\\" + DateTime.Now.ToString("HH-mm-ss") + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + Path.GetFileName(save)).Replace(" ","_");
+                            
+                            string outputFolder = Path.GetDirectoryName(path);
+                            if (!Directory.Exists(outputFolder))
+                            {
+                                Directory.CreateDirectory(outputFolder);
+                            }
+                            Console.WriteLine(save);
+                            Console.WriteLine(path);
+                            File.Copy(save, path);
+                        }
                         File.Delete(save);
                         vb.downloadFile(url, save, md5);
                     }
@@ -392,84 +406,13 @@ namespace vBoxingModPack
                 Directory.CreateDirectory(Path.Combine(vb.appdata(), "temp"));
                 Properties.Settings.Default.toDownloadFiles = 2;
                 Properties.Settings.Default.finishedFiles = 0;
-                client.DownloadFile("http://lawall.funpic.de/modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
-                client.DownloadFile("http://lawall.funpic.de/modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
-                client.DownloadFile("http://lawall.funpic.de/modpack/files/mods.json", vb.appdata() + "\\temp\\mods.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/mods.json", vb.appdata() + "\\temp\\mods.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/config.json", vb.appdata() + "\\temp\\config.json");
 
                 jsonClasses.filesList j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
 
-
-                //var j = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(vb.appdata() + "\\temp\\version.json"));
-                
-
-                /*if (j.mods == "0.0.1")
-                {
-                    versions["mods"] = true;
-                    Properties.version.Default.modsVer = j.mods;
-                    Properties.version.Default.mods = true;
-                }
-                else
-                {
-                    Properties.version.Default.mods = false;
-                }
-
-                if (j.config == "0.0.1")
-                {
-                    versions["config"] = true;
-                    Properties.version.Default.configVer = j.config;
-                    Properties.version.Default.config = true;
-                }
-                else
-                {
-                    Properties.version.Default.config = false;
-                }
-
-                if (j.libraries == "1.6.4")
-                {
-                    versions["libraries"] = true;
-                    Properties.version.Default.librariesVer = j.libraries;
-                    Properties.version.Default.libraries = true;
-                }
-                else
-                {
-                    Properties.version.Default.libraries = false;
-                }
-
-                if (j.natives == "1.6.4")
-                {
-                    versions["natives"] = true;
-                    Properties.version.Default.nativesVer = j.natives;
-                    Properties.version.Default.natives = true;
-                }
-                else
-                {
-                    Properties.version.Default.natives = false;
-                }
-
-                if (j.minecraft == "1.6.4")
-                {
-                    versions["minecraft"] = true;
-                    Properties.version.Default.minecraftVer = j.minecraft;
-                    Properties.version.Default.minecraft = true;
-                }
-                else
-                {
-                    Properties.version.Default.minecraft = false;
-                }
-
-                if (j.forge == "9.11.1.916")
-                {
-                    versions["forge"] = true;
-                    Properties.version.Default.forgeVer = j.forge;
-                    Properties.version.Default.forge = true;
-                }
-                else
-                {
-                    Properties.version.Default.forge = false;
-                }*/
-
-                //Properties.version.Default.update = j.update;
-                //Properties.version.Default.Save();
                 vBoxingModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
                 return j;
             }
@@ -510,27 +453,15 @@ namespace vBoxingModPack
             {
                 vb.downloadFile(j.files[i].url, vb.appdata() + j.files[i].path, j.files[i].md5);
             }
-
-            /*if (Directory.Exists(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-Natives\\"))
-            {
-                Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-Natives\\",true);
-            }
-            /*string jarPath = vb.appdata() + "\\temp\\windows_natives.jar";
-            string saveFolderPath = vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\";
-            Directory.CreateDirectory(saveFolderPath);
-            FastZip fz = new FastZip();
-            fz.ExtractZip(jarPath, saveFolderPath, "");
-            try
-            {
-                Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\META-INF\\", true);
-                File.Delete(vb.appdata() + "\\temp\\windows_natives.jar");
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }*/
             vBoxingModPack.mainForm.monitor.TrackFeatureStop("downloadFiles");
         }
         #endregion        
+
+        #region variables
+        public static string downloadLocation()
+        {
+            return "http://lawall.funpic.de/";
+        }
+        #endregion
     }
 }

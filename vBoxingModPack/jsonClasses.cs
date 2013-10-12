@@ -39,12 +39,15 @@ namespace vBoxingModPack
         public class files2
         {
             public string name { get; set; }
+            public bool enabled { get; set; }
+            public bool server { get; set; }
             public string forumLink { get; set; }
             public string version { get; set; }
             public bool config { get; set; }
             public string url { get; set; }
             public string path { get; set; }
             public string md5 { get; set; }
+
         }
         #endregion
 

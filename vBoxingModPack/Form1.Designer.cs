@@ -60,6 +60,10 @@
             this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogBrowser = new System.Windows.Forms.WebBrowser();
             this.optionTabPage = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.themeSelecter = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.openDirectory = new System.Windows.Forms.Button();
             this.modlistTabPage = new System.Windows.Forms.TabPage();
             this.modListTable = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,7 +79,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.openDirectory = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
@@ -87,6 +90,7 @@
             this.infosTabPage.SuspendLayout();
             this.changelogTabPage.SuspendLayout();
             this.optionTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.modlistTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modListTable)).BeginInit();
             this.contactTabPage.SuspendLayout();
@@ -122,30 +126,38 @@
             // savePasswordCheck
             // 
             this.savePasswordCheck.AutoSize = true;
+            this.savePasswordCheck.BackColor = System.Drawing.Color.Transparent;
+            this.savePasswordCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.savePasswordCheck.Location = new System.Drawing.Point(844, 459);
             this.savePasswordCheck.Name = "savePasswordCheck";
-            this.savePasswordCheck.Size = new System.Drawing.Size(118, 17);
+            this.savePasswordCheck.Size = new System.Drawing.Size(136, 17);
             this.savePasswordCheck.TabIndex = 3;
             this.savePasswordCheck.TabStop = false;
             this.savePasswordCheck.Text = "speichere Passwort";
-            this.savePasswordCheck.UseVisualStyleBackColor = true;
+            this.savePasswordCheck.UseVisualStyleBackColor = false;
             this.savePasswordCheck.CheckedChanged += new System.EventHandler(this.savePasswordCheck_CheckedChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(596, 435);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(584, 433);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Benutzername";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(621, 459);
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(613, 459);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Passwort";
             // 
@@ -235,21 +247,24 @@
             // 
             // updateStatus
             // 
+            this.updateStatus.BackColor = System.Drawing.SystemColors.Control;
             this.updateStatus.Location = new System.Drawing.Point(778, 50);
             this.updateStatus.Name = "updateStatus";
             this.updateStatus.Size = new System.Drawing.Size(184, 23);
             this.updateStatus.TabIndex = 14;
             this.updateStatus.Text = "Update Server Status";
-            this.updateStatus.UseVisualStyleBackColor = true;
+            this.updateStatus.UseVisualStyleBackColor = false;
             this.updateStatus.Click += new System.EventHandler(this.updateStatus_Click);
             // 
             // welcomeMessage
             // 
             this.welcomeMessage.AutoSize = true;
-            this.welcomeMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeMessage.BackColor = System.Drawing.Color.Transparent;
+            this.welcomeMessage.Font = new System.Drawing.Font("Asimov", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeMessage.ForeColor = System.Drawing.Color.White;
             this.welcomeMessage.Location = new System.Drawing.Point(12, 12);
             this.welcomeMessage.Name = "welcomeMessage";
-            this.welcomeMessage.Size = new System.Drawing.Size(606, 39);
+            this.welcomeMessage.Size = new System.Drawing.Size(511, 37);
             this.welcomeMessage.TabIndex = 15;
             this.welcomeMessage.Text = "mmmmmmmmmmmmmmmmmmm";
             this.welcomeMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -338,6 +353,7 @@
             // 
             // mojangStatus
             // 
+            this.mojangStatus.BackColor = System.Drawing.Color.Transparent;
             this.mojangStatus.Cursor = System.Windows.Forms.Cursors.Default;
             this.mojangStatus.Location = new System.Drawing.Point(778, 47);
             this.mojangStatus.Name = "mojangStatus";
@@ -401,6 +417,9 @@
             // 
             // optionTabPage
             // 
+            this.optionTabPage.Controls.Add(this.label9);
+            this.optionTabPage.Controls.Add(this.themeSelecter);
+            this.optionTabPage.Controls.Add(this.pictureBox1);
             this.optionTabPage.Controls.Add(this.openDirectory);
             this.optionTabPage.Controls.Add(this.noServerCheckOnStart);
             this.optionTabPage.Controls.Add(this.showConsole);
@@ -417,6 +436,47 @@
             this.optionTabPage.TabIndex = 2;
             this.optionTabPage.Text = "Optionen";
             this.optionTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(210, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Theme";
+            // 
+            // themeSelecter
+            // 
+            this.themeSelecter.FormattingEnabled = true;
+            this.themeSelecter.Items.AddRange(new object[] {
+            "Dark",
+            "Light",
+            "Keins"});
+            this.themeSelecter.Location = new System.Drawing.Point(253, 7);
+            this.themeSelecter.Name = "themeSelecter";
+            this.themeSelecter.Size = new System.Drawing.Size(121, 21);
+            this.themeSelecter.TabIndex = 24;
+            this.themeSelecter.SelectedIndexChanged += new System.EventHandler(this.themeSelecter_SelectedIndexChanged);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Gray;
+            this.pictureBox1.Location = new System.Drawing.Point(202, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1, 323);
+            this.pictureBox1.TabIndex = 23;
+            this.pictureBox1.TabStop = false;
+            // 
+            // openDirectory
+            // 
+            this.openDirectory.Location = new System.Drawing.Point(12, 148);
+            this.openDirectory.Name = "openDirectory";
+            this.openDirectory.Size = new System.Drawing.Size(108, 23);
+            this.openDirectory.TabIndex = 22;
+            this.openDirectory.Text = "Installations Ordner";
+            this.openDirectory.UseVisualStyleBackColor = true;
+            this.openDirectory.Click += new System.EventHandler(this.openDirectory_Click);
             // 
             // modlistTabPage
             // 
@@ -575,20 +635,12 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Dieses Programm wurde für den Minecraft Server vBoxing.de Programmiert.";
             // 
-            // openDirectory
-            // 
-            this.openDirectory.Location = new System.Drawing.Point(12, 148);
-            this.openDirectory.Name = "openDirectory";
-            this.openDirectory.Size = new System.Drawing.Size(108, 23);
-            this.openDirectory.TabIndex = 22;
-            this.openDirectory.Text = "Installations Ordner";
-            this.openDirectory.UseVisualStyleBackColor = true;
-            this.openDirectory.Click += new System.EventHandler(this.openDirectory_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::vBoxingModPack.Properties.Resources.T_nw;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(974, 488);
             this.Controls.Add(this.infosMain);
             this.Controls.Add(this.welcomeMessage);
@@ -605,6 +657,7 @@
             this.Controls.Add(this.passwordText);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.mojangStatus);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -626,6 +679,7 @@
             this.changelogTabPage.ResumeLayout(false);
             this.optionTabPage.ResumeLayout(false);
             this.optionTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.modlistTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.modListTable)).EndInit();
             this.contactTabPage.ResumeLayout(false);
@@ -683,6 +737,9 @@
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button openDirectory;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox themeSelecter;
 	}
 }
 

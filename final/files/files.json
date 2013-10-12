@@ -13,7 +13,7 @@
 	{
       "url": "http://lawall.funpic.de/modpack/files/servers.dat",
       "path": "\\servers.dat",
-      "md5": "4c381167ef8e9be4fe72eaea9c3a8d7e"
+      "md5": null
     },
     {
       "url": "https://dl.dropboxusercontent.com/u/151381089/modpack/libraries/lzma-0.0.1.jar",
