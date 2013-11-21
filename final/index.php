@@ -1,6 +1,6 @@
 ﻿<HTML>
   <HEAD>
-    <TITLE>vBoxing.de Mod Pack</TITLE>
+    <TITLE>MechZoneModPack</TITLE>
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
     <STYLE TYPE="text/css">
 <!--
@@ -118,7 +118,7 @@ function CompareVersions(v1, v2)
     <TABLE WIDTH="100%" CELLPADDING="0" CELLSPACING="2" BORDER="0">
 
 <!-- Begin Banner -->
-<TR><TD><TABLE CELLPADDING="2" CELLSPACING="0" BORDER="0" BGCOLOR="#cecece" WIDTH="100%"><TR><TD><TABLE BGCOLOR="#1c5280" WIDTH="100%" CELLPADDING="0" CELLSPACING="0" BORDER="0"><TR><TD CLASS="Banner" /></TR><TR><TD CLASS="Banner"><SPAN CLASS="BannerTextCompany">vBoxing</SPAN></TD></TR><TR><TD CLASS="Banner"><SPAN CLASS="BannerTextApplication">vBoxing.de Mod Pack</SPAN></TD></TR><TR><TD CLASS="Banner" ALIGN="RIGHT" /></TR></TABLE></TD></TR></TABLE></TD></TR>
+<TR><TD><TABLE CELLPADDING="2" CELLSPACING="0" BORDER="0" BGCOLOR="#cecece" WIDTH="100%"><TR><TD><TABLE BGCOLOR="#1c5280" WIDTH="100%" CELLPADDING="0" CELLSPACING="0" BORDER="0"><TR><TD CLASS="Banner" /></TR><TR><TD CLASS="Banner"><SPAN CLASS="BannerTextCompany">MechZone</SPAN></TD></TR><TR><TD CLASS="Banner"><SPAN CLASS="BannerTextApplication">MechZoneModPack</SPAN></TD></TR><TR><TD CLASS="Banner" ALIGN="RIGHT" /></TR></TABLE></TD></TR></TABLE></TD></TR>
 <!-- End Banner -->
 
 
@@ -126,7 +126,7 @@ function CompareVersions(v1, v2)
 <TR><TD ALIGN="LEFT"><TABLE CELLPADDING="2" CELLSPACING="0" BORDER="0" WIDTH="540"><TR><TD WIDTH="496">
 
 <!-- Begin AppInfo -->
-<TABLE><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Name:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>vBoxing.de Mod Pack</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Version:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>1.0.0.26</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Herausgeber:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>vBoxing</TD></TR><tr><td colspan="3">&nbsp;</td></tr></TABLE>
+<TABLE><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Name:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>MechZoneModPack</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Version:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>1.0.0.41</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Herausgeber:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>MechZone</TD></TR><tr><td colspan="3">&nbsp;</td></tr></TABLE>
 <!-- End AppInfo -->
 
 
@@ -154,7 +154,7 @@ Falls diese Komponenten bereits installiert wurden, können Sie die Anwendung je
 <TR><TD>
 <!-- Begin Footer -->
 <TABLE WIDTH="100%" CELLPADDING="0" CELLSPACING="0" BORDER="0" BGCOLOR="#ffffff"><TR><TD HEIGHT="5"><SPACER TYPE="block" HEIGHT="5" /></TD></TR><TR><TD CLASS="FooterText" ALIGN="center">
-<A HREF="http://fueller.t15.org/">vBoxing-Kundensupport</A>
+<A HREF="http://mechzone.net">MechZone-Kundensupport</A>
 &nbsp;&nbsp;&nbsp;::&nbsp;&nbsp;&nbsp;
 <A HREF="http://go.microsoft.com/fwlink/?LinkId=154571">ClickOnce- und .NET Framework-Ressourcen</A>
 </TD></TR><TR><TD HEIGHT="5"><SPACER TYPE="block" HEIGHT="5" /></TD></TR><TR><TD HEIGHT="1" bgcolor="#cecece"><SPACER TYPE="block" HEIGHT="1" /></TD></TR></TABLE>
