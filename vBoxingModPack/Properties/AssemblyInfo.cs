@@ -6,11 +6,11 @@ using System.Resources;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
-[assembly: AssemblyTitle("vBoxing Mod Pack")]
-[assembly: AssemblyDescription("Programm zum herunterladen und installieren des vBoxing.de Minecraft Mod Pack")]
+[assembly: AssemblyTitle("MechZone Mod Pack")]
+[assembly: AssemblyDescription("Programm zum herunterladen und installieren des MechZone.net Minecraft Mod Pack")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("vBoxingDE")]
-[assembly: AssemblyProduct("vBoxing Mod Pack")]
+[assembly: AssemblyCompany("MechZone.net")]
+[assembly: AssemblyProduct("MechZone Mod Pack")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

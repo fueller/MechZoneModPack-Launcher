@@ -1,4 +1,4 @@
-﻿namespace vBoxingModPack
+﻿namespace MechZoneModPack
 {
     partial class Download
     {
@@ -46,13 +46,13 @@
             // cancel
             // 
             this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancel.Enabled = false;
             this.cancel.Location = new System.Drawing.Point(312, 116);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 1;
             this.cancel.Text = "Abbrechen";
             this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
             // doing
             // 
@@ -64,7 +64,6 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Enabled = false;
             this.progressBar2.Location = new System.Drawing.Point(13, 48);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(374, 23);

@@ -1,4 +1,4 @@
-﻿namespace vBoxingModPack.Properties {
+﻿namespace MechZoneModPack.Properties {
     
     
     // Diese Klasse ermöglicht die Behandlung bestimmter Ereignisse der Einstellungsklasse:

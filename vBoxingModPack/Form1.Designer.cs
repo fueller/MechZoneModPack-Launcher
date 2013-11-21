@@ -1,4 +1,4 @@
-﻿namespace vBoxingModPack
+﻿namespace MechZoneModPack
 {
 	partial class mainForm
 	{
@@ -44,7 +44,6 @@
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.noServerCheckOnStart = new System.Windows.Forms.CheckBox();
             this.process1 = new System.Diagnostics.Process();
-            this.showConsole = new System.Windows.Forms.CheckBox();
             this.updateStatus = new System.Windows.Forms.Button();
             this.welcomeMessage = new System.Windows.Forms.Label();
             this.ramComb = new System.Windows.Forms.CheckBox();
@@ -56,19 +55,18 @@
             this.mojangStatus = new System.Windows.Forms.Label();
             this.infosMain = new System.Windows.Forms.TabControl();
             this.infosTabPage = new System.Windows.Forms.TabPage();
-            this.infosBrowser = new System.Windows.Forms.WebBrowser();
             this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogBrowser = new System.Windows.Forms.WebBrowser();
             this.optionTabPage = new System.Windows.Forms.TabPage();
+            this.updateFiles = new System.Windows.Forms.CheckBox();
+            this.extraJavaPrameters = new System.Windows.Forms.Label();
+            this.extraJavaParameterText = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.themeSelecter = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openDirectory = new System.Windows.Forms.Button();
             this.modlistTabPage = new System.Windows.Forms.TabPage();
             this.modListTable = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.website = new System.Windows.Forms.DataGridViewLinkColumn();
             this.contactTabPage = new System.Windows.Forms.TabPage();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
@@ -79,6 +77,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.logTabPage = new System.Windows.Forms.TabPage();
+            this.logTextBox = new System.Windows.Forms.TextBox();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.website = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.beschreibung = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
@@ -87,13 +92,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
             this.infosMain.SuspendLayout();
-            this.infosTabPage.SuspendLayout();
             this.changelogTabPage.SuspendLayout();
             this.optionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.modlistTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modListTable)).BeginInit();
             this.contactTabPage.SuspendLayout();
+            this.logTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // loginButton
@@ -163,7 +168,7 @@
             // 
             // realmStatus
             // 
-            this.realmStatus.Image = global::vBoxingModPack.Properties.Resources.statusOff;
+            this.realmStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
             this.realmStatus.Location = new System.Drawing.Point(892, 12);
             this.realmStatus.Name = "realmStatus";
             this.realmStatus.Size = new System.Drawing.Size(32, 32);
@@ -172,7 +177,7 @@
             // 
             // skinsStatus
             // 
-            this.skinsStatus.Image = global::vBoxingModPack.Properties.Resources.statusOff;
+            this.skinsStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
             this.skinsStatus.Location = new System.Drawing.Point(854, 12);
             this.skinsStatus.Name = "skinsStatus";
             this.skinsStatus.Size = new System.Drawing.Size(32, 32);
@@ -181,7 +186,7 @@
             // 
             // sessionStatus
             // 
-            this.sessionStatus.Image = global::vBoxingModPack.Properties.Resources.statusOff;
+            this.sessionStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
             this.sessionStatus.Location = new System.Drawing.Point(778, 12);
             this.sessionStatus.Name = "sessionStatus";
             this.sessionStatus.Size = new System.Drawing.Size(32, 32);
@@ -190,7 +195,7 @@
             // 
             // loginStatus
             // 
-            this.loginStatus.Image = global::vBoxingModPack.Properties.Resources.statusOff;
+            this.loginStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
             this.loginStatus.Location = new System.Drawing.Point(930, 12);
             this.loginStatus.Name = "loginStatus";
             this.loginStatus.Size = new System.Drawing.Size(32, 32);
@@ -199,7 +204,7 @@
             // 
             // websiteStatus
             // 
-            this.websiteStatus.Image = global::vBoxingModPack.Properties.Resources.statusOff;
+            this.websiteStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
             this.websiteStatus.Location = new System.Drawing.Point(816, 12);
             this.websiteStatus.Name = "websiteStatus";
             this.websiteStatus.Size = new System.Drawing.Size(32, 32);
@@ -213,9 +218,10 @@
             // noServerCheckOnStart
             // 
             this.noServerCheckOnStart.AutoSize = true;
+            this.noServerCheckOnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noServerCheckOnStart.Location = new System.Drawing.Point(12, 124);
             this.noServerCheckOnStart.Name = "noServerCheckOnStart";
-            this.noServerCheckOnStart.Size = new System.Drawing.Size(175, 17);
+            this.noServerCheckOnStart.Size = new System.Drawing.Size(205, 17);
             this.noServerCheckOnStart.TabIndex = 21;
             this.noServerCheckOnStart.Text = "Kein Server Check beim starten";
             this.ToolTip.SetToolTip(this.noServerCheckOnStart, "Checkt beim starten nicht ob die Minecraft Server Online sind\r\n(Das Programm star" +
@@ -234,17 +240,6 @@
             this.process1.StartInfo.UserName = "";
             this.process1.SynchronizingObject = this;
             // 
-            // showConsole
-            // 
-            this.showConsole.AutoSize = true;
-            this.showConsole.Location = new System.Drawing.Point(12, 6);
-            this.showConsole.Name = "showConsole";
-            this.showConsole.Size = new System.Drawing.Size(94, 17);
-            this.showConsole.TabIndex = 12;
-            this.showConsole.Text = "Zeige Konsole";
-            this.showConsole.UseVisualStyleBackColor = true;
-            this.showConsole.CheckedChanged += new System.EventHandler(this.showConsole_CheckedChanged);
-            // 
             // updateStatus
             // 
             this.updateStatus.BackColor = System.Drawing.SystemColors.Control;
@@ -260,11 +255,11 @@
             // 
             this.welcomeMessage.AutoSize = true;
             this.welcomeMessage.BackColor = System.Drawing.Color.Transparent;
-            this.welcomeMessage.Font = new System.Drawing.Font("Asimov", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.welcomeMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.welcomeMessage.ForeColor = System.Drawing.Color.White;
             this.welcomeMessage.Location = new System.Drawing.Point(12, 12);
             this.welcomeMessage.Name = "welcomeMessage";
-            this.welcomeMessage.Size = new System.Drawing.Size(511, 37);
+            this.welcomeMessage.Size = new System.Drawing.Size(606, 39);
             this.welcomeMessage.TabIndex = 15;
             this.welcomeMessage.Text = "mmmmmmmmmmmmmmmmmmm";
             this.welcomeMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -272,9 +267,10 @@
             // ramComb
             // 
             this.ramComb.AutoSize = true;
+            this.ramComb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ramComb.Location = new System.Drawing.Point(12, 78);
             this.ramComb.Name = "ramComb";
-            this.ramComb.Size = new System.Drawing.Size(98, 17);
+            this.ramComb.Size = new System.Drawing.Size(113, 17);
             this.ramComb.TabIndex = 20;
             this.ramComb.Text = "Arbeitsspeicher";
             this.ramComb.UseVisualStyleBackColor = true;
@@ -343,9 +339,10 @@
             // resolutionComb
             // 
             this.resolutionComb.AutoSize = true;
+            this.resolutionComb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resolutionComb.Location = new System.Drawing.Point(12, 29);
             this.resolutionComb.Name = "resolutionComb";
-            this.resolutionComb.Size = new System.Drawing.Size(73, 17);
+            this.resolutionComb.Size = new System.Drawing.Size(82, 17);
             this.resolutionComb.TabIndex = 13;
             this.resolutionComb.Text = "Auflösung";
             this.resolutionComb.UseVisualStyleBackColor = true;
@@ -368,6 +365,7 @@
             this.infosMain.Controls.Add(this.optionTabPage);
             this.infosMain.Controls.Add(this.modlistTabPage);
             this.infosMain.Controls.Add(this.contactTabPage);
+            this.infosMain.Controls.Add(this.logTabPage);
             this.infosMain.ItemSize = new System.Drawing.Size(58, 18);
             this.infosMain.Location = new System.Drawing.Point(19, 63);
             this.infosMain.Name = "infosMain";
@@ -377,7 +375,8 @@
             // 
             // infosTabPage
             // 
-            this.infosTabPage.Controls.Add(this.infosBrowser);
+            this.infosTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
+            this.infosTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.infosTabPage.Location = new System.Drawing.Point(4, 22);
             this.infosTabPage.Name = "infosTabPage";
             this.infosTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -385,15 +384,6 @@
             this.infosTabPage.TabIndex = 0;
             this.infosTabPage.Text = "Infos";
             this.infosTabPage.UseVisualStyleBackColor = true;
-            // 
-            // infosBrowser
-            // 
-            this.infosBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.infosBrowser.Location = new System.Drawing.Point(3, 3);
-            this.infosBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.infosBrowser.Name = "infosBrowser";
-            this.infosBrowser.Size = new System.Drawing.Size(739, 329);
-            this.infosBrowser.TabIndex = 0;
             // 
             // changelogTabPage
             // 
@@ -417,12 +407,16 @@
             // 
             // optionTabPage
             // 
+            this.optionTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
+            this.optionTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.optionTabPage.Controls.Add(this.updateFiles);
+            this.optionTabPage.Controls.Add(this.extraJavaPrameters);
+            this.optionTabPage.Controls.Add(this.extraJavaParameterText);
             this.optionTabPage.Controls.Add(this.label9);
             this.optionTabPage.Controls.Add(this.themeSelecter);
             this.optionTabPage.Controls.Add(this.pictureBox1);
             this.optionTabPage.Controls.Add(this.openDirectory);
             this.optionTabPage.Controls.Add(this.noServerCheckOnStart);
-            this.optionTabPage.Controls.Add(this.showConsole);
             this.optionTabPage.Controls.Add(this.ramSelect);
             this.optionTabPage.Controls.Add(this.ramComb);
             this.optionTabPage.Controls.Add(this.resolutionComb);
@@ -437,12 +431,44 @@
             this.optionTabPage.Text = "Optionen";
             this.optionTabPage.UseVisualStyleBackColor = true;
             // 
+            // updateFiles
+            // 
+            this.updateFiles.AutoSize = true;
+            this.updateFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateFiles.Location = new System.Drawing.Point(13, 7);
+            this.updateFiles.Name = "updateFiles";
+            this.updateFiles.Size = new System.Drawing.Size(170, 17);
+            this.updateFiles.TabIndex = 28;
+            this.updateFiles.Text = "Kein Datei Update Check";
+            this.updateFiles.UseVisualStyleBackColor = true;
+            this.updateFiles.CheckedChanged += new System.EventHandler(this.updateFiles_CheckedChanged);
+            // 
+            // extraJavaPrameters
+            // 
+            this.extraJavaPrameters.AutoSize = true;
+            this.extraJavaPrameters.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.extraJavaPrameters.Location = new System.Drawing.Point(9, 149);
+            this.extraJavaPrameters.Name = "extraJavaPrameters";
+            this.extraJavaPrameters.Size = new System.Drawing.Size(128, 13);
+            this.extraJavaPrameters.TabIndex = 27;
+            this.extraJavaPrameters.Text = "Extra Java Parameter";
+            // 
+            // extraJavaParameterText
+            // 
+            this.extraJavaParameterText.Location = new System.Drawing.Point(10, 168);
+            this.extraJavaParameterText.Name = "extraJavaParameterText";
+            this.extraJavaParameterText.Size = new System.Drawing.Size(200, 20);
+            this.extraJavaParameterText.TabIndex = 26;
+            this.extraJavaParameterText.Text = "-XX:PermSize=256m";
+            this.extraJavaParameterText.TextChanged += new System.EventHandler(this.extraJavaParameterText_TextChanged);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(210, 10);
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(223, 10);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 25;
             this.label9.Text = "Theme";
             // 
@@ -453,7 +479,7 @@
             "Dark",
             "Light",
             "Keins"});
-            this.themeSelecter.Location = new System.Drawing.Point(253, 7);
+            this.themeSelecter.Location = new System.Drawing.Point(270, 7);
             this.themeSelecter.Name = "themeSelecter";
             this.themeSelecter.Size = new System.Drawing.Size(121, 21);
             this.themeSelecter.TabIndex = 24;
@@ -462,7 +488,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBox1.Location = new System.Drawing.Point(202, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(218, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1, 323);
             this.pictureBox1.TabIndex = 23;
@@ -470,7 +496,7 @@
             // 
             // openDirectory
             // 
-            this.openDirectory.Location = new System.Drawing.Point(12, 148);
+            this.openDirectory.Location = new System.Drawing.Point(10, 194);
             this.openDirectory.Name = "openDirectory";
             this.openDirectory.Size = new System.Drawing.Size(108, 23);
             this.openDirectory.TabIndex = 22;
@@ -480,6 +506,8 @@
             // 
             // modlistTabPage
             // 
+            this.modlistTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
+            this.modlistTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.modlistTabPage.Controls.Add(this.modListTable);
             this.modlistTabPage.Location = new System.Drawing.Point(4, 22);
             this.modlistTabPage.Name = "modlistTabPage";
@@ -501,7 +529,9 @@
             this.modListTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
             this.version,
-            this.website});
+            this.website,
+            this.autor,
+            this.beschreibung});
             this.modListTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modListTable.Location = new System.Drawing.Point(3, 3);
             this.modListTable.Name = "modListTable";
@@ -512,26 +542,10 @@
             this.modListTable.TabIndex = 0;
             this.modListTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.modListTable_CellContentClick);
             // 
-            // name
-            // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // version
-            // 
-            this.version.HeaderText = "Version";
-            this.version.Name = "version";
-            this.version.ReadOnly = true;
-            // 
-            // website
-            // 
-            this.website.HeaderText = "Website";
-            this.website.Name = "website";
-            this.website.ReadOnly = true;
-            // 
             // contactTabPage
             // 
+            this.contactTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
+            this.contactTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.contactTabPage.Controls.Add(this.linkLabel3);
             this.contactTabPage.Controls.Add(this.label8);
             this.contactTabPage.Controls.Add(this.linkLabel2);
@@ -593,10 +607,10 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(35, 76);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(98, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(113, 13);
             this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "fueller@vboxing.de";
+            this.linkLabel1.Text = "fueller@mechzone.net";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label6
@@ -631,16 +645,69 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(361, 13);
+            this.label3.Size = new System.Drawing.Size(378, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Dieses Programm wurde für den Minecraft Server vBoxing.de Programmiert.";
+            this.label3.Text = "Dieses Programm wurde für den Minecraft Server MechZone.net Programmiert.";
+            // 
+            // logTabPage
+            // 
+            this.logTabPage.Controls.Add(this.logTextBox);
+            this.logTabPage.Location = new System.Drawing.Point(4, 22);
+            this.logTabPage.Name = "logTabPage";
+            this.logTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.logTabPage.Size = new System.Drawing.Size(745, 335);
+            this.logTabPage.TabIndex = 6;
+            this.logTabPage.Text = "Log";
+            this.logTabPage.UseVisualStyleBackColor = true;
+            // 
+            // logTextBox
+            // 
+            this.logTextBox.Location = new System.Drawing.Point(0, 0);
+            this.logTextBox.Multiline = true;
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.ReadOnly = true;
+            this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.logTextBox.Size = new System.Drawing.Size(745, 335);
+            this.logTextBox.TabIndex = 0;
+            this.logTextBox.TabStop = false;
+            this.logTextBox.WordWrap = false;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // version
+            // 
+            this.version.HeaderText = "Version";
+            this.version.Name = "version";
+            this.version.ReadOnly = true;
+            // 
+            // website
+            // 
+            this.website.HeaderText = "Website";
+            this.website.Name = "website";
+            this.website.ReadOnly = true;
+            // 
+            // autor
+            // 
+            this.autor.HeaderText = "Autor";
+            this.autor.Name = "autor";
+            this.autor.ReadOnly = true;
+            // 
+            // beschreibung
+            // 
+            this.beschreibung.HeaderText = "Beschreibung";
+            this.beschreibung.Name = "beschreibung";
+            this.beschreibung.ReadOnly = true;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::vBoxingModPack.Properties.Resources.T_nw;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(974, 488);
             this.Controls.Add(this.infosMain);
             this.Controls.Add(this.welcomeMessage);
@@ -663,7 +730,7 @@
             this.MaximizeBox = false;
             this.Name = "mainForm";
             this.ShowIcon = false;
-            this.Text = "vBoxing.de Mod Pack";
+            this.Text = "MechZone Mod Pack";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.Shown += new System.EventHandler(this.mainForm_Shown);
@@ -675,7 +742,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).EndInit();
             this.infosMain.ResumeLayout(false);
-            this.infosTabPage.ResumeLayout(false);
             this.changelogTabPage.ResumeLayout(false);
             this.optionTabPage.ResumeLayout(false);
             this.optionTabPage.PerformLayout();
@@ -684,6 +750,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.modListTable)).EndInit();
             this.contactTabPage.ResumeLayout(false);
             this.contactTabPage.PerformLayout();
+            this.logTabPage.ResumeLayout(false);
+            this.logTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -704,7 +772,6 @@
         private System.Windows.Forms.PictureBox skinsStatus;
         private System.Windows.Forms.ToolTip ToolTip;
         private System.Diagnostics.Process process1;
-        private System.Windows.Forms.CheckBox showConsole;
         private System.Windows.Forms.Button updateStatus;
         private System.Windows.Forms.Label welcomeMessage;
         private System.Windows.Forms.Label resX;
@@ -718,14 +785,10 @@
         private System.Windows.Forms.TabControl infosMain;
         private System.Windows.Forms.TabPage infosTabPage;
         private System.Windows.Forms.TabPage changelogTabPage;
-        private System.Windows.Forms.WebBrowser infosBrowser;
         private System.Windows.Forms.WebBrowser changelogBrowser;
         private System.Windows.Forms.TabPage optionTabPage;
         private System.Windows.Forms.TabPage modlistTabPage;
         private System.Windows.Forms.DataGridView modListTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn version;
-        private System.Windows.Forms.DataGridViewLinkColumn website;
         private System.Windows.Forms.TabPage contactTabPage;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label6;
@@ -740,6 +803,16 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox themeSelecter;
+        private System.Windows.Forms.Label extraJavaPrameters;
+        private System.Windows.Forms.TextBox extraJavaParameterText;
+        private System.Windows.Forms.TabPage logTabPage;
+        private System.Windows.Forms.CheckBox updateFiles;
+        private System.Windows.Forms.TextBox logTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn version;
+        private System.Windows.Forms.DataGridViewLinkColumn website;
+        private System.Windows.Forms.DataGridViewTextBoxColumn autor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn beschreibung;
 	}
 }
 

@@ -10,14 +10,14 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using vBoxingModPack;
+using MechZoneModPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using EQATEC.Analytics.Monitor;
 using System.Security.Cryptography;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace vBoxingModPack
+namespace MechZoneModPack
 {
     public class vb
     {
@@ -26,7 +26,7 @@ namespace vBoxingModPack
         {
             try
             {
-                vBoxingModPack.mainForm.monitor.TrackFeatureStart("getSessionKey");
+                MechZoneModPack.mainForm.monitor.TrackFeatureStart("getSessionKey");
                 WebRequest.DefaultWebProxy = null;
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://authserver.mojang.com/authenticate");
                 
@@ -35,7 +35,7 @@ namespace vBoxingModPack
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    string json = "{\"agent\":{\"name\":\"Minecraft\",\"version\":1},\"username\":\"" + username + "\",\"password\":\"" + password + "\",\"clientToken\":\"vBoxingModPack" + vb.RandomString(4) + vb.RandomString(4) + vb.RandomString(4) + "\"}";
+                    string json = "{\"agent\":{\"name\":\"Minecraft\",\"version\":1},\"username\":\"" + username + "\",\"password\":\"" + password + "\",\"clientToken\":\"MechZoneModPack" + vb.RandomString(4) + vb.RandomString(4) + vb.RandomString(4) + "\"}";
                     //MessageBox.Show(json);
                     streamWriter.Write(json);
                     streamWriter.Flush();
@@ -49,7 +49,7 @@ namespace vBoxingModPack
                         var j = JsonConvert.DeserializeObject<jsonClasses.minecraftLogonJson1>(response);
                         Properties.Settings.Default.nickname = j.selectedProfile.name;
                         Properties.Settings.Default.Save();
-                        vBoxingModPack.mainForm.monitor.TrackFeatureStop("getSessionKey");
+                        MechZoneModPack.mainForm.monitor.TrackFeatureStop("getSessionKey");
                         return "token:" + j.accessToken + ":" + j.selectedProfile.id;
                     }
                 
@@ -57,8 +57,8 @@ namespace vBoxingModPack
             catch (Exception ex)
             {
                 MessageBox.Show("Benutzername oder Passwort stimmt nicht\n" + ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                vBoxingModPack.mainForm.monitor.TrackFeatureCancel("getSessionKey");
-                vBoxingModPack.mainForm.monitor.TrackException(ex, "noLogin");
+                MechZoneModPack.mainForm.monitor.TrackFeatureCancel("getSessionKey");
+                MechZoneModPack.mainForm.monitor.TrackException(ex, "noLogin");
                 return "error";
             }
         }
@@ -153,7 +153,7 @@ namespace vBoxingModPack
         #region appdata
         public static string appdata(/*string file*/)
         {
-            string pfad = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.vboxing");
+            string pfad = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MechZoneModPack");
             return pfad;
         }
         #endregion
@@ -209,7 +209,7 @@ namespace vBoxingModPack
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                vBoxingModPack.mainForm.monitor.TrackException(ex, "GetJavaPath");
+                MechZoneModPack.mainForm.monitor.TrackException(ex, "GetJavaPath");
                 return null;
             }
         }
@@ -220,19 +220,19 @@ namespace vBoxingModPack
         {
             try
             {
-                vBoxingModPack.mainForm.monitor.TrackFeatureStart("getServerStatus");
+                MechZoneModPack.mainForm.monitor.TrackFeatureStart("getServerStatus");
                 WebClient client = new WebClient();
                 client.Proxy = null;
                 var response = client.DownloadString(new Uri("http://xpaw.ru/mcstatus/status.json"));
                 dynamic data = new JsonFx.Json.JsonReader().Read(response);
-                vBoxingModPack.mainForm.monitor.TrackFeatureStop("getServerStatus");
+                MechZoneModPack.mainForm.monitor.TrackFeatureStop("getServerStatus");
                 return data;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                vBoxingModPack.mainForm.monitor.TrackFeatureCancel("getServerStatus");
-                vBoxingModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
+                MechZoneModPack.mainForm.monitor.TrackFeatureCancel("getServerStatus");
+                MechZoneModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
                 return null;
             }
         }
@@ -384,18 +384,9 @@ namespace vBoxingModPack
         #region check Version
         public static jsonClasses.filesList checkVersion()
         {
-            
-            Dictionary<string, bool> versions = new Dictionary<string, bool>();
-            versions.Add("mods", false);
-            versions.Add("config", false);
-            versions.Add("libraries", false);
-            versions.Add("natives", false);
-            versions.Add("minecraft", false);
-            versions.Add("forge", false);
-            
             try
             {
-                vBoxingModPack.mainForm.monitor.TrackFeatureStart("checkVersion");
+                MechZoneModPack.mainForm.monitor.TrackFeatureStart("checkVersion");
                 WebClient client = new WebClient();
                 client.Proxy = null;
                 if (Directory.Exists(Path.Combine(vb.appdata(), "temp")))
@@ -406,25 +397,24 @@ namespace vBoxingModPack
                 Directory.CreateDirectory(Path.Combine(vb.appdata(), "temp"));
                 Properties.Settings.Default.toDownloadFiles = 2;
                 Properties.Settings.Default.finishedFiles = 0;
-                client.DownloadFile(downloadLocation() + "modpack/files/version.json", vb.appdata() + "\\temp\\version.json");
-                client.DownloadFile(downloadLocation() + "modpack/files/files.json", vb.appdata() + "\\temp\\files.json");
                 client.DownloadFile(downloadLocation() + "modpack/files/mods.json", vb.appdata() + "\\temp\\mods.json");
                 client.DownloadFile(downloadLocation() + "modpack/files/config.json", vb.appdata() + "\\temp\\config.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/assets.json", vb.appdata() + "\\temp\\assets.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/libraries.json", vb.appdata() + "\\temp\\libraries.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/sonstiges.json", vb.appdata() + "\\temp\\sonstiges.json");
 
                 jsonClasses.filesList j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
 
-                vBoxingModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
+                MechZoneModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
                 return j;
             }
             catch (Exception ex)
             {
-                vBoxingModPack.mainForm.monitor.TrackFeatureCancel("checkVersion");
+                MechZoneModPack.mainForm.monitor.TrackFeatureCancel("checkVersion");
                 MessageBox.Show("Konnte Version nicht prüfen!\nBenutze letzte heruntergeladene");
                 MessageBox.Show(ex.Message);
                 return null;
             }
-
-            //return versions;
         }
         #endregion
 
@@ -442,25 +432,12 @@ namespace vBoxingModPack
 
             return builder.ToString();
         }
-        #endregion
-
-        #region getFiles
-        public static void getFiles()
-        {
-            vBoxingModPack.mainForm.monitor.TrackFeatureStart("downloadFiles");
-            var j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\files.json"));
-            for (int i = 0; i < j.files.Count(); i++)
-            {
-                vb.downloadFile(j.files[i].url, vb.appdata() + j.files[i].path, j.files[i].md5);
-            }
-            vBoxingModPack.mainForm.monitor.TrackFeatureStop("downloadFiles");
-        }
-        #endregion        
+        #endregion     
 
         #region variables
         public static string downloadLocation()
         {
-            return "http://lawall.funpic.de/";
+            return "http://mechzone.net/";
         }
         #endregion
     }

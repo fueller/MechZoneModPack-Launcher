@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using vBoxingModPack;
+using MechZoneModPack;
 using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -18,7 +18,7 @@ using System.Deployment.Application;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace vBoxingModPack
+namespace MechZoneModPack
 {
 	public partial class mainForm : Form
 	{
@@ -45,7 +45,7 @@ namespace vBoxingModPack
             ToolTip.SetToolTip(passwordText, "Dein Minecraft Passwort oder\r\nMojang Passwort");
             ToolTip.SetToolTip(savePasswordCheck, "Speichere Passwort\r\nACHTUNG: Speichert Passwort unverschlüsselt!\r\nFunktioniert noch nicht");
             
-            this.Text = "vBoxing Mod Pack v." + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            this.Text = "MechZone Mod Pack v." + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString());
             
             usernameText.Text = Properties.Settings.Default.email;
             resHeight.Value = Properties.Settings.Default.height;
@@ -53,13 +53,11 @@ namespace vBoxingModPack
             
             ramComb.Checked = Properties.Settings.Default.ram;
             resolutionComb.Checked = Properties.Settings.Default.resolution;
-            showConsole.Checked = Properties.Settings.Default.console;
+            updateFiles.Checked = Properties.Settings.Default.updateFiles;
             noServerCheckOnStart.Checked = Properties.Settings.Default.noServerCheck;
-
-            //if (Properties.Settings.Default.noServerCheck == false)
-            //{
-            //   status();
-            //}
+            extraJavaParameterText.Text = Properties.Settings.Default.extraJavaParameter;
+            themeSelecter.SelectedIndex = Properties.Settings.Default.theme;
+            themeSelecter_SelectedIndexChanged(null, null);
 
             if (Properties.Settings.Default.nickname != "xx")
             {
@@ -67,7 +65,7 @@ namespace vBoxingModPack
             }
             else
             {
-                welcomeMessage.Text = "vBoxing Mod Pack";
+                welcomeMessage.Text = "MechZone Mod Pack";
             }
 
             for (int i = 512; i <= 16384; i = i + 512)
@@ -75,8 +73,17 @@ namespace vBoxingModPack
                 ramSelect.Items.Add(i.ToString() + " MB");
             }
 
-            ramSelect.SelectedIndex = Properties.Settings.Default.ramLast;
+            if (Properties.Settings.Default.savePassword)
+            {
+                passwordText.Text = Properties.Settings.Default.password;
+            }
+            else
+            {
+                passwordText.Text = "";
+                Properties.Settings.Default.password = "";
+            }
 
+            ramSelect.SelectedIndex = Properties.Settings.Default.ramLast;
             savePasswordCheck.Checked = Properties.Settings.Default.savePassword;
             passwordText.Text = Properties.Settings.Default.password;
             //MessageBox.Show(Properties.Settings.Default.password.ToString());
@@ -87,6 +94,7 @@ namespace vBoxingModPack
         private void loginButton_Click(object sender, EventArgs e)
         {
             monitor.TrackFeature("login");
+            logTextBox.Clear();
             try
             {
                 monitor.TrackFeatureStart("loginProzedure");
@@ -108,14 +116,7 @@ namespace vBoxingModPack
                 {
                     //MessageBox.Show(session);
                     //MessageBox.Show(vb.GetJavaInstallationPath().ToString());
-                    if (showConsole.Checked)
-                    {
-                        process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "java.exe";
-                    }
-                    else
-                    {
-                        process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
-                    }
+                    process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
                     process1.StartInfo.WorkingDirectory = vb.appdata() + "";
                     string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
 
@@ -127,10 +128,10 @@ namespace vBoxingModPack
                     {
                         arguments += "-Xmx1G";
                     }
-
+                    arguments += " " + extraJavaParameterText.Text;
                     arguments += " -Djava.library.path="
                         + vb.appdata() + "\\versions\\" + name + "\\" + name + "-natives -cp "
-                        + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\9.11.1.916\\minecraftforge-9.11.1.916.jar;"
+                        + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\minecraftforge.jar;"
                         + vb.appdata() + "\\libraries\\net\\minecraft\\launchwrapper\\1.8\\launchwrapper-1.8.jar;"
                         + vb.appdata() + "\\libraries\\org\\ow2\\asm\\asm-all\\4.1\\asm-all-4.1.jar;"
                         + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-library\\2.10.2\\scala-library-2.10.2.jar;"
@@ -164,22 +165,26 @@ namespace vBoxingModPack
 
                     //MessageBox.Show(arguments);
                     process1.StartInfo.Arguments = arguments;
-                    //process1.StartInfo.RedirectStandardOutput = true;
-                    //process1.StartInfo.UseShellExecute = false;
-                    monitor.TrackFeatureStop("loginProzedure");
-                    process1.Start();
+                    process1.StartInfo.RedirectStandardOutput = true;
+                    process1.StartInfo.UseShellExecute = false;
+                    //StreamReader reader = process1.StandardOutput;
+                    ProcessStartInfo start = new ProcessStartInfo();
+                    start.FileName = "javaw";
+                    start.Arguments = arguments;
+                    start.RedirectStandardError = true;
+                    start.UseShellExecute = false;
+                    start.WorkingDirectory = vb.appdata();
                     
-                    /*using (Process process = Process.Start(process1))
+
+                    using (Process process = Process.Start(start))
                     {
-                        using (StreamReader reader = process.StandardOutput)
-                        {
-                            string result = reader.ReadToEnd();
-                            //Console.WriteLine(result);
-                            richTextBox1.AppendText(result);
-                            Application.DoEvents();
-                            this.Update();
-                        }
-                    }*/
+                        
+                        process.ErrorDataReceived += ErrorReceived;
+                        process.BeginErrorReadLine();
+                    }
+                    
+
+                    monitor.TrackFeatureStop("loginProzedure");
                 }
             }
             catch (Exception ex)
@@ -187,6 +192,41 @@ namespace vBoxingModPack
                 MessageBox.Show(ex.Message);
                 monitor.TrackException(ex, "loginButton");
             } 
+        }
+
+        delegate void logTextAdd(string text);
+        
+        void addLogText(string value)
+        {
+            int maxlength = 100;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new logTextAdd(addLogText), new object[] { value });
+                return;
+            }
+
+            logTextBox.Text += value + Environment.NewLine;
+
+            if (logTextBox.Lines.Length > maxlength)
+            {
+                string[] newLines = new string[maxlength];
+                Array.Copy(logTextBox.Lines, 1, newLines, 0, maxlength);
+                logTextBox.Lines = newLines;
+            }
+            
+            //logTextBox.Text += value + "\n";
+            //logTextBox.AppendText(value + "\n");
+            logTextBox.SelectionStart = logTextBox.Text.Length;
+            logTextBox.ScrollToCaret();
+             
+            
+            //this.Update();
+        }
+
+        private void ErrorReceived(object sender, DataReceivedEventArgs e)
+        {
+            addLogText(e.Data);
         }
 
         #region status
@@ -199,21 +239,13 @@ namespace vBoxingModPack
             {
                 if (data.v != 9)
                 {
-                    MessageBox.Show("Es ist ein Fehler aufgetreten!\nBitte wende dich an fueller\nfueller@vboxing.de", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Es ist ein Fehler aufgetreten!\nBitte wende dich an fueller\nfueller@mechzone.net", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    updateStatus.Location = new Point(778, 89);
-                    mojangStatus.Visible = true;
-                    try
-                    {                        
-                        mojangStatus.Text = data.psa;
-                    }
-                    catch (Exception)
-                    {
-                        updateStatus.Location = new Point(778, 50);
-                        mojangStatus.Visible = false;
-                    }
+                    
+                    updateStatus.Location = new Point(778, 50);
+                    mojangStatus.Visible = false;
 
                     //Session Server
                     if (data.report.session.status == "up")
@@ -334,12 +366,6 @@ namespace vBoxingModPack
             Properties.Settings.Default.Save();
         }
 
-        private void showConsole_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.console = showConsole.Checked;
-            Properties.Settings.Default.Save();
-        }
-
         private void ramSelect_SelectionChangeCommitted(object sender, EventArgs e)
         {
             Properties.Settings.Default.ramLast = ramSelect.SelectedIndex;            
@@ -401,9 +427,11 @@ namespace vBoxingModPack
                 {
                     if (!j.files[i].config)
                     {
-                        modListTable.Rows.Add(j.files[i].name, j.files[i].version, j.files[i].forumLink); 
+                        modListTable.Rows.Add(j.files[i].name, j.files[i].version, j.files[i].forumLink, j.files[i].authors, j.files[i].description); 
                     }
                 }
+
+                this.Update();
             }
             catch (Exception){}
             modListTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -436,11 +464,15 @@ namespace vBoxingModPack
 
         private void passwordText_TextChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.password = passwordText.Text;
             
-            if (!savePasswordCheck.Checked)
+            
+            if (Properties.Settings.Default.savePassword == false)
             {
                 Properties.Settings.Default.password = "";
+            }
+            else
+            {
+                Properties.Settings.Default.password = passwordText.Text;
             }
             
             Properties.Settings.Default.Save();
@@ -457,7 +489,7 @@ namespace vBoxingModPack
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto://fueller@vboxing.de");
+            Process.Start("mailto://fueller@mechzone.de");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -478,23 +510,54 @@ namespace vBoxingModPack
         private void themeSelecter_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Console.WriteLine(themeSelecter.SelectedIndex.ToString());
+            Properties.Settings.Default.theme = themeSelecter.SelectedIndex;
+            Properties.Settings.Default.Save();
             switch (themeSelecter.SelectedIndex)
             {
                 case 0:
-                    this.BackgroundImage = Properties.Resources.T_nw;
+                    this.BackgroundImage = Properties.Resources.Bild1;
+                    infosTabPage.BackgroundImage = Properties.Resources.Bild1_mitte;
+                    infosTabPage.BackgroundImageLayout = ImageLayout.Stretch;
+                    optionTabPage.BackgroundImage = Properties.Resources.Bild1_mitte;
+                    optionTabPage.BackgroundImageLayout = ImageLayout.Stretch;
+                    contactTabPage.BackgroundImage = Properties.Resources.Bild1_mitte;
+                    contactTabPage.BackgroundImageLayout = ImageLayout.Stretch;
                     this.Update();
                     break;
                 case 1:
-                    this.BackgroundImage = Properties.Resources.B_nw;
+                    this.BackgroundImage = Properties.Resources.Bild2;
+                    infosTabPage.BackgroundImage = Properties.Resources.Bild2_mitte;
+                    infosTabPage.BackgroundImageLayout = ImageLayout.Stretch;
+                    optionTabPage.BackgroundImage = Properties.Resources.Bild2_mitte;
+                    optionTabPage.BackgroundImageLayout = ImageLayout.Stretch;
+                    contactTabPage.BackgroundImage = Properties.Resources.Bild2_mitte;
+                    contactTabPage.BackgroundImageLayout = ImageLayout.Stretch;
                     this.Update();
                     break;
                 case 2:
                     this.BackgroundImage = null;
+                    infosTabPage.BackgroundImage = null;
+                    optionTabPage.BackgroundImage = null;
+                    contactTabPage.BackgroundImage = null;
                     this.Update();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void extraJavaParameterText_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.extraJavaParameter = extraJavaParameterText.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void updateFiles_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.updateFiles = updateFiles.Checked;
+            Properties.Settings.Default.Save();
+
+            //MessageBox.Show(Properties.Settings.Default.updateFiles.ToString());
         }
 	}
 }

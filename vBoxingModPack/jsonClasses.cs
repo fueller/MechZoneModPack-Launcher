@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vBoxingModPack
+
+namespace MechZoneModPack
 {
     public class jsonClasses
     {
@@ -47,7 +48,8 @@ namespace vBoxingModPack
             public string url { get; set; }
             public string path { get; set; }
             public string md5 { get; set; }
-
+            public string description { get; set; }
+            public string authors { get; set; }
         }
         #endregion
 
@@ -114,6 +116,25 @@ namespace vBoxingModPack
             public string forge { get; set; }
             public string minecraft { get; set; }
             public bool update { get; set; }
+        }
+        #endregion
+
+        #region mcmodInfo
+        public class mcmod
+        {
+            public string modid { get; set; }
+            public string name { get; set; }
+            public string description { get; set; }
+            public string version { get; set; }
+            public string mcversion { get; set; }
+            public string url { get; set; }
+            public string updateUrl { get; set; }
+            public string[] authors { get; set; }
+            public string credits { get; set; }
+            public string logoFile { get; set; }
+            public string[] ascreenshots { get; set; }
+            public string parent { get; set; }
+            public string[] dependencies { get; set; }
         }
         #endregion
     }
