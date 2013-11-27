@@ -87,7 +87,9 @@ namespace MechZoneModPack
                 catch (Exception ex)
                 {
                     Properties.Settings.Default.finishedFiles++;
-                    MessageBox.Show(ex.Message);
+                    ErrorWindow err = new ErrorWindow();
+                    err.ex = ex;
+                    err.ShowDialog();
                 }
             }
             else
@@ -198,17 +200,28 @@ namespace MechZoneModPack
         {
             try
             {
-                String javaKey = "SOFTWARE\\JavaSoft\\Java Runtime Environment";
-                using (var baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey(javaKey))
+                //return null;
+                if (File.Exists(Properties.Settings.Default.javaPath))
                 {
-                    String currentVersion = baseKey.GetValue("CurrentVersion").ToString();
-                    using (var homeKey = baseKey.OpenSubKey(currentVersion))
-                        return homeKey.GetValue("JavaHome").ToString() + "\\bin\\";
+                    return Properties.Settings.Default.javaPath;
+                }
+                else
+                {
+                    if (File.Exists(@"C:\Program Files\Java\jre7\bin\javaw.exe"))
+                    {
+                        return @"C:\Program Files\Java\jre7\bin\javaw.exe";
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
                 MechZoneModPack.mainForm.monitor.TrackException(ex, "GetJavaPath");
                 return null;
             }
@@ -230,7 +243,9 @@ namespace MechZoneModPack
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
                 MechZoneModPack.mainForm.monitor.TrackFeatureCancel("getServerStatus");
                 MechZoneModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
                 return null;
@@ -346,9 +361,11 @@ namespace MechZoneModPack
                 Directory.Delete(vb.appdata() + "\\versions\\1.6.4-Forge\\1.6.4-Forge-natives\\META-INF\\", true);
                 File.Delete(vb.appdata() + "\\temp\\windows_natives.jar");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
             }
         }
         #endregion
@@ -362,7 +379,9 @@ namespace MechZoneModPack
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
             }
         }
         #endregion
@@ -376,7 +395,9 @@ namespace MechZoneModPack
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
             }
         }
         #endregion
@@ -412,7 +433,9 @@ namespace MechZoneModPack
             {
                 MechZoneModPack.mainForm.monitor.TrackFeatureCancel("checkVersion");
                 MessageBox.Show("Konnte Version nicht prüfen!\nBenutze letzte heruntergeladene");
-                MessageBox.Show(ex.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
                 return null;
             }
         }
@@ -438,6 +461,37 @@ namespace MechZoneModPack
         public static string downloadLocation()
         {
             return "http://mechzone.net/";
+        }
+        #endregion
+
+        #region send error log
+        public static void sendErrorLog(string Error)
+        {
+            try
+            {
+                string apiKey = "1c28f9526330ebefa9f7b38f2020d05b";
+                var client = new PasteBinClient(apiKey);
+
+                var entry = new PasteBinEntry
+                {
+                    Title = "MechZoneModPack Error Report",
+                    Text = Error,
+                    Expiration = PasteBinExpiration.OneDay,
+                    Private = true,
+                    Format = "csharp"
+                };
+
+                string pasteUrl = client.Paste(entry);
+                MessageBox.Show("Der Error Link wurde in deine Zwischenablage Kopiert!\nBitte schicke ihn einem Admin!\n" + pasteUrl, "Link", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Windows.Forms.Clipboard.SetText(pasteUrl);
+                Console.WriteLine(pasteUrl);
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }
         }
         #endregion
     }

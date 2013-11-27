@@ -12,7 +12,7 @@ using System.Resources;
 [assembly: AssemblyCompany("MechZone.net")]
 [assembly: AssemblyProduct("MechZone Mod Pack")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("MechZone")]
 [assembly: AssemblyCulture("")]
 
 // Durch Festlegen von ComVisible auf "false" werden die Typen in dieser Assembly unsichtbar 

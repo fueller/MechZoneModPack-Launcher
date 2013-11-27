@@ -238,5 +238,17 @@ namespace MechZoneModPack.Properties {
                 this["updateFiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files\\Java\\jre7\\bin\\javaw.exe")]
+        public string javaPath {
+            get {
+                return ((string)(this["javaPath"]));
+            }
+            set {
+                this["javaPath"] = value;
+            }
+        }
     }
 }

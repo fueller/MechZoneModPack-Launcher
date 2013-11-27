@@ -57,6 +57,8 @@ namespace MechZoneModPack
             noServerCheckOnStart.Checked = Properties.Settings.Default.noServerCheck;
             extraJavaParameterText.Text = Properties.Settings.Default.extraJavaParameter;
             themeSelecter.SelectedIndex = Properties.Settings.Default.theme;
+            javaPathLabel.Text = Properties.Settings.Default.javaPath;
+
             themeSelecter_SelectedIndexChanged(null, null);
 
             if (Properties.Settings.Default.nickname != "xx")
@@ -116,8 +118,8 @@ namespace MechZoneModPack
                 {
                     //MessageBox.Show(session);
                     //MessageBox.Show(vb.GetJavaInstallationPath().ToString());
-                    process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
-                    process1.StartInfo.WorkingDirectory = vb.appdata() + "";
+                    //process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
+                    //process1.StartInfo.WorkingDirectory = vb.appdata() + "";
                     string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
 
                     if (ramComb.Checked)
@@ -164,12 +166,28 @@ namespace MechZoneModPack
                     }
 
                     //MessageBox.Show(arguments);
-                    process1.StartInfo.Arguments = arguments;
-                    process1.StartInfo.RedirectStandardOutput = true;
-                    process1.StartInfo.UseShellExecute = false;
+                    //process1.StartInfo.Arguments = arguments;
+                    //process1.StartInfo.RedirectStandardOutput = true;
+                    //process1.StartInfo.UseShellExecute = false;
                     //StreamReader reader = process1.StandardOutput;
+                    
                     ProcessStartInfo start = new ProcessStartInfo();
-                    start.FileName = "javaw";
+
+                    string javaPath = vb.GetJavaInstallationPath();
+                    if (javaPath == null)
+                    {
+                        MessageBox.Show("Die javaw Datei konnte nicht gefunden werden!\nBitte wähle diese nun aus!\nSie liegt meist unter \"C:\\Program Files (x86)\\Java\\jre7\\bin\\javaw.exe\"\noder \"C:\\Program Files\\Java\\jre7\\bin\\javaw.exe\"","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        if (openJavaFile.ShowDialog() == DialogResult.OK)
+                        {
+                            javaPath = openJavaFile.FileName;
+                            Properties.Settings.Default.javaPath = javaPath;
+                            Properties.Settings.Default.Save();
+                            javaPathLabel.Text = Properties.Settings.Default.javaPath;
+                        }
+                    }
+                    
+                    start.FileName = javaPath;
+                    
                     start.Arguments = arguments;
                     start.RedirectStandardError = true;
                     start.UseShellExecute = false;
@@ -189,7 +207,9 @@ namespace MechZoneModPack
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
                 monitor.TrackException(ex, "loginButton");
             } 
         }
@@ -558,6 +578,107 @@ namespace MechZoneModPack
             Properties.Settings.Default.Save();
 
             //MessageBox.Show(Properties.Settings.Default.updateFiles.ToString());
+        }
+
+        private void infosMain_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPageIndex == 5)
+            {
+                sendErrorLog.Visible = true;
+                sendLogBG.Visible = true;
+            }
+            else
+            {
+                sendErrorLog.Visible = false;
+                sendLogBG.Visible = false;
+            }
+            Console.WriteLine(e.TabPageIndex);
+        }
+
+        private void sendErrorLog_Click(object sender, EventArgs e)
+        {
+            vb.sendErrorLog(logTextBox.Text);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show(File.Exists("java").ToString());
+        }
+
+        private void sendLastCrashLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var directory = new DirectoryInfo(vb.appdata() + "\\crash-reports");
+                var myFile = (from f in directory.GetFiles() orderby f.LastWriteTime descending select f).First();
+                StreamReader reader = new StreamReader(myFile.OpenRead());
+                vb.sendErrorLog(reader.ReadToEnd());
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }
+        }
+
+        private void sendLastClientLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string error = "";
+                string[] file = File.ReadAllLines(vb.appdata() + "\\ForgeModLoader-client-0.log");
+                int len = file.Length;
+                int maxLen = 2000;
+                error += "Länge: " + len + "\n\n";
+
+                if (len < maxLen)
+                {
+                    for (int i = 0; i < len; i++)
+                    {
+                        error += file[i] + "\n";
+                    }
+                }
+                else
+                {
+                    for (int i = len - maxLen; i < len; i++)
+                    {
+                        error += file[i] + "\n";
+                    }
+                }
+                vb.sendErrorLog(error);
+                
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }
+            
+        }
+
+        private void changeJavaPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string javaPath = vb.GetJavaInstallationPath();
+                MessageBox.Show("Bitte wähle nun javaw.exe aus!\nSie liegt meist unter \"C:\\Program Files\\Java\\jre7\\bin\\javaw.exe\"", "javaw.exe Pfad ändern", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (openJavaFile.ShowDialog() == DialogResult.OK)
+                {
+                    javaPath = openJavaFile.FileName;
+                    Properties.Settings.Default.javaPath = javaPath;
+                    Properties.Settings.Default.Save();
+                    javaPathLabel.Text = Properties.Settings.Default.javaPath;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }
         }
 	}
 }

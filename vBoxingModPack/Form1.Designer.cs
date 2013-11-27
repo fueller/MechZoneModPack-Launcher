@@ -58,6 +58,11 @@
             this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogBrowser = new System.Windows.Forms.WebBrowser();
             this.optionTabPage = new System.Windows.Forms.TabPage();
+            this.javaPathLabel = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.sendLastClientLog = new System.Windows.Forms.Button();
+            this.sendLastCrashLog = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.updateFiles = new System.Windows.Forms.CheckBox();
             this.extraJavaPrameters = new System.Windows.Forms.Label();
             this.extraJavaParameterText = new System.Windows.Forms.TextBox();
@@ -67,6 +72,11 @@
             this.openDirectory = new System.Windows.Forms.Button();
             this.modlistTabPage = new System.Windows.Forms.TabPage();
             this.modListTable = new System.Windows.Forms.DataGridView();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.website = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.beschreibung = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contactTabPage = new System.Windows.Forms.TabPage();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
@@ -79,11 +89,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.logTabPage = new System.Windows.Forms.TabPage();
             this.logTextBox = new System.Windows.Forms.TextBox();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.website = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.beschreibung = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sendErrorLog = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.sendLogBG = new System.Windows.Forms.PictureBox();
+            this.openJavaFile = new System.Windows.Forms.OpenFileDialog();
+            this.changeJavaPath = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
@@ -94,11 +104,13 @@
             this.infosMain.SuspendLayout();
             this.changelogTabPage.SuspendLayout();
             this.optionTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.modlistTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modListTable)).BeginInit();
             this.contactTabPage.SuspendLayout();
             this.logTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sendLogBG)).BeginInit();
             this.SuspendLayout();
             // 
             // loginButton
@@ -372,6 +384,7 @@
             this.infosMain.SelectedIndex = 0;
             this.infosMain.Size = new System.Drawing.Size(753, 361);
             this.infosMain.TabIndex = 19;
+            this.infosMain.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.infosMain_Selecting);
             // 
             // infosTabPage
             // 
@@ -409,6 +422,12 @@
             // 
             this.optionTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
             this.optionTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.optionTabPage.Controls.Add(this.changeJavaPath);
+            this.optionTabPage.Controls.Add(this.javaPathLabel);
+            this.optionTabPage.Controls.Add(this.label10);
+            this.optionTabPage.Controls.Add(this.sendLastClientLog);
+            this.optionTabPage.Controls.Add(this.sendLastCrashLog);
+            this.optionTabPage.Controls.Add(this.pictureBox2);
             this.optionTabPage.Controls.Add(this.updateFiles);
             this.optionTabPage.Controls.Add(this.extraJavaPrameters);
             this.optionTabPage.Controls.Add(this.extraJavaParameterText);
@@ -431,11 +450,59 @@
             this.optionTabPage.Text = "Optionen";
             this.optionTabPage.UseVisualStyleBackColor = true;
             // 
+            // javaPathLabel
+            // 
+            this.javaPathLabel.AutoSize = true;
+            this.javaPathLabel.Location = new System.Drawing.Point(4, 251);
+            this.javaPathLabel.Name = "javaPathLabel";
+            this.javaPathLabel.Size = new System.Drawing.Size(41, 13);
+            this.javaPathLabel.TabIndex = 33;
+            this.javaPathLabel.Text = "label11";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(12, 231);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 13);
+            this.label10.TabIndex = 32;
+            this.label10.Text = "Java Path";
+            // 
+            // sendLastClientLog
+            // 
+            this.sendLastClientLog.Location = new System.Drawing.Point(443, 33);
+            this.sendLastClientLog.Name = "sendLastClientLog";
+            this.sendLastClientLog.Size = new System.Drawing.Size(152, 23);
+            this.sendLastClientLog.TabIndex = 31;
+            this.sendLastClientLog.Text = "Sende Letzten Client Log";
+            this.sendLastClientLog.UseVisualStyleBackColor = true;
+            this.sendLastClientLog.Click += new System.EventHandler(this.sendLastClientLog_Click);
+            // 
+            // sendLastCrashLog
+            // 
+            this.sendLastCrashLog.Location = new System.Drawing.Point(443, 4);
+            this.sendLastCrashLog.Name = "sendLastCrashLog";
+            this.sendLastCrashLog.Size = new System.Drawing.Size(152, 23);
+            this.sendLastCrashLog.TabIndex = 30;
+            this.sendLastCrashLog.Text = "Sende Letzten Crash Log";
+            this.sendLastCrashLog.UseVisualStyleBackColor = true;
+            this.sendLastCrashLog.Click += new System.EventHandler(this.sendLastCrashLog_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Gray;
+            this.pictureBox2.Location = new System.Drawing.Point(415, 6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(1, 323);
+            this.pictureBox2.TabIndex = 29;
+            this.pictureBox2.TabStop = false;
+            // 
             // updateFiles
             // 
             this.updateFiles.AutoSize = true;
             this.updateFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateFiles.Location = new System.Drawing.Point(13, 7);
+            this.updateFiles.Location = new System.Drawing.Point(12, 6);
             this.updateFiles.Name = "updateFiles";
             this.updateFiles.Size = new System.Drawing.Size(170, 17);
             this.updateFiles.TabIndex = 28;
@@ -541,6 +608,36 @@
             this.modListTable.Size = new System.Drawing.Size(739, 329);
             this.modListTable.TabIndex = 0;
             this.modListTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.modListTable_CellContentClick);
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // version
+            // 
+            this.version.HeaderText = "Version";
+            this.version.Name = "version";
+            this.version.ReadOnly = true;
+            // 
+            // website
+            // 
+            this.website.HeaderText = "Website";
+            this.website.Name = "website";
+            this.website.ReadOnly = true;
+            // 
+            // autor
+            // 
+            this.autor.HeaderText = "Autor";
+            this.autor.Name = "autor";
+            this.autor.ReadOnly = true;
+            // 
+            // beschreibung
+            // 
+            this.beschreibung.HeaderText = "Beschreibung";
+            this.beschreibung.Name = "beschreibung";
+            this.beschreibung.ReadOnly = true;
             // 
             // contactTabPage
             // 
@@ -672,35 +769,52 @@
             this.logTextBox.TabStop = false;
             this.logTextBox.WordWrap = false;
             // 
-            // name
+            // sendErrorLog
             // 
-            this.name.HeaderText = "Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
+            this.sendErrorLog.Location = new System.Drawing.Point(778, 330);
+            this.sendErrorLog.Name = "sendErrorLog";
+            this.sendErrorLog.Size = new System.Drawing.Size(108, 23);
+            this.sendErrorLog.TabIndex = 20;
+            this.sendErrorLog.Text = "Sende Error Log";
+            this.sendErrorLog.UseVisualStyleBackColor = true;
+            this.sendErrorLog.Visible = false;
+            this.sendErrorLog.Click += new System.EventHandler(this.sendErrorLog_Click);
             // 
-            // version
+            // button1
             // 
-            this.version.HeaderText = "Version";
-            this.version.Name = "version";
-            this.version.ReadOnly = true;
+            this.button1.Location = new System.Drawing.Point(810, 237);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // website
+            // sendLogBG
             // 
-            this.website.HeaderText = "Website";
-            this.website.Name = "website";
-            this.website.ReadOnly = true;
+            this.sendLogBG.BackColor = System.Drawing.Color.Gainsboro;
+            this.sendLogBG.Location = new System.Drawing.Point(749, 317);
+            this.sendLogBG.Name = "sendLogBG";
+            this.sendLogBG.Size = new System.Drawing.Size(144, 50);
+            this.sendLogBG.TabIndex = 22;
+            this.sendLogBG.TabStop = false;
+            this.sendLogBG.Visible = false;
             // 
-            // autor
+            // openJavaFile
             // 
-            this.autor.HeaderText = "Autor";
-            this.autor.Name = "autor";
-            this.autor.ReadOnly = true;
+            this.openJavaFile.FileName = "javaw.exe";
+            this.openJavaFile.Filter = "javaw|javaw.exe";
+            this.openJavaFile.InitialDirectory = "C:\\Program Files\\Javax\\";
             // 
-            // beschreibung
+            // changeJavaPath
             // 
-            this.beschreibung.HeaderText = "Beschreibung";
-            this.beschreibung.Name = "beschreibung";
-            this.beschreibung.ReadOnly = true;
+            this.changeJavaPath.Location = new System.Drawing.Point(83, 226);
+            this.changeJavaPath.Name = "changeJavaPath";
+            this.changeJavaPath.Size = new System.Drawing.Size(75, 23);
+            this.changeJavaPath.TabIndex = 34;
+            this.changeJavaPath.Text = "Ändern";
+            this.changeJavaPath.UseVisualStyleBackColor = true;
+            this.changeJavaPath.Click += new System.EventHandler(this.changeJavaPath_Click);
             // 
             // mainForm
             // 
@@ -709,6 +823,8 @@
             this.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(974, 488);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.sendErrorLog);
             this.Controls.Add(this.infosMain);
             this.Controls.Add(this.welcomeMessage);
             this.Controls.Add(this.updateStatus);
@@ -724,6 +840,7 @@
             this.Controls.Add(this.passwordText);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.mojangStatus);
+            this.Controls.Add(this.sendLogBG);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -745,6 +862,7 @@
             this.changelogTabPage.ResumeLayout(false);
             this.optionTabPage.ResumeLayout(false);
             this.optionTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.modlistTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.modListTable)).EndInit();
@@ -752,6 +870,7 @@
             this.contactTabPage.PerformLayout();
             this.logTabPage.ResumeLayout(false);
             this.logTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sendLogBG)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -813,6 +932,16 @@
         private System.Windows.Forms.DataGridViewLinkColumn website;
         private System.Windows.Forms.DataGridViewTextBoxColumn autor;
         private System.Windows.Forms.DataGridViewTextBoxColumn beschreibung;
+        private System.Windows.Forms.Button sendErrorLog;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button sendLastClientLog;
+        private System.Windows.Forms.Button sendLastCrashLog;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox sendLogBG;
+        private System.Windows.Forms.OpenFileDialog openJavaFile;
+        private System.Windows.Forms.Label javaPathLabel;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button changeJavaPath;
 	}
 }
 

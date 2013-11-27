@@ -56,5 +56,8 @@
     <Setting Name="updateFiles" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="javaPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\Java\jre7\bin\javaw.exe</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

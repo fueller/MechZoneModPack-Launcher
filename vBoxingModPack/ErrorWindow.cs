@@ -12,6 +12,7 @@ namespace MechZoneModPack
 {
     public partial class ErrorWindow : Form
     {
+        string error;
         public ErrorWindow()
         {
             InitializeComponent();
@@ -24,9 +25,10 @@ namespace MechZoneModPack
             this.Size = new Size(this.Size.Width, 100);
             ok.Location = new Point(339, 32);
             label1.Text = ex.Message;
+            error += ex.Message + "\n";
             if (ex.Source != null)
             {
-                richTextBox1.AppendText(ex.Source + "\n");
+                error += ex.Source + "\n";
             }
             if (ex.HelpLink != null)
             {
@@ -34,23 +36,24 @@ namespace MechZoneModPack
             }
             if (ex.HResult != null)
             {
-                richTextBox1.AppendText(ex.HResult.ToString() + "\n");
+                error += ex.HResult.ToString() + "\n";
             }
             if (ex.InnerException != null)
             {
                 if (ex.InnerException.HelpLink != null)
                 {
-                    richTextBox1.AppendText(ex.InnerException.HelpLink + "\n");
+                    error += ex.InnerException.HelpLink + "\n";
                 }
                 if (ex.InnerException.Message != null)
                 {
-                    richTextBox1.AppendText(ex.InnerException.Message + "\n");
+                    error += ex.InnerException.Message + "\n";
                 }
             }
             if (ex.StackTrace != null)
             {
-                richTextBox1.AppendText(ex.StackTrace + "\n");
+                error += ex.StackTrace + "\n";
             }
+            richTextBox1.Text = error;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -60,6 +63,11 @@ namespace MechZoneModPack
             richTextBox1.Location = new Point(16, 32);
             ok.Location = new Point(339, 304);
             this.Size = new Size(this.Size.Width, 373);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            vb.sendErrorLog(error);
         }
     }
 }

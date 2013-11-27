@@ -50,7 +50,7 @@ FONT.key {font-weight: bold; color: darkgreen}
 <!--
 runtimeVersion = "4.5.0";
 checkClient = false;
-directLink = "vBoxingModPack.application";
+directLink = "MechZoneModPack.application";
 
 
 function Initialize()
@@ -126,7 +126,7 @@ function CompareVersions(v1, v2)
 <TR><TD ALIGN="LEFT"><TABLE CELLPADDING="2" CELLSPACING="0" BORDER="0" WIDTH="540"><TR><TD WIDTH="496">
 
 <!-- Begin AppInfo -->
-<TABLE><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Name:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>MechZoneModPack</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Version:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>1.0.0.41</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Herausgeber:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>MechZone</TD></TR><tr><td colspan="3">&nbsp;</td></tr></TABLE>
+<TABLE><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Name:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>MechZoneModPack</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Version:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>1.0.0.45</TD></TR><TR><TD COLSPAN="3">&nbsp;</TD></TR><TR><TD><B>Herausgeber:</B></TD><TD WIDTH="5"><SPACER TYPE="block" WIDTH="10" /></TD><TD>MechZone</TD></TR><tr><td colspan="3">&nbsp;</td></tr></TABLE>
 <!-- End AppInfo -->
 
 
@@ -134,7 +134,7 @@ function CompareVersions(v1, v2)
 <TABLE ID="BootstrapperSection" BORDER="0"><TR><TD COLSPAN="2">Die folgenden Komponenten sind erforderlich:</TD></TR><TR><TD WIDTH="10">&nbsp;</TD><TD><UL>
 <LI>Microsoft .NET Framework 4.5 (x86 and x64)</LI>
 </UL></TD></TR><TR><TD COLSPAN="2">
-Falls diese Komponenten bereits installiert wurden, können Sie die Anwendung jetzt <SPAN CLASS="JustThisApp"><A HREF="vBoxingModPack.application">starten</A></SPAN>. Klicken Sie andernfalls auf die Schaltfläche unten, um die erforderlichen Komponenten zu installieren und die Anwendung auszuführen.
+Falls diese Komponenten bereits installiert wurden, können Sie die Anwendung jetzt <SPAN CLASS="JustThisApp"><A HREF="MechZoneModPack.application">starten</A></SPAN>. Klicken Sie andernfalls auf die Schaltfläche unten, um die erforderlichen Komponenten zu installieren und die Anwendung auszuführen.
 </TD></TR><TR><TD COLSPAN="2">&nbsp;</TD></TR></TABLE>
 <!-- End Prerequisites -->
 
