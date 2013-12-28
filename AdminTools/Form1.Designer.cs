@@ -33,6 +33,8 @@
             this.generateAssetsList = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.generateLibrariesList = new System.Windows.Forms.Button();
+            this.itempanelToJson = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // generateModList
@@ -79,11 +81,27 @@
             this.generateLibrariesList.UseVisualStyleBackColor = true;
             this.generateLibrariesList.Click += new System.EventHandler(this.generateLibrariesList_Click);
             // 
+            // itempanelToJson
+            // 
+            this.itempanelToJson.Location = new System.Drawing.Point(12, 132);
+            this.itempanelToJson.Name = "itempanelToJson";
+            this.itempanelToJson.Size = new System.Drawing.Size(121, 23);
+            this.itempanelToJson.TabIndex = 4;
+            this.itempanelToJson.Text = "Itempanel -> JSON";
+            this.itempanelToJson.UseVisualStyleBackColor = true;
+            this.itempanelToJson.Click += new System.EventHandler(this.itempanelToJson_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "itempanel.csv";
+            this.openFileDialog1.Filter = "CSV-Datei|*.csv";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.itempanelToJson);
             this.Controls.Add(this.generateLibrariesList);
             this.Controls.Add(this.generateAssetsList);
             this.Controls.Add(this.generateConfigList);
@@ -93,7 +111,6 @@
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "Admin Tools";
-            this.Load += new System.EventHandler(this.Form1_Load_1);
             this.ResumeLayout(false);
 
         }
@@ -105,6 +122,8 @@
         private System.Windows.Forms.Button generateAssetsList;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button generateLibrariesList;
+        private System.Windows.Forms.Button itempanelToJson;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

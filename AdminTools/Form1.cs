@@ -299,14 +299,36 @@ namespace AdminTools
         }
         #endregion
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void itempanelToJson_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = appdata() + "\\dumps";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string[] file = File.ReadAllLines(openFileDialog1.FileName);
+                string[] finish = new string[file.Length];
+                
+                for (int i = 1; i < file.Length; i++)
+                {
+                    char[] seperator = { ',' };
+                    string[] item = file[i].Split(seperator);
+                    //Console.WriteLine("\"" + item[0] + ":" + item[1] + "\": \"" + item[3].Replace(" ", "_") + "\",");
+                    finish[i] = "\"" + item[0] + ":" + item[1] + "\": \"" + item[3].Replace(" ", "_").Replace("\"","") + "\",";
+                }
 
-        }
-
-        private void Form1_Load_1(object sender, EventArgs e)
-        {
-
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                    fs.Write(StringToByteArray("{"), 0, StringToByteArray("{").Length);
+                    for (int i = 1; i < finish.Length; i++)
+                    {
+                        fs.Write(StringToByteArray(finish[i] + ","), 0, StringToByteArray(finish[i]).Length);
+                        fs.Write(StringToByteArray("\n"), 0, 1);
+                    }
+                    fs.Write(StringToByteArray("}"), 0, StringToByteArray("}").Length);
+                    fs.Close();
+                }
+            }
+            
         }
 
     }
