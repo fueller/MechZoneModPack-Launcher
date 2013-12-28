@@ -243,11 +243,11 @@ namespace MechZoneModPack
             }
             catch (Exception ex)
             {
-                ErrorWindow err = new ErrorWindow();
-                err.ex = ex;
-                err.ShowDialog();
+                //ErrorWindow err = new ErrorWindow();
+                //err.ex = ex;
+                //err.ShowDialog();
                 MechZoneModPack.mainForm.monitor.TrackFeatureCancel("getServerStatus");
-                MechZoneModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
+                //MechZoneModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
                 return null;
             }
         }
@@ -423,6 +423,7 @@ namespace MechZoneModPack
                 client.DownloadFile(downloadLocation() + "modpack/files/assets.json", vb.appdata() + "\\temp\\assets.json");
                 client.DownloadFile(downloadLocation() + "modpack/files/libraries.json", vb.appdata() + "\\temp\\libraries.json");
                 client.DownloadFile(downloadLocation() + "modpack/files/sonstiges.json", vb.appdata() + "\\temp\\sonstiges.json");
+                client.DownloadFile(downloadLocation() + "modpack/files/delete.json", vb.appdata() + "\\temp\\delete.json");
 
                 jsonClasses.filesList j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
 

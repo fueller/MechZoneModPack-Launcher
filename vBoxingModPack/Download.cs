@@ -50,13 +50,38 @@ namespace MechZoneModPack
                 var config = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\config.json"));
                 var libraries = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\libraries.json"));
                 var sonstiges = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\sonstiges.json"));
+                var delete = JsonConvert.DeserializeObject<jsonClasses.deleteFiles>(File.ReadAllText(vb.appdata() + "\\temp\\delete.json"));
 
 
                 progressBar1.Maximum = mods.files.Count() + assets.files.Count() + config.files.Count() + libraries.files.Count() + sonstiges.files.Count();
                 progressBar2.Maximum = 100;
                 progressBar2.Value = 0;
 
+                //delete
+                for (int i = 0; i < delete.files.Count(); i++)
+                {
+                    string file = vb.appdata() + "\\" + delete.files[i];
 
+                    if (File.Exists(file))
+                    {
+                        try
+                        {
+                            Console.WriteLine("Datei " + file + " existiert und wird gelöscht");
+                            File.Delete(file);
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrorWindow err = new ErrorWindow();
+                            err.ex = ex;
+                            err.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Datei " + file + " existiert nicht und wird nicht gelöscht");
+                    }
+                }
+                
                 //assets                
                 for (int i = 0; i < assets.files.Count(); i++)
                 {

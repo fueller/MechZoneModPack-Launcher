@@ -123,16 +123,6 @@ namespace MechZoneModPack.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap status {
-            get {
-                object obj = ResourceManager.GetObject("status", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap statusOff {
             get {
                 object obj = ResourceManager.GetObject("statusOff", resourceCulture);
@@ -146,6 +136,16 @@ namespace MechZoneModPack.Properties {
         internal static System.Drawing.Bitmap statusOn {
             get {
                 object obj = ResourceManager.GetObject("statusOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap test1 {
+            get {
+                object obj = ResourceManager.GetObject("test1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

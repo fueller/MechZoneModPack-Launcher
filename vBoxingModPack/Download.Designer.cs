@@ -50,7 +50,7 @@
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 1;
-            this.cancel.Text = "Abbrechen";
+            this.cancel.Text = "Cancel";
             this.cancel.UseVisualStyleBackColor = true;
             this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
@@ -99,7 +99,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Download";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Download";
+            this.Text = "Download / Filecheck";
             this.Load += new System.EventHandler(this.Download_Load);
             this.Shown += new System.EventHandler(this.Download_Shown);
             this.ResumeLayout(false);

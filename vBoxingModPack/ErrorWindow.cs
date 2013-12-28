@@ -69,5 +69,10 @@ namespace MechZoneModPack
         {
             vb.sendErrorLog(error);
         }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

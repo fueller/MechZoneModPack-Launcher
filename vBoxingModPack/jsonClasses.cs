@@ -137,5 +137,12 @@ namespace MechZoneModPack
             public string[] dependencies { get; set; }
         }
         #endregion
+
+        #region deletefiles
+        public class deleteFiles
+        {
+            public string[] files { get; set; }
+        }
+        #endregion
     }
 }

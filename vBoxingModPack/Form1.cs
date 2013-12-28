@@ -17,6 +17,10 @@ using EQATEC.Analytics.Monitor;
 using System.Deployment.Application;
 using System.Reflection;
 using System.Diagnostics;
+using System.Threading;
+using System.Globalization;
+using System.Resources;
+
 
 namespace MechZoneModPack
 {
@@ -26,27 +30,38 @@ namespace MechZoneModPack
         public static IAnalyticsMonitor monitor = AnalyticsMonitorFactory.CreateMonitor("A645BAB7505648C3AE67645A9DB77EF7");
                 
         public mainForm()
-		{            
+		{
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
             monitor.Start();
             InitializeComponent();
 		}
 
         private void mainForm_Load(object sender, EventArgs e)
         {
+            if (Debugger.IsAttached)
+            {
+                button1.Visible = true;
+            }
+            else
+            {
+                button1.Visible = false;
+            }
 
             this.themeSelecter.DropDownStyle = ComboBoxStyle.DropDownList;
             this.ramSelect.DropDownStyle = ComboBoxStyle.DropDownList;
-            ToolTip.SetToolTip(websiteStatus, "Website Status\r\nGerade Offline\r\n");
-            ToolTip.SetToolTip(loginStatus, "Login Server Status\r\nGerade Offline\r\n");
-            ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\nGerade Offline\r\n");
-            ToolTip.SetToolTip(skinsStatus, "Skin Server Status\r\nGerade Offline\r\n");
-            ToolTip.SetToolTip(realmStatus, "Realms Server Status\r\nGerade Offline\r\n");
-            ToolTip.SetToolTip(usernameText, "Deinen Benutzernamen\r\noder deine Mojang Email");
-            ToolTip.SetToolTip(passwordText, "Dein Minecraft Passwort oder\r\nMojang Passwort");
-            ToolTip.SetToolTip(savePasswordCheck, "Speichere Passwort\r\nACHTUNG: Speichert Passwort unverschlüsselt!\r\nFunktioniert noch nicht");
+
+            ToolTip.SetToolTip(websiteStatus, "Website Status\r\nCurrenty Offline\r\n");
+            ToolTip.SetToolTip(loginStatus, "Login Server Status\r\nCurrenty Offline\r\n");
+            ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\nCurrenty Offline\r\n");
+            ToolTip.SetToolTip(skinsStatus, "Skin Server Status\r\nCurrenty Offline\r\n");
+            ToolTip.SetToolTip(realmStatus, "Realms Server Status\r\nCurrenty Offline\r\n");
+            ToolTip.SetToolTip(usernameText, "Your username\r\nor Mojang Mail");
+            ToolTip.SetToolTip(passwordText, "Your Minecraft or\r\nMojang password");
+            ToolTip.SetToolTip(savePasswordCheck, "Save password\r\nWARNING: saves password unencryted!");
             
-            this.Text = "MechZone Mod Pack v." + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString());
-            
+            this.Text = this.Text + " " + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            //this.Text = rm.GetString("form1mainText", cult_ger) + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString());
+
             usernameText.Text = Properties.Settings.Default.email;
             resHeight.Value = Properties.Settings.Default.height;
             resWidth.Value = Properties.Settings.Default.width;
@@ -63,11 +78,11 @@ namespace MechZoneModPack
 
             if (Properties.Settings.Default.nickname != "xx")
             {
-                welcomeMessage.Text = "Willkommen zurück " + Properties.Settings.Default.nickname;
+                welcomeMessage.Text = "Welcome back " + Properties.Settings.Default.nickname;
             }
             else
             {
-                welcomeMessage.Text = "MechZone Mod Pack";
+                welcomeMessage.Text = "MechZone ModPack";
             }
 
             for (int i = 512; i <= 16384; i = i + 512)
@@ -102,8 +117,7 @@ namespace MechZoneModPack
                 monitor.TrackFeatureStart("loginProzedure");
                 //string version = "1.6.4";
                 string name = "1.6.4-Forge";
-
-                //vb.getFiles();
+                //string name = "1.7.2-Forge";
 
                 Download dl = new Download();
                 dl.ShowDialog();
@@ -176,7 +190,7 @@ namespace MechZoneModPack
                     string javaPath = vb.GetJavaInstallationPath();
                     if (javaPath == null)
                     {
-                        MessageBox.Show("Die javaw Datei konnte nicht gefunden werden!\nBitte wähle diese nun aus!\nSie liegt meist unter \"C:\\Program Files (x86)\\Java\\jre7\\bin\\javaw.exe\"\noder \"C:\\Program Files\\Java\\jre7\\bin\\javaw.exe\"","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        MessageBox.Show("Die javaw Datei konnte nicht gefunden werden!\nBitte wähle diese nun aus!\nSie liegt meist unter \"C:\\Program Files (x86)\\Java\\jre7\\bin\\javaw.exe\"\noder \"C:\\Program Files\\Java\\jre7\\bin\\javaw.exe\"","Could not find File!",MessageBoxButtons.OK,MessageBoxIcon.Error);
                         if (openJavaFile.ShowDialog() == DialogResult.OK)
                         {
                             javaPath = openJavaFile.FileName;
@@ -582,7 +596,7 @@ namespace MechZoneModPack
 
         private void infosMain_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (e.TabPageIndex == 5)
+            if (e.TabPageIndex == 6)
             {
                 sendErrorLog.Visible = true;
                 sendLogBG.Visible = true;
@@ -592,7 +606,7 @@ namespace MechZoneModPack
                 sendErrorLog.Visible = false;
                 sendLogBG.Visible = false;
             }
-            Console.WriteLine(e.TabPageIndex);
+            //Console.WriteLine(e.TabPageIndex);
         }
 
         private void sendErrorLog_Click(object sender, EventArgs e)
@@ -602,7 +616,7 @@ namespace MechZoneModPack
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show(File.Exists("java").ToString());
+            addBugToSpreadsheet("", "");
         }
 
         private void sendLastCrashLog_Click(object sender, EventArgs e)
@@ -679,6 +693,68 @@ namespace MechZoneModPack
                 err.ex = ex;
                 err.ShowDialog();
             }
+        }
+
+        private void passwordText_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                loginButton_Click(sender, null);
+            }
+        }
+
+        private void addBugToSpreadsheet(string text, string link)
+        {
+            string error = "";
+            try
+            {
+                
+                string[] file = File.ReadAllLines(vb.appdata() + "\\ForgeModLoader-client-0.log");
+                int len = file.Length;
+                int maxLen = 2000;
+                error += "Länge: " + len + "\n\n";
+
+                if (len < maxLen)
+                {
+                    for (int i = 0; i < len; i++)
+                    {
+                        error += file[i] + "\n";
+                    }
+                }
+                else
+                {
+                    for (int i = len - maxLen; i < len; i++)
+                    {
+                        error += file[i] + "\n";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+            HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create("https://docs.google.com/forms/d/1VIoN_o9TnAuQ5PptQj459c6R-dhXtXPvd-x-SFOBXQg/formResponse");
+
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            string postData = "entry.1715453108=test";
+            postData += "&entry.1075040391=http://google.de";
+            postData += "&entry.107304472=" + error;
+            byte[] data = encoding.GetBytes(postData);
+
+            httpWReq.Method = "POST";
+            httpWReq.ContentType = "application/x-www-form-urlencoded";
+            httpWReq.ContentLength = data.Length;
+
+            using (Stream stream = httpWReq.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+
+            HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
+            string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+            Console.WriteLine(responseString);
         }
 	}
 }

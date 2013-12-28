@@ -53,6 +53,7 @@
             this.ok.TabIndex = 1;
             this.ok.Text = "OK";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // richTextBox1
             // 
@@ -68,7 +69,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(168, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Error an Entwickler übermitteln";
+            this.button1.Text = "Send error to developer";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -76,9 +77,9 @@
             // 
             this.moreInfos.Location = new System.Drawing.Point(15, 32);
             this.moreInfos.Name = "moreInfos";
-            this.moreInfos.Size = new System.Drawing.Size(75, 23);
+            this.moreInfos.Size = new System.Drawing.Size(113, 23);
             this.moreInfos.TabIndex = 4;
-            this.moreInfos.Text = "Mehr Infos";
+            this.moreInfos.Text = "More Information";
             this.moreInfos.UseVisualStyleBackColor = true;
             this.moreInfos.Click += new System.EventHandler(this.button2_Click);
             // 

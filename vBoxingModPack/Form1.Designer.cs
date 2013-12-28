@@ -43,7 +43,6 @@
             this.websiteStatus = new System.Windows.Forms.PictureBox();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.noServerCheckOnStart = new System.Windows.Forms.CheckBox();
-            this.process1 = new System.Diagnostics.Process();
             this.updateStatus = new System.Windows.Forms.Button();
             this.welcomeMessage = new System.Windows.Forms.Label();
             this.ramComb = new System.Windows.Forms.CheckBox();
@@ -55,9 +54,12 @@
             this.mojangStatus = new System.Windows.Forms.Label();
             this.infosMain = new System.Windows.Forms.TabControl();
             this.infosTabPage = new System.Windows.Forms.TabPage();
+            this.infoBrowser = new System.Windows.Forms.WebBrowser();
             this.changelogTabPage = new System.Windows.Forms.TabPage();
             this.changelogBrowser = new System.Windows.Forms.WebBrowser();
+            this.tabTexturePack = new System.Windows.Forms.TabPage();
             this.optionTabPage = new System.Windows.Forms.TabPage();
+            this.changeJavaPath = new System.Windows.Forms.Button();
             this.javaPathLabel = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.sendLastClientLog = new System.Windows.Forms.Button();
@@ -92,8 +94,8 @@
             this.sendErrorLog = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.sendLogBG = new System.Windows.Forms.PictureBox();
+            this.process1 = new System.Diagnostics.Process();
             this.openJavaFile = new System.Windows.Forms.OpenFileDialog();
-            this.changeJavaPath = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
@@ -102,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
             this.infosMain.SuspendLayout();
+            this.infosTabPage.SuspendLayout();
             this.changelogTabPage.SuspendLayout();
             this.optionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -115,112 +118,75 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(844, 430);
+            resources.ApplyResources(this.loginButton, "loginButton");
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(118, 23);
-            this.loginButton.TabIndex = 3;
-            this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // passwordText
             // 
-            this.passwordText.Location = new System.Drawing.Point(677, 456);
+            resources.ApplyResources(this.passwordText, "passwordText");
             this.passwordText.Name = "passwordText";
-            this.passwordText.PasswordChar = '*';
-            this.passwordText.Size = new System.Drawing.Size(161, 20);
-            this.passwordText.TabIndex = 2;
             this.passwordText.TextChanged += new System.EventHandler(this.passwordText_TextChanged);
+            this.passwordText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.passwordText_KeyUp);
             // 
             // usernameText
             // 
-            this.usernameText.Location = new System.Drawing.Point(677, 430);
+            resources.ApplyResources(this.usernameText, "usernameText");
             this.usernameText.Name = "usernameText";
-            this.usernameText.Size = new System.Drawing.Size(161, 20);
-            this.usernameText.TabIndex = 1;
             this.usernameText.TextChanged += new System.EventHandler(this.usernameText_TextChanged);
             // 
             // savePasswordCheck
             // 
-            this.savePasswordCheck.AutoSize = true;
+            resources.ApplyResources(this.savePasswordCheck, "savePasswordCheck");
             this.savePasswordCheck.BackColor = System.Drawing.Color.Transparent;
-            this.savePasswordCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.savePasswordCheck.Location = new System.Drawing.Point(844, 459);
             this.savePasswordCheck.Name = "savePasswordCheck";
-            this.savePasswordCheck.Size = new System.Drawing.Size(136, 17);
-            this.savePasswordCheck.TabIndex = 3;
             this.savePasswordCheck.TabStop = false;
-            this.savePasswordCheck.Text = "speichere Passwort";
             this.savePasswordCheck.UseVisualStyleBackColor = false;
             this.savePasswordCheck.CheckedChanged += new System.EventHandler(this.savePasswordCheck_CheckedChanged);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            resources.ApplyResources(this.label1, "label1");
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(584, 433);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Benutzername";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
+            resources.ApplyResources(this.label2, "label2");
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(613, 459);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Passwort";
             // 
             // realmStatus
             // 
-            this.realmStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
-            this.realmStatus.Location = new System.Drawing.Point(892, 12);
+            resources.ApplyResources(this.realmStatus, "realmStatus");
             this.realmStatus.Name = "realmStatus";
-            this.realmStatus.Size = new System.Drawing.Size(32, 32);
-            this.realmStatus.TabIndex = 6;
             this.realmStatus.TabStop = false;
             // 
             // skinsStatus
             // 
-            this.skinsStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
-            this.skinsStatus.Location = new System.Drawing.Point(854, 12);
+            resources.ApplyResources(this.skinsStatus, "skinsStatus");
             this.skinsStatus.Name = "skinsStatus";
-            this.skinsStatus.Size = new System.Drawing.Size(32, 32);
-            this.skinsStatus.TabIndex = 7;
             this.skinsStatus.TabStop = false;
             // 
             // sessionStatus
             // 
-            this.sessionStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
-            this.sessionStatus.Location = new System.Drawing.Point(778, 12);
+            resources.ApplyResources(this.sessionStatus, "sessionStatus");
             this.sessionStatus.Name = "sessionStatus";
-            this.sessionStatus.Size = new System.Drawing.Size(32, 32);
-            this.sessionStatus.TabIndex = 8;
             this.sessionStatus.TabStop = false;
             // 
             // loginStatus
             // 
-            this.loginStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
-            this.loginStatus.Location = new System.Drawing.Point(930, 12);
+            resources.ApplyResources(this.loginStatus, "loginStatus");
             this.loginStatus.Name = "loginStatus";
-            this.loginStatus.Size = new System.Drawing.Size(32, 32);
-            this.loginStatus.TabIndex = 9;
             this.loginStatus.TabStop = false;
             // 
             // websiteStatus
             // 
-            this.websiteStatus.Image = global::MechZoneModPack.Properties.Resources.statusOff;
-            this.websiteStatus.Location = new System.Drawing.Point(816, 12);
+            resources.ApplyResources(this.websiteStatus, "websiteStatus");
             this.websiteStatus.Name = "websiteStatus";
-            this.websiteStatus.Size = new System.Drawing.Size(32, 32);
-            this.websiteStatus.TabIndex = 10;
             this.websiteStatus.TabStop = false;
             // 
             // ToolTip
@@ -229,99 +195,56 @@
             // 
             // noServerCheckOnStart
             // 
-            this.noServerCheckOnStart.AutoSize = true;
-            this.noServerCheckOnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noServerCheckOnStart.Location = new System.Drawing.Point(12, 124);
+            resources.ApplyResources(this.noServerCheckOnStart, "noServerCheckOnStart");
             this.noServerCheckOnStart.Name = "noServerCheckOnStart";
-            this.noServerCheckOnStart.Size = new System.Drawing.Size(205, 17);
-            this.noServerCheckOnStart.TabIndex = 21;
-            this.noServerCheckOnStart.Text = "Kein Server Check beim starten";
-            this.ToolTip.SetToolTip(this.noServerCheckOnStart, "Checkt beim starten nicht ob die Minecraft Server Online sind\r\n(Das Programm star" +
-        "tet schneller)");
+            this.ToolTip.SetToolTip(this.noServerCheckOnStart, resources.GetString("noServerCheckOnStart.ToolTip"));
             this.noServerCheckOnStart.UseVisualStyleBackColor = true;
             this.noServerCheckOnStart.CheckedChanged += new System.EventHandler(this.noServerCheckOnStart_CheckedChanged);
-            // 
-            // process1
-            // 
-            this.process1.StartInfo.Domain = "";
-            this.process1.StartInfo.FileName = resources.GetString("resource.FileName");
-            this.process1.StartInfo.LoadUserProfile = false;
-            this.process1.StartInfo.Password = null;
-            this.process1.StartInfo.StandardErrorEncoding = null;
-            this.process1.StartInfo.StandardOutputEncoding = null;
-            this.process1.StartInfo.UserName = "";
-            this.process1.SynchronizingObject = this;
             // 
             // updateStatus
             // 
             this.updateStatus.BackColor = System.Drawing.SystemColors.Control;
-            this.updateStatus.Location = new System.Drawing.Point(778, 50);
+            resources.ApplyResources(this.updateStatus, "updateStatus");
             this.updateStatus.Name = "updateStatus";
-            this.updateStatus.Size = new System.Drawing.Size(184, 23);
-            this.updateStatus.TabIndex = 14;
-            this.updateStatus.Text = "Update Server Status";
             this.updateStatus.UseVisualStyleBackColor = false;
             this.updateStatus.Click += new System.EventHandler(this.updateStatus_Click);
             // 
             // welcomeMessage
             // 
-            this.welcomeMessage.AutoSize = true;
+            resources.ApplyResources(this.welcomeMessage, "welcomeMessage");
             this.welcomeMessage.BackColor = System.Drawing.Color.Transparent;
-            this.welcomeMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.welcomeMessage.ForeColor = System.Drawing.Color.White;
-            this.welcomeMessage.Location = new System.Drawing.Point(12, 12);
             this.welcomeMessage.Name = "welcomeMessage";
-            this.welcomeMessage.Size = new System.Drawing.Size(606, 39);
-            this.welcomeMessage.TabIndex = 15;
-            this.welcomeMessage.Text = "mmmmmmmmmmmmmmmmmmm";
-            this.welcomeMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ramComb
             // 
-            this.ramComb.AutoSize = true;
-            this.ramComb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ramComb.Location = new System.Drawing.Point(12, 78);
+            resources.ApplyResources(this.ramComb, "ramComb");
             this.ramComb.Name = "ramComb";
-            this.ramComb.Size = new System.Drawing.Size(113, 17);
-            this.ramComb.TabIndex = 20;
-            this.ramComb.Text = "Arbeitsspeicher";
             this.ramComb.UseVisualStyleBackColor = true;
             this.ramComb.CheckedChanged += new System.EventHandler(this.ramComb_CheckedChanged);
             // 
             // ramSelect
             // 
-            this.ramSelect.Enabled = false;
+            resources.ApplyResources(this.ramSelect, "ramSelect");
             this.ramSelect.FormattingEnabled = true;
-            this.ramSelect.Location = new System.Drawing.Point(22, 97);
             this.ramSelect.Name = "ramSelect";
-            this.ramSelect.Size = new System.Drawing.Size(121, 21);
-            this.ramSelect.TabIndex = 19;
-            this.ramSelect.Text = "1024 MB";
             this.ramSelect.SelectedIndexChanged += new System.EventHandler(this.ramSelect_SelectedIndexChanged);
             this.ramSelect.SelectionChangeCommitted += new System.EventHandler(this.ramSelect_SelectionChangeCommitted);
             // 
             // resX
             // 
-            this.resX.AutoSize = true;
-            this.resX.Enabled = false;
-            this.resX.Location = new System.Drawing.Point(65, 54);
+            resources.ApplyResources(this.resX, "resX");
             this.resX.Name = "resX";
-            this.resX.Size = new System.Drawing.Size(12, 13);
-            this.resX.TabIndex = 18;
-            this.resX.Text = "x";
             // 
             // resHeight
             // 
-            this.resHeight.Enabled = false;
-            this.resHeight.Location = new System.Drawing.Point(83, 52);
+            resources.ApplyResources(this.resHeight, "resHeight");
             this.resHeight.Maximum = new decimal(new int[] {
             2160,
             0,
             0,
             0});
             this.resHeight.Name = "resHeight";
-            this.resHeight.Size = new System.Drawing.Size(47, 20);
-            this.resHeight.TabIndex = 15;
             this.resHeight.Value = new decimal(new int[] {
             720,
             0,
@@ -331,16 +254,13 @@
             // 
             // resWidth
             // 
-            this.resWidth.Enabled = false;
-            this.resWidth.Location = new System.Drawing.Point(12, 52);
+            resources.ApplyResources(this.resWidth, "resWidth");
             this.resWidth.Maximum = new decimal(new int[] {
             3840,
             0,
             0,
             0});
             this.resWidth.Name = "resWidth";
-            this.resWidth.Size = new System.Drawing.Size(47, 20);
-            this.resWidth.TabIndex = 14;
             this.resWidth.Value = new decimal(new int[] {
             1280,
             0,
@@ -350,13 +270,8 @@
             // 
             // resolutionComb
             // 
-            this.resolutionComb.AutoSize = true;
-            this.resolutionComb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resolutionComb.Location = new System.Drawing.Point(12, 29);
+            resources.ApplyResources(this.resolutionComb, "resolutionComb");
             this.resolutionComb.Name = "resolutionComb";
-            this.resolutionComb.Size = new System.Drawing.Size(82, 17);
-            this.resolutionComb.TabIndex = 13;
-            this.resolutionComb.Text = "Auflösung";
             this.resolutionComb.UseVisualStyleBackColor = true;
             this.resolutionComb.CheckedChanged += new System.EventHandler(this.resolutionComb_CheckedChanged);
             // 
@@ -364,64 +279,60 @@
             // 
             this.mojangStatus.BackColor = System.Drawing.Color.Transparent;
             this.mojangStatus.Cursor = System.Windows.Forms.Cursors.Default;
-            this.mojangStatus.Location = new System.Drawing.Point(778, 47);
+            resources.ApplyResources(this.mojangStatus, "mojangStatus");
             this.mojangStatus.Name = "mojangStatus";
-            this.mojangStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mojangStatus.Size = new System.Drawing.Size(184, 39);
-            this.mojangStatus.TabIndex = 18;
             // 
             // infosMain
             // 
             this.infosMain.Controls.Add(this.infosTabPage);
             this.infosMain.Controls.Add(this.changelogTabPage);
+            this.infosMain.Controls.Add(this.tabTexturePack);
             this.infosMain.Controls.Add(this.optionTabPage);
             this.infosMain.Controls.Add(this.modlistTabPage);
             this.infosMain.Controls.Add(this.contactTabPage);
             this.infosMain.Controls.Add(this.logTabPage);
-            this.infosMain.ItemSize = new System.Drawing.Size(58, 18);
-            this.infosMain.Location = new System.Drawing.Point(19, 63);
+            resources.ApplyResources(this.infosMain, "infosMain");
             this.infosMain.Name = "infosMain";
             this.infosMain.SelectedIndex = 0;
-            this.infosMain.Size = new System.Drawing.Size(753, 361);
-            this.infosMain.TabIndex = 19;
             this.infosMain.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.infosMain_Selecting);
             // 
             // infosTabPage
             // 
-            this.infosTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
-            this.infosTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.infosTabPage.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.infosTabPage, "infosTabPage");
+            this.infosTabPage.Controls.Add(this.infoBrowser);
             this.infosTabPage.Name = "infosTabPage";
-            this.infosTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.infosTabPage.Size = new System.Drawing.Size(745, 335);
-            this.infosTabPage.TabIndex = 0;
-            this.infosTabPage.Text = "Infos";
             this.infosTabPage.UseVisualStyleBackColor = true;
+            // 
+            // infoBrowser
+            // 
+            resources.ApplyResources(this.infoBrowser, "infoBrowser");
+            this.infoBrowser.Name = "infoBrowser";
+            this.infoBrowser.Url = new System.Uri("http://mechzone.net/modpack/launcher/info/info.html", System.UriKind.Absolute);
             // 
             // changelogTabPage
             // 
             this.changelogTabPage.Controls.Add(this.changelogBrowser);
-            this.changelogTabPage.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.changelogTabPage, "changelogTabPage");
             this.changelogTabPage.Name = "changelogTabPage";
-            this.changelogTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.changelogTabPage.Size = new System.Drawing.Size(745, 335);
-            this.changelogTabPage.TabIndex = 1;
-            this.changelogTabPage.Text = "Changelog";
             this.changelogTabPage.UseVisualStyleBackColor = true;
             // 
             // changelogBrowser
             // 
-            this.changelogBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.changelogBrowser.Location = new System.Drawing.Point(3, 3);
-            this.changelogBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            resources.ApplyResources(this.changelogBrowser, "changelogBrowser");
+            this.changelogBrowser.IsWebBrowserContextMenuEnabled = false;
             this.changelogBrowser.Name = "changelogBrowser";
-            this.changelogBrowser.Size = new System.Drawing.Size(739, 329);
-            this.changelogBrowser.TabIndex = 0;
+            this.changelogBrowser.TabStop = false;
+            this.changelogBrowser.Url = new System.Uri("http://mechzone.net/modpack/launcher/info/changelog.html", System.UriKind.Absolute);
+            // 
+            // tabTexturePack
+            // 
+            resources.ApplyResources(this.tabTexturePack, "tabTexturePack");
+            this.tabTexturePack.Name = "tabTexturePack";
+            this.tabTexturePack.UseVisualStyleBackColor = true;
             // 
             // optionTabPage
             // 
-            this.optionTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
-            this.optionTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            resources.ApplyResources(this.optionTabPage, "optionTabPage");
             this.optionTabPage.Controls.Add(this.changeJavaPath);
             this.optionTabPage.Controls.Add(this.javaPathLabel);
             this.optionTabPage.Controls.Add(this.label10);
@@ -442,146 +353,100 @@
             this.optionTabPage.Controls.Add(this.resWidth);
             this.optionTabPage.Controls.Add(this.resHeight);
             this.optionTabPage.Controls.Add(this.resX);
-            this.optionTabPage.Location = new System.Drawing.Point(4, 22);
             this.optionTabPage.Name = "optionTabPage";
-            this.optionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.optionTabPage.Size = new System.Drawing.Size(745, 335);
-            this.optionTabPage.TabIndex = 2;
-            this.optionTabPage.Text = "Optionen";
             this.optionTabPage.UseVisualStyleBackColor = true;
+            // 
+            // changeJavaPath
+            // 
+            resources.ApplyResources(this.changeJavaPath, "changeJavaPath");
+            this.changeJavaPath.Name = "changeJavaPath";
+            this.changeJavaPath.UseVisualStyleBackColor = true;
+            this.changeJavaPath.Click += new System.EventHandler(this.changeJavaPath_Click);
             // 
             // javaPathLabel
             // 
-            this.javaPathLabel.AutoSize = true;
-            this.javaPathLabel.Location = new System.Drawing.Point(4, 251);
+            resources.ApplyResources(this.javaPathLabel, "javaPathLabel");
             this.javaPathLabel.Name = "javaPathLabel";
-            this.javaPathLabel.Size = new System.Drawing.Size(41, 13);
-            this.javaPathLabel.TabIndex = 33;
-            this.javaPathLabel.Text = "label11";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(12, 231);
+            resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(64, 13);
-            this.label10.TabIndex = 32;
-            this.label10.Text = "Java Path";
             // 
             // sendLastClientLog
             // 
-            this.sendLastClientLog.Location = new System.Drawing.Point(443, 33);
+            resources.ApplyResources(this.sendLastClientLog, "sendLastClientLog");
             this.sendLastClientLog.Name = "sendLastClientLog";
-            this.sendLastClientLog.Size = new System.Drawing.Size(152, 23);
-            this.sendLastClientLog.TabIndex = 31;
-            this.sendLastClientLog.Text = "Sende Letzten Client Log";
             this.sendLastClientLog.UseVisualStyleBackColor = true;
             this.sendLastClientLog.Click += new System.EventHandler(this.sendLastClientLog_Click);
             // 
             // sendLastCrashLog
             // 
-            this.sendLastCrashLog.Location = new System.Drawing.Point(443, 4);
+            resources.ApplyResources(this.sendLastCrashLog, "sendLastCrashLog");
             this.sendLastCrashLog.Name = "sendLastCrashLog";
-            this.sendLastCrashLog.Size = new System.Drawing.Size(152, 23);
-            this.sendLastCrashLog.TabIndex = 30;
-            this.sendLastCrashLog.Text = "Sende Letzten Crash Log";
             this.sendLastCrashLog.UseVisualStyleBackColor = true;
             this.sendLastCrashLog.Click += new System.EventHandler(this.sendLastCrashLog_Click);
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Gray;
-            this.pictureBox2.Location = new System.Drawing.Point(415, 6);
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1, 323);
-            this.pictureBox2.TabIndex = 29;
             this.pictureBox2.TabStop = false;
             // 
             // updateFiles
             // 
-            this.updateFiles.AutoSize = true;
-            this.updateFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateFiles.Location = new System.Drawing.Point(12, 6);
+            resources.ApplyResources(this.updateFiles, "updateFiles");
             this.updateFiles.Name = "updateFiles";
-            this.updateFiles.Size = new System.Drawing.Size(170, 17);
-            this.updateFiles.TabIndex = 28;
-            this.updateFiles.Text = "Kein Datei Update Check";
             this.updateFiles.UseVisualStyleBackColor = true;
             this.updateFiles.CheckedChanged += new System.EventHandler(this.updateFiles_CheckedChanged);
             // 
             // extraJavaPrameters
             // 
-            this.extraJavaPrameters.AutoSize = true;
-            this.extraJavaPrameters.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.extraJavaPrameters.Location = new System.Drawing.Point(9, 149);
+            resources.ApplyResources(this.extraJavaPrameters, "extraJavaPrameters");
             this.extraJavaPrameters.Name = "extraJavaPrameters";
-            this.extraJavaPrameters.Size = new System.Drawing.Size(128, 13);
-            this.extraJavaPrameters.TabIndex = 27;
-            this.extraJavaPrameters.Text = "Extra Java Parameter";
             // 
             // extraJavaParameterText
             // 
-            this.extraJavaParameterText.Location = new System.Drawing.Point(10, 168);
+            resources.ApplyResources(this.extraJavaParameterText, "extraJavaParameterText");
             this.extraJavaParameterText.Name = "extraJavaParameterText";
-            this.extraJavaParameterText.Size = new System.Drawing.Size(200, 20);
-            this.extraJavaParameterText.TabIndex = 26;
-            this.extraJavaParameterText.Text = "-XX:PermSize=256m";
             this.extraJavaParameterText.TextChanged += new System.EventHandler(this.extraJavaParameterText_TextChanged);
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(223, 10);
+            resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(45, 13);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Theme";
             // 
             // themeSelecter
             // 
             this.themeSelecter.FormattingEnabled = true;
             this.themeSelecter.Items.AddRange(new object[] {
-            "Dark",
-            "Light",
-            "Keins"});
-            this.themeSelecter.Location = new System.Drawing.Point(270, 7);
+            resources.GetString("themeSelecter.Items"),
+            resources.GetString("themeSelecter.Items1"),
+            resources.GetString("themeSelecter.Items2")});
+            resources.ApplyResources(this.themeSelecter, "themeSelecter");
             this.themeSelecter.Name = "themeSelecter";
-            this.themeSelecter.Size = new System.Drawing.Size(121, 21);
-            this.themeSelecter.TabIndex = 24;
             this.themeSelecter.SelectedIndexChanged += new System.EventHandler(this.themeSelecter_SelectedIndexChanged);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Gray;
-            this.pictureBox1.Location = new System.Drawing.Point(218, 6);
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1, 323);
-            this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
             // openDirectory
             // 
-            this.openDirectory.Location = new System.Drawing.Point(10, 194);
+            resources.ApplyResources(this.openDirectory, "openDirectory");
             this.openDirectory.Name = "openDirectory";
-            this.openDirectory.Size = new System.Drawing.Size(108, 23);
-            this.openDirectory.TabIndex = 22;
-            this.openDirectory.Text = "Installations Ordner";
             this.openDirectory.UseVisualStyleBackColor = true;
             this.openDirectory.Click += new System.EventHandler(this.openDirectory_Click);
             // 
             // modlistTabPage
             // 
-            this.modlistTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
-            this.modlistTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            resources.ApplyResources(this.modlistTabPage, "modlistTabPage");
             this.modlistTabPage.Controls.Add(this.modListTable);
-            this.modlistTabPage.Location = new System.Drawing.Point(4, 22);
             this.modlistTabPage.Name = "modlistTabPage";
-            this.modlistTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.modlistTabPage.Size = new System.Drawing.Size(745, 335);
-            this.modlistTabPage.TabIndex = 4;
-            this.modlistTabPage.Text = "Mod List";
             this.modlistTabPage.UseVisualStyleBackColor = true;
             // 
             // modListTable
@@ -599,50 +464,46 @@
             this.website,
             this.autor,
             this.beschreibung});
-            this.modListTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modListTable.Location = new System.Drawing.Point(3, 3);
+            resources.ApplyResources(this.modListTable, "modListTable");
             this.modListTable.Name = "modListTable";
             this.modListTable.ReadOnly = true;
             this.modListTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.modListTable.ShowEditingIcon = false;
-            this.modListTable.Size = new System.Drawing.Size(739, 329);
-            this.modListTable.TabIndex = 0;
             this.modListTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.modListTable_CellContentClick);
             // 
             // name
             // 
-            this.name.HeaderText = "Name";
+            resources.ApplyResources(this.name, "name");
             this.name.Name = "name";
             this.name.ReadOnly = true;
             // 
             // version
             // 
-            this.version.HeaderText = "Version";
+            resources.ApplyResources(this.version, "version");
             this.version.Name = "version";
             this.version.ReadOnly = true;
             // 
             // website
             // 
-            this.website.HeaderText = "Website";
+            resources.ApplyResources(this.website, "website");
             this.website.Name = "website";
             this.website.ReadOnly = true;
             // 
             // autor
             // 
-            this.autor.HeaderText = "Autor";
+            resources.ApplyResources(this.autor, "autor");
             this.autor.Name = "autor";
             this.autor.ReadOnly = true;
             // 
             // beschreibung
             // 
-            this.beschreibung.HeaderText = "Beschreibung";
+            resources.ApplyResources(this.beschreibung, "beschreibung");
             this.beschreibung.Name = "beschreibung";
             this.beschreibung.ReadOnly = true;
             // 
             // contactTabPage
             // 
-            this.contactTabPage.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1_mitte;
-            this.contactTabPage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            resources.ApplyResources(this.contactTabPage, "contactTabPage");
             this.contactTabPage.Controls.Add(this.linkLabel3);
             this.contactTabPage.Controls.Add(this.label8);
             this.contactTabPage.Controls.Add(this.linkLabel2);
@@ -652,177 +513,116 @@
             this.contactTabPage.Controls.Add(this.label5);
             this.contactTabPage.Controls.Add(this.label4);
             this.contactTabPage.Controls.Add(this.label3);
-            this.contactTabPage.Location = new System.Drawing.Point(4, 22);
             this.contactTabPage.Name = "contactTabPage";
-            this.contactTabPage.Size = new System.Drawing.Size(745, 335);
-            this.contactTabPage.TabIndex = 5;
-            this.contactTabPage.Text = "Kontakt / Bug Reports";
             this.contactTabPage.UseVisualStyleBackColor = true;
             // 
             // linkLabel3
             // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(143, 102);
+            resources.ApplyResources(this.linkLabel3, "linkLabel3");
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(64, 13);
-            this.linkLabel3.TabIndex = 7;
             this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "über GitHub";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(4, 102);
+            resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(143, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Bug-Reports: Per Email oder ";
             // 
             // linkLabel2
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(105, 89);
+            resources.ApplyResources(this.linkLabel2, "linkLabel2");
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(40, 13);
-            this.linkLabel2.TabIndex = 5;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "GitHub";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 89);
+            resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(105, 13);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "GitHub SourceCode:";
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(35, 76);
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(113, 13);
-            this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "fueller@mechzone.net";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 76);
+            resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Email:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 59);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Kontakt:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 23);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(202, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Jede andere Benutzung ist nicht zulässig!";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 10);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(378, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Dieses Programm wurde für den Minecraft Server MechZone.net Programmiert.";
             // 
             // logTabPage
             // 
             this.logTabPage.Controls.Add(this.logTextBox);
-            this.logTabPage.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.logTabPage, "logTabPage");
             this.logTabPage.Name = "logTabPage";
-            this.logTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.logTabPage.Size = new System.Drawing.Size(745, 335);
-            this.logTabPage.TabIndex = 6;
-            this.logTabPage.Text = "Log";
             this.logTabPage.UseVisualStyleBackColor = true;
             // 
             // logTextBox
             // 
-            this.logTextBox.Location = new System.Drawing.Point(0, 0);
-            this.logTextBox.Multiline = true;
+            resources.ApplyResources(this.logTextBox, "logTextBox");
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
-            this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.logTextBox.Size = new System.Drawing.Size(745, 335);
-            this.logTextBox.TabIndex = 0;
             this.logTextBox.TabStop = false;
-            this.logTextBox.WordWrap = false;
             // 
             // sendErrorLog
             // 
-            this.sendErrorLog.Location = new System.Drawing.Point(778, 330);
+            resources.ApplyResources(this.sendErrorLog, "sendErrorLog");
             this.sendErrorLog.Name = "sendErrorLog";
-            this.sendErrorLog.Size = new System.Drawing.Size(108, 23);
-            this.sendErrorLog.TabIndex = 20;
-            this.sendErrorLog.Text = "Sende Error Log";
             this.sendErrorLog.UseVisualStyleBackColor = true;
-            this.sendErrorLog.Visible = false;
             this.sendErrorLog.Click += new System.EventHandler(this.sendErrorLog_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(810, 237);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // sendLogBG
             // 
             this.sendLogBG.BackColor = System.Drawing.Color.Gainsboro;
-            this.sendLogBG.Location = new System.Drawing.Point(749, 317);
+            resources.ApplyResources(this.sendLogBG, "sendLogBG");
             this.sendLogBG.Name = "sendLogBG";
-            this.sendLogBG.Size = new System.Drawing.Size(144, 50);
-            this.sendLogBG.TabIndex = 22;
             this.sendLogBG.TabStop = false;
-            this.sendLogBG.Visible = false;
+            // 
+            // process1
+            // 
+            this.process1.StartInfo.Domain = "";
+            this.process1.StartInfo.FileName = resources.GetString("resource.FileName");
+            this.process1.StartInfo.LoadUserProfile = false;
+            this.process1.StartInfo.Password = null;
+            this.process1.StartInfo.StandardErrorEncoding = null;
+            this.process1.StartInfo.StandardOutputEncoding = null;
+            this.process1.StartInfo.UserName = "";
+            this.process1.SynchronizingObject = this;
             // 
             // openJavaFile
             // 
             this.openJavaFile.FileName = "javaw.exe";
-            this.openJavaFile.Filter = "javaw|javaw.exe";
+            resources.ApplyResources(this.openJavaFile, "openJavaFile");
             this.openJavaFile.InitialDirectory = "C:\\Program Files\\Javax\\";
-            // 
-            // changeJavaPath
-            // 
-            this.changeJavaPath.Location = new System.Drawing.Point(83, 226);
-            this.changeJavaPath.Name = "changeJavaPath";
-            this.changeJavaPath.Size = new System.Drawing.Size(75, 23);
-            this.changeJavaPath.TabIndex = 34;
-            this.changeJavaPath.Text = "Ändern";
-            this.changeJavaPath.UseVisualStyleBackColor = true;
-            this.changeJavaPath.Click += new System.EventHandler(this.changeJavaPath_Click);
             // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::MechZoneModPack.Properties.Resources.Bild1;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(974, 488);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.sendErrorLog);
             this.Controls.Add(this.infosMain);
@@ -843,11 +643,9 @@
             this.Controls.Add(this.sendLogBG);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "mainForm";
             this.ShowIcon = false;
-            this.Text = "MechZone Mod Pack";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.Shown += new System.EventHandler(this.mainForm_Shown);
@@ -859,6 +657,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).EndInit();
             this.infosMain.ResumeLayout(false);
+            this.infosTabPage.ResumeLayout(false);
             this.changelogTabPage.ResumeLayout(false);
             this.optionTabPage.ResumeLayout(false);
             this.optionTabPage.PerformLayout();
@@ -927,11 +726,6 @@
         private System.Windows.Forms.TabPage logTabPage;
         private System.Windows.Forms.CheckBox updateFiles;
         private System.Windows.Forms.TextBox logTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn version;
-        private System.Windows.Forms.DataGridViewLinkColumn website;
-        private System.Windows.Forms.DataGridViewTextBoxColumn autor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn beschreibung;
         private System.Windows.Forms.Button sendErrorLog;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button sendLastClientLog;
@@ -942,6 +736,13 @@
         private System.Windows.Forms.Label javaPathLabel;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button changeJavaPath;
+        private System.Windows.Forms.TabPage tabTexturePack;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn version;
+        private System.Windows.Forms.DataGridViewLinkColumn website;
+        private System.Windows.Forms.DataGridViewTextBoxColumn autor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn beschreibung;
+        private System.Windows.Forms.WebBrowser infoBrowser;
 	}
 }
 
