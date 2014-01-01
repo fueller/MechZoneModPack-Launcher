@@ -36,11 +36,6 @@
             this.savePasswordCheck = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.realmStatus = new System.Windows.Forms.PictureBox();
-            this.skinsStatus = new System.Windows.Forms.PictureBox();
-            this.sessionStatus = new System.Windows.Forms.PictureBox();
-            this.loginStatus = new System.Windows.Forms.PictureBox();
-            this.websiteStatus = new System.Windows.Forms.PictureBox();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.noServerCheckOnStart = new System.Windows.Forms.CheckBox();
             this.updateStatus = new System.Windows.Forms.Button();
@@ -55,8 +50,13 @@
             this.infosMain = new System.Windows.Forms.TabControl();
             this.infosTabPage = new System.Windows.Forms.TabPage();
             this.infoBrowser = new System.Windows.Forms.WebBrowser();
-            this.changelogTabPage = new System.Windows.Forms.TabPage();
-            this.changelogBrowser = new System.Windows.Forms.WebBrowser();
+            this.modPackTabPage = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.modInfoModListBtn = new System.Windows.Forms.Button();
+            this.modInfoChangelogBtn = new System.Windows.Forms.Button();
+            this.modInfoDescription = new System.Windows.Forms.RichTextBox();
+            this.modInfoImage = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tabTexturePack = new System.Windows.Forms.TabPage();
             this.optionTabPage = new System.Windows.Forms.TabPage();
             this.changeJavaPath = new System.Windows.Forms.Button();
@@ -64,21 +64,14 @@
             this.label10 = new System.Windows.Forms.Label();
             this.sendLastClientLog = new System.Windows.Forms.Button();
             this.sendLastCrashLog = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.updateFiles = new System.Windows.Forms.CheckBox();
             this.extraJavaPrameters = new System.Windows.Forms.Label();
             this.extraJavaParameterText = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.themeSelecter = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openDirectory = new System.Windows.Forms.Button();
-            this.modlistTabPage = new System.Windows.Forms.TabPage();
-            this.modListTable = new System.Windows.Forms.DataGridView();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.website = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.beschreibung = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contactTabPage = new System.Windows.Forms.TabPage();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.label8 = new System.Windows.Forms.Label();
@@ -93,26 +86,33 @@
             this.logTextBox = new System.Windows.Forms.TextBox();
             this.sendErrorLog = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.sendLogBG = new System.Windows.Forms.PictureBox();
             this.process1 = new System.Diagnostics.Process();
             this.openJavaFile = new System.Windows.Forms.OpenFileDialog();
+            this.selectedModPack = new System.Windows.Forms.Label();
+            this.realmStatus = new System.Windows.Forms.PictureBox();
+            this.skinsStatus = new System.Windows.Forms.PictureBox();
+            this.sessionStatus = new System.Windows.Forms.PictureBox();
+            this.loginStatus = new System.Windows.Forms.PictureBox();
+            this.websiteStatus = new System.Windows.Forms.PictureBox();
+            this.sendLogBG = new System.Windows.Forms.PictureBox();
+            this.modInfoDownloadBtn = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
+            this.infosMain.SuspendLayout();
+            this.infosTabPage.SuspendLayout();
+            this.modPackTabPage.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modInfoImage)).BeginInit();
+            this.optionTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contactTabPage.SuspendLayout();
+            this.logTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.websiteStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
-            this.infosMain.SuspendLayout();
-            this.infosTabPage.SuspendLayout();
-            this.changelogTabPage.SuspendLayout();
-            this.optionTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.modlistTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.modListTable)).BeginInit();
-            this.contactTabPage.SuspendLayout();
-            this.logTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sendLogBG)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,36 +158,6 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Name = "label2";
-            // 
-            // realmStatus
-            // 
-            resources.ApplyResources(this.realmStatus, "realmStatus");
-            this.realmStatus.Name = "realmStatus";
-            this.realmStatus.TabStop = false;
-            // 
-            // skinsStatus
-            // 
-            resources.ApplyResources(this.skinsStatus, "skinsStatus");
-            this.skinsStatus.Name = "skinsStatus";
-            this.skinsStatus.TabStop = false;
-            // 
-            // sessionStatus
-            // 
-            resources.ApplyResources(this.sessionStatus, "sessionStatus");
-            this.sessionStatus.Name = "sessionStatus";
-            this.sessionStatus.TabStop = false;
-            // 
-            // loginStatus
-            // 
-            resources.ApplyResources(this.loginStatus, "loginStatus");
-            this.loginStatus.Name = "loginStatus";
-            this.loginStatus.TabStop = false;
-            // 
-            // websiteStatus
-            // 
-            resources.ApplyResources(this.websiteStatus, "websiteStatus");
-            this.websiteStatus.Name = "websiteStatus";
-            this.websiteStatus.TabStop = false;
             // 
             // ToolTip
             // 
@@ -285,10 +255,9 @@
             // infosMain
             // 
             this.infosMain.Controls.Add(this.infosTabPage);
-            this.infosMain.Controls.Add(this.changelogTabPage);
+            this.infosMain.Controls.Add(this.modPackTabPage);
             this.infosMain.Controls.Add(this.tabTexturePack);
             this.infosMain.Controls.Add(this.optionTabPage);
-            this.infosMain.Controls.Add(this.modlistTabPage);
             this.infosMain.Controls.Add(this.contactTabPage);
             this.infosMain.Controls.Add(this.logTabPage);
             resources.ApplyResources(this.infosMain, "infosMain");
@@ -309,20 +278,57 @@
             this.infoBrowser.Name = "infoBrowser";
             this.infoBrowser.Url = new System.Uri("http://mechzone.net/modpack/launcher/info/info.html", System.UriKind.Absolute);
             // 
-            // changelogTabPage
+            // modPackTabPage
             // 
-            this.changelogTabPage.Controls.Add(this.changelogBrowser);
-            resources.ApplyResources(this.changelogTabPage, "changelogTabPage");
-            this.changelogTabPage.Name = "changelogTabPage";
-            this.changelogTabPage.UseVisualStyleBackColor = true;
+            this.modPackTabPage.Controls.Add(this.panel2);
+            this.modPackTabPage.Controls.Add(this.panel1);
+            resources.ApplyResources(this.modPackTabPage, "modPackTabPage");
+            this.modPackTabPage.Name = "modPackTabPage";
+            this.modPackTabPage.UseVisualStyleBackColor = true;
             // 
-            // changelogBrowser
+            // panel2
             // 
-            resources.ApplyResources(this.changelogBrowser, "changelogBrowser");
-            this.changelogBrowser.IsWebBrowserContextMenuEnabled = false;
-            this.changelogBrowser.Name = "changelogBrowser";
-            this.changelogBrowser.TabStop = false;
-            this.changelogBrowser.Url = new System.Uri("http://mechzone.net/modpack/launcher/info/changelog.html", System.UriKind.Absolute);
+            this.panel2.Controls.Add(this.modInfoDownloadBtn);
+            this.panel2.Controls.Add(this.modInfoModListBtn);
+            this.panel2.Controls.Add(this.modInfoChangelogBtn);
+            this.panel2.Controls.Add(this.modInfoDescription);
+            this.panel2.Controls.Add(this.modInfoImage);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // modInfoModListBtn
+            // 
+            resources.ApplyResources(this.modInfoModListBtn, "modInfoModListBtn");
+            this.modInfoModListBtn.Name = "modInfoModListBtn";
+            this.modInfoModListBtn.UseVisualStyleBackColor = true;
+            this.modInfoModListBtn.Click += new System.EventHandler(this.modInfoModListBtn_Click);
+            // 
+            // modInfoChangelogBtn
+            // 
+            resources.ApplyResources(this.modInfoChangelogBtn, "modInfoChangelogBtn");
+            this.modInfoChangelogBtn.Name = "modInfoChangelogBtn";
+            this.modInfoChangelogBtn.UseVisualStyleBackColor = true;
+            this.modInfoChangelogBtn.Click += new System.EventHandler(this.modInfoChangelogBtn_Click);
+            // 
+            // modInfoDescription
+            // 
+            this.modInfoDescription.BackColor = System.Drawing.Color.White;
+            this.modInfoDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.modInfoDescription, "modInfoDescription");
+            this.modInfoDescription.Name = "modInfoDescription";
+            this.modInfoDescription.ReadOnly = true;
+            // 
+            // modInfoImage
+            // 
+            resources.ApplyResources(this.modInfoImage, "modInfoImage");
+            this.modInfoImage.Name = "modInfoImage";
+            this.modInfoImage.TabStop = false;
+            // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.BackColor = System.Drawing.Color.LightGray;
+            this.panel1.Name = "panel1";
             // 
             // tabTexturePack
             // 
@@ -338,13 +344,11 @@
             this.optionTabPage.Controls.Add(this.label10);
             this.optionTabPage.Controls.Add(this.sendLastClientLog);
             this.optionTabPage.Controls.Add(this.sendLastCrashLog);
-            this.optionTabPage.Controls.Add(this.pictureBox2);
             this.optionTabPage.Controls.Add(this.updateFiles);
             this.optionTabPage.Controls.Add(this.extraJavaPrameters);
             this.optionTabPage.Controls.Add(this.extraJavaParameterText);
             this.optionTabPage.Controls.Add(this.label9);
             this.optionTabPage.Controls.Add(this.themeSelecter);
-            this.optionTabPage.Controls.Add(this.pictureBox1);
             this.optionTabPage.Controls.Add(this.openDirectory);
             this.optionTabPage.Controls.Add(this.noServerCheckOnStart);
             this.optionTabPage.Controls.Add(this.ramSelect);
@@ -353,6 +357,8 @@
             this.optionTabPage.Controls.Add(this.resWidth);
             this.optionTabPage.Controls.Add(this.resHeight);
             this.optionTabPage.Controls.Add(this.resX);
+            this.optionTabPage.Controls.Add(this.pictureBox2);
+            this.optionTabPage.Controls.Add(this.pictureBox1);
             this.optionTabPage.Name = "optionTabPage";
             this.optionTabPage.UseVisualStyleBackColor = true;
             // 
@@ -386,13 +392,6 @@
             this.sendLastCrashLog.Name = "sendLastCrashLog";
             this.sendLastCrashLog.UseVisualStyleBackColor = true;
             this.sendLastCrashLog.Click += new System.EventHandler(this.sendLastCrashLog_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Gray;
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
             // 
             // updateFiles
             // 
@@ -428,13 +427,6 @@
             this.themeSelecter.Name = "themeSelecter";
             this.themeSelecter.SelectedIndexChanged += new System.EventHandler(this.themeSelecter_SelectedIndexChanged);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Gray;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
-            // 
             // openDirectory
             // 
             resources.ApplyResources(this.openDirectory, "openDirectory");
@@ -442,64 +434,19 @@
             this.openDirectory.UseVisualStyleBackColor = true;
             this.openDirectory.Click += new System.EventHandler(this.openDirectory_Click);
             // 
-            // modlistTabPage
+            // pictureBox2
             // 
-            resources.ApplyResources(this.modlistTabPage, "modlistTabPage");
-            this.modlistTabPage.Controls.Add(this.modListTable);
-            this.modlistTabPage.Name = "modlistTabPage";
-            this.modlistTabPage.UseVisualStyleBackColor = true;
+            this.pictureBox2.BackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
             // 
-            // modListTable
+            // pictureBox1
             // 
-            this.modListTable.AllowUserToAddRows = false;
-            this.modListTable.AllowUserToDeleteRows = false;
-            this.modListTable.AllowUserToResizeColumns = false;
-            this.modListTable.AllowUserToResizeRows = false;
-            this.modListTable.BackgroundColor = System.Drawing.Color.White;
-            this.modListTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.modListTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.modListTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.name,
-            this.version,
-            this.website,
-            this.autor,
-            this.beschreibung});
-            resources.ApplyResources(this.modListTable, "modListTable");
-            this.modListTable.Name = "modListTable";
-            this.modListTable.ReadOnly = true;
-            this.modListTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.modListTable.ShowEditingIcon = false;
-            this.modListTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.modListTable_CellContentClick);
-            // 
-            // name
-            // 
-            resources.ApplyResources(this.name, "name");
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // version
-            // 
-            resources.ApplyResources(this.version, "version");
-            this.version.Name = "version";
-            this.version.ReadOnly = true;
-            // 
-            // website
-            // 
-            resources.ApplyResources(this.website, "website");
-            this.website.Name = "website";
-            this.website.ReadOnly = true;
-            // 
-            // autor
-            // 
-            resources.ApplyResources(this.autor, "autor");
-            this.autor.Name = "autor";
-            this.autor.ReadOnly = true;
-            // 
-            // beschreibung
-            // 
-            resources.ApplyResources(this.beschreibung, "beschreibung");
-            this.beschreibung.Name = "beschreibung";
-            this.beschreibung.ReadOnly = true;
+            this.pictureBox1.BackColor = System.Drawing.Color.Gray;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
             // 
             // contactTabPage
             // 
@@ -595,13 +542,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // sendLogBG
-            // 
-            this.sendLogBG.BackColor = System.Drawing.Color.Gainsboro;
-            resources.ApplyResources(this.sendLogBG, "sendLogBG");
-            this.sendLogBG.Name = "sendLogBG";
-            this.sendLogBG.TabStop = false;
-            // 
             // process1
             // 
             this.process1.StartInfo.Domain = "";
@@ -619,10 +559,61 @@
             resources.ApplyResources(this.openJavaFile, "openJavaFile");
             this.openJavaFile.InitialDirectory = "C:\\Program Files\\Javax\\";
             // 
+            // selectedModPack
+            // 
+            resources.ApplyResources(this.selectedModPack, "selectedModPack");
+            this.selectedModPack.BackColor = System.Drawing.Color.Transparent;
+            this.selectedModPack.Name = "selectedModPack";
+            // 
+            // realmStatus
+            // 
+            resources.ApplyResources(this.realmStatus, "realmStatus");
+            this.realmStatus.Name = "realmStatus";
+            this.realmStatus.TabStop = false;
+            // 
+            // skinsStatus
+            // 
+            resources.ApplyResources(this.skinsStatus, "skinsStatus");
+            this.skinsStatus.Name = "skinsStatus";
+            this.skinsStatus.TabStop = false;
+            // 
+            // sessionStatus
+            // 
+            resources.ApplyResources(this.sessionStatus, "sessionStatus");
+            this.sessionStatus.Name = "sessionStatus";
+            this.sessionStatus.TabStop = false;
+            // 
+            // loginStatus
+            // 
+            resources.ApplyResources(this.loginStatus, "loginStatus");
+            this.loginStatus.Name = "loginStatus";
+            this.loginStatus.TabStop = false;
+            // 
+            // websiteStatus
+            // 
+            resources.ApplyResources(this.websiteStatus, "websiteStatus");
+            this.websiteStatus.Name = "websiteStatus";
+            this.websiteStatus.TabStop = false;
+            // 
+            // sendLogBG
+            // 
+            this.sendLogBG.BackColor = System.Drawing.Color.Gainsboro;
+            resources.ApplyResources(this.sendLogBG, "sendLogBG");
+            this.sendLogBG.Name = "sendLogBG";
+            this.sendLogBG.TabStop = false;
+            // 
+            // modInfoDownloadBtn
+            // 
+            resources.ApplyResources(this.modInfoDownloadBtn, "modInfoDownloadBtn");
+            this.modInfoDownloadBtn.Name = "modInfoDownloadBtn";
+            this.modInfoDownloadBtn.UseVisualStyleBackColor = true;
+            this.modInfoDownloadBtn.Click += new System.EventHandler(this.modInfoDownloadBtn_Click);
+            // 
             // mainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.selectedModPack);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.sendErrorLog);
             this.Controls.Add(this.infosMain);
@@ -649,26 +640,26 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainForm_FormClosed);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.Shown += new System.EventHandler(this.mainForm_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.resHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.resWidth)).EndInit();
+            this.infosMain.ResumeLayout(false);
+            this.infosTabPage.ResumeLayout(false);
+            this.modPackTabPage.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.modInfoImage)).EndInit();
+            this.optionTabPage.ResumeLayout(false);
+            this.optionTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contactTabPage.ResumeLayout(false);
+            this.contactTabPage.PerformLayout();
+            this.logTabPage.ResumeLayout(false);
+            this.logTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.realmStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinsStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.loginStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.websiteStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resWidth)).EndInit();
-            this.infosMain.ResumeLayout(false);
-            this.infosTabPage.ResumeLayout(false);
-            this.changelogTabPage.ResumeLayout(false);
-            this.optionTabPage.ResumeLayout(false);
-            this.optionTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.modlistTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.modListTable)).EndInit();
-            this.contactTabPage.ResumeLayout(false);
-            this.contactTabPage.PerformLayout();
-            this.logTabPage.ResumeLayout(false);
-            this.logTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sendLogBG)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -702,11 +693,7 @@
         private System.Windows.Forms.CheckBox noServerCheckOnStart;
         private System.Windows.Forms.TabControl infosMain;
         private System.Windows.Forms.TabPage infosTabPage;
-        private System.Windows.Forms.TabPage changelogTabPage;
-        private System.Windows.Forms.WebBrowser changelogBrowser;
         private System.Windows.Forms.TabPage optionTabPage;
-        private System.Windows.Forms.TabPage modlistTabPage;
-        private System.Windows.Forms.DataGridView modListTable;
         private System.Windows.Forms.TabPage contactTabPage;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label6;
@@ -737,12 +724,16 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button changeJavaPath;
         private System.Windows.Forms.TabPage tabTexturePack;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn version;
-        private System.Windows.Forms.DataGridViewLinkColumn website;
-        private System.Windows.Forms.DataGridViewTextBoxColumn autor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn beschreibung;
         private System.Windows.Forms.WebBrowser infoBrowser;
+        private System.Windows.Forms.TabPage modPackTabPage;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox modInfoImage;
+        private System.Windows.Forms.RichTextBox modInfoDescription;
+        private System.Windows.Forms.Label selectedModPack;
+        private System.Windows.Forms.Button modInfoModListBtn;
+        private System.Windows.Forms.Button modInfoChangelogBtn;
+        private System.Windows.Forms.Button modInfoDownloadBtn;
 	}
 }
 

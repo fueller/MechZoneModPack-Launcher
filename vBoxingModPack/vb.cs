@@ -241,7 +241,7 @@ namespace MechZoneModPack
                 MechZoneModPack.mainForm.monitor.TrackFeatureStop("getServerStatus");
                 return data;
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
                 //ErrorWindow err = new ErrorWindow();
                 //err.ex = ex;
@@ -416,16 +416,16 @@ namespace MechZoneModPack
                     Directory.CreateDirectory(Path.Combine(vb.appdata(), "temp"));
                 }
                 Directory.CreateDirectory(Path.Combine(vb.appdata(), "temp"));
-                Properties.Settings.Default.toDownloadFiles = 2;
-                Properties.Settings.Default.finishedFiles = 0;
-                client.DownloadFile(downloadLocation() + "modpack/files/mods.json", vb.appdata() + "\\temp\\mods.json");
-                client.DownloadFile(downloadLocation() + "modpack/files/config.json", vb.appdata() + "\\temp\\config.json");
-                client.DownloadFile(downloadLocation() + "modpack/files/assets.json", vb.appdata() + "\\temp\\assets.json");
-                client.DownloadFile(downloadLocation() + "modpack/files/libraries.json", vb.appdata() + "\\temp\\libraries.json");
-                client.DownloadFile(downloadLocation() + "modpack/files/sonstiges.json", vb.appdata() + "\\temp\\sonstiges.json");
-                client.DownloadFile(downloadLocation() + "modpack/files/delete.json", vb.appdata() + "\\temp\\delete.json");
-
-                jsonClasses.filesList j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
+                
+                //client.DownloadFile(downloadLocation() + "modpack/files/mods.json", vb.appdata() + "\\temp\\mods.json");
+                //client.DownloadFile(downloadLocation() + "modpack/files/config.json", vb.appdata() + "\\temp\\config.json");
+                //client.DownloadFile(downloadLocation() + "modpack/files/assets.json", vb.appdata() + "\\temp\\assets.json");
+                //client.DownloadFile(downloadLocation() + "modpack/files/libraries.json", vb.appdata() + "\\temp\\libraries.json");
+                //client.DownloadFile(downloadLocation() + "modpack/files/sonstiges.json", vb.appdata() + "\\temp\\sonstiges.json");
+                //client.DownloadFile(downloadLocation() + "modpack/files/delete.json", vb.appdata() + "\\temp\\delete.json");
+                client.DownloadFile(downloadLocation() + "modpack/modpacks/modpacks.json", vb.appdata() + "\\temp\\modpacks.json");
+               
+                jsonClasses.filesList j = null; // = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
 
                 MechZoneModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
                 return j;
@@ -466,7 +466,7 @@ namespace MechZoneModPack
         #endregion
 
         #region send error log
-        public static void sendErrorLog(string Error)
+        public static void sendErrorLog(string Error, Exception ex)
         {
             try
             {
@@ -483,15 +483,42 @@ namespace MechZoneModPack
                 };
 
                 string pasteUrl = client.Paste(entry);
+                if (ex != null)
+                {
+                    MechZoneModPack.mainForm.addBugToSpreadsheet(ex.Message, pasteUrl);
+                }
+                else
+                {
+                    MechZoneModPack.mainForm.addBugToSpreadsheet("Pastebin", pasteUrl);
+                }
+                
                 MessageBox.Show("Der Error Link wurde in deine Zwischenablage Kopiert!\nBitte schicke ihn einem Admin!\n" + pasteUrl, "Link", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 System.Windows.Forms.Clipboard.SetText(pasteUrl);
                 Console.WriteLine(pasteUrl);
             }
-            catch (Exception ex)
+            catch (Exception exx)
             {
                 ErrorWindow err = new ErrorWindow();
-                err.ex = ex;
+                err.ex = exx;
                 err.ShowDialog();
+            }
+        }
+        #endregion
+
+        #region createFolderStructure
+        public static void createFolderStructure(int id, jsonClasses.modpacks modPackInfo)
+        {
+            if (!Directory.Exists(Path.Combine(vb.appdata(), "modpacks", modPackInfo.list[id].tag)))
+            {
+                Directory.CreateDirectory(Path.Combine(vb.appdata(), "modpacks", modPackInfo.list[id].tag));
+            }
+
+            for (int i = 0; i < modPackInfo.list[id].folders.Count; i++)
+            {
+                if (!Directory.Exists(Path.Combine(vb.appdata(), "modpacks", modPackInfo.list[id].tag, modPackInfo.list[id].folders[i])))
+                {
+                    Directory.CreateDirectory(Path.Combine(vb.appdata(), "modpacks", modPackInfo.list[id].tag, modPackInfo.list[id].folders[i]));
+                }
             }
         }
         #endregion

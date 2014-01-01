@@ -144,5 +144,33 @@ namespace MechZoneModPack
             public string[] files { get; set; }
         }
         #endregion
+
+        #region modpacks
+        public class modpacks
+        {
+            public List<modpacks2> list { get; set; }
+        }
+
+        public class modpacks2
+        {
+            public string name { get; set; }
+            public string tag { get; set; }
+            public string shortDescription { get; set; }
+            public string longDescription { get; set; }
+            public string modsVersion { get; set; }
+            public string configVersion { get; set; }
+            public string deleteVersion { get; set; }
+            public string sonstigesVersion { get; set; }
+            public string modsFile { get; set; }
+            public string configFile { get; set; }
+            public string assetsFile { get; set; }
+            public string librariesFile { get; set; }
+            public string changelogUrl { get; set; }
+            public string versionsPath { get; set; }
+            public string logo { get; set; }
+            public string mainLogo { get; set; }
+            public List<string> folders { get; set; }
+        }
+        #endregion
     }
 }

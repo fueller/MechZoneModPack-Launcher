@@ -20,6 +20,8 @@ using System.Diagnostics;
 using System.Threading;
 using System.Globalization;
 using System.Resources;
+using System.Drawing.Imaging;
+using fNbt;
 
 
 namespace MechZoneModPack
@@ -28,6 +30,9 @@ namespace MechZoneModPack
 	{
         List<string> output = new List<string>();
         public static IAnalyticsMonitor monitor = AnalyticsMonitorFactory.CreateMonitor("A645BAB7505648C3AE67645A9DB77EF7");
+        List<modPackList> modPacks = new List<modPackList>();
+        jsonClasses.modpacks modPackList;
+        jsonClasses.filesList fileList;
                 
         public mainForm()
 		{
@@ -104,9 +109,8 @@ namespace MechZoneModPack
             savePasswordCheck.Checked = Properties.Settings.Default.savePassword;
             passwordText.Text = Properties.Settings.Default.password;
             //MessageBox.Show(Properties.Settings.Default.password.ToString());
-        }
 
-        
+        }
 
         private void loginButton_Click(object sender, EventArgs e)
         {
@@ -119,8 +123,8 @@ namespace MechZoneModPack
                 string name = "1.6.4-Forge";
                 //string name = "1.7.2-Forge";
 
-                Download dl = new Download();
-                dl.ShowDialog();
+                //Download dl = new Download();
+                //dl.ShowDialog();
 
 
                 string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
@@ -148,6 +152,7 @@ namespace MechZoneModPack
                     arguments += " -Djava.library.path="
                         + vb.appdata() + "\\versions\\" + name + "\\" + name + "-natives -cp "
                         + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\minecraftforge.jar;"
+                        + vb.appdata() + "\\libraries\\com\\mumfrey\\liteloader\\1.6.4\\liteloader-1.6.4.jar;"
                         + vb.appdata() + "\\libraries\\net\\minecraft\\launchwrapper\\1.8\\launchwrapper-1.8.jar;"
                         + vb.appdata() + "\\libraries\\org\\ow2\\asm\\asm-all\\4.1\\asm-all-4.1.jar;"
                         + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-library\\2.10.2\\scala-library-2.10.2.jar;"
@@ -172,7 +177,7 @@ namespace MechZoneModPack
                         + vb.appdata() + "\\versions\\" + name + "\\" + name + ".jar net.minecraft.launchwrapper.Launch "
                         + "--username " + Properties.Settings.Default.nickname + " --session " + session + " --version " + name + " --gameDir "
                         + vb.appdata() + " --assetsDir "
-                        + vb.appdata() + "\\assets --tweakClass cpw.mods.fml.common.launcher.FMLTweaker";
+                        + vb.appdata() + "\\assets --tweakClass cpw.mods.fml.common.launcher.FMLTweaker --tweakClass com.mumfrey.liteloader.launch.LiteLoaderTweaker";
 
                     if (resolutionComb.Checked)
                     {
@@ -446,40 +451,61 @@ namespace MechZoneModPack
             this.Update();
             if (Properties.Settings.Default.noServerCheck == false)
             {
-                status();
-                
+                status();                
             }
-            jsonClasses.filesList j = vb.checkVersion();
 
-            //modListTable.Columns.Add("name", "Name");
-            //modListTable.Columns.Add("version", "Version");
-            //modListTable.Columns.Add("forumLink", "Website");
+            fileList = vb.checkVersion();
 
             try
             {
-                for (int i = 0; i < j.files.Count; i++)
+                modPackList = JsonConvert.DeserializeObject<jsonClasses.modpacks>(File.ReadAllText(vb.appdata() + "\\temp\\modpacks.json"));
+                
+                for (int i = 0; i < modPackList.list.Count; i++)
                 {
-                    if (!j.files[i].config)
-                    {
-                        modListTable.Rows.Add(j.files[i].name, j.files[i].version, j.files[i].forumLink, j.files[i].authors, j.files[i].description); 
-                    }
+                    modPacks.Add(new modPackList());
+                    modPacks[i].BackColor = System.Drawing.SystemColors.ControlLight;
+                    modPacks[i].Name = "modPack" + i;
+                    modPacks[i].Location = new Point(3, 3 + (113 * i));
+                    modPacks[i].modPackName = modPackList.list[i].name;
+                    modPacks[i].modPackDescription = modPackList.list[i].shortDescription;
+                    modPacks[i].modPackID = i;
+                    modPacks[i].Click += modInfoChangelogButton_Click;
+                    modPacks[i].modPackImage = ImageFromBase64String(modPackList.list[i].logo);
+                    panel1.Controls.Add(modPacks[i]);
                 }
+            
 
-                this.Update();
+            this.Update();
+            modPacks[Properties.Settings.Default.selectedModPack].BorderStyle = BorderStyle.Fixed3D;
+            showDescription(Properties.Settings.Default.selectedModPack);
             }
-            catch (Exception){}
-            modListTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }
+        }
 
+        void modInfoChangelogButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < modPacks.Count; i++)
+			{
+                modPacks[i].BorderStyle = BorderStyle.None;
+                if (sender.Equals(modPacks[i]))
+	            {
+                    modPacks[i].BorderStyle = BorderStyle.Fixed3D;
+                    Properties.Settings.Default.selectedModPack = i;
+                    Properties.Settings.Default.Save();
+                    showDescription(i);
+	            }
+			}
+            
         }
 
         private void updateStatus_Click(object sender, EventArgs e)
         {
             status();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            vb.getLibraries();
         }
 
         private void savePasswordCheck_CheckedChanged(object sender, EventArgs e)
@@ -510,15 +536,6 @@ namespace MechZoneModPack
             }
             
             Properties.Settings.Default.Save();
-        }
-
-        private void modListTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 2)
-            {
-                //MessageBox.Show(modListTable[e.ColumnIndex, e.RowIndex].Value.ToString());
-                Process.Start(modListTable[e.ColumnIndex, e.RowIndex].Value.ToString());
-            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -596,7 +613,7 @@ namespace MechZoneModPack
 
         private void infosMain_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (e.TabPageIndex == 6)
+            if (e.TabPageIndex == 5)
             {
                 sendErrorLog.Visible = true;
                 sendLogBG.Visible = true;
@@ -611,12 +628,35 @@ namespace MechZoneModPack
 
         private void sendErrorLog_Click(object sender, EventArgs e)
         {
-            vb.sendErrorLog(logTextBox.Text);
+            vb.sendErrorLog(logTextBox.Text, null);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            addBugToSpreadsheet("", "");
+            var serverInfo = new NbtCompound("Server");
+            serverInfo.Add(new NbtString("Name", "MechZone.net Minecraft Server"));
+            serverInfo.Add(new NbtInt("Players", 0));
+            serverInfo.Add(new NbtInt("MaxPlayers", 20));
+            var serverFile = new NbtFile(serverInfo);
+            serverFile.SaveToFile("server.nbt", NbtCompression.None);
+            
+            
+            
+            /*try
+            {
+                int nix = 0;
+                int test = 100 / nix;
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }*/
+            
+            /*Image test = Image.FromFile(@"D:\temp\test2.png");
+            string result = ImageToBase64String(test, ImageFormat.Png);
+            Console.WriteLine(result);*/
         }
 
         private void sendLastCrashLog_Click(object sender, EventArgs e)
@@ -626,7 +666,7 @@ namespace MechZoneModPack
                 var directory = new DirectoryInfo(vb.appdata() + "\\crash-reports");
                 var myFile = (from f in directory.GetFiles() orderby f.LastWriteTime descending select f).First();
                 StreamReader reader = new StreamReader(myFile.OpenRead());
-                vb.sendErrorLog(reader.ReadToEnd());
+                vb.sendErrorLog(reader.ReadToEnd(), null);
                 reader.Close();
             }
             catch (Exception ex)
@@ -642,26 +682,32 @@ namespace MechZoneModPack
             try
             {
                 string error = "";
-                string[] file = File.ReadAllLines(vb.appdata() + "\\ForgeModLoader-client-0.log");
-                int len = file.Length;
-                int maxLen = 2000;
-                error += "Länge: " + len + "\n\n";
 
-                if (len < maxLen)
+                StringBuilder sb = new StringBuilder();
+
+                Stream stream = File.Open(vb.appdata() + "\\ForgeModLoader-client-0.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                StreamReader reader = new StreamReader(stream);
+
+                String line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    for (int i = 0; i < len; i++)
-                    {
-                        error += file[i] + "\n";
-                    }
+                    sb.AppendLine(line);
+                }
+                int maxLen = 150000;
+                error += "Länge: " + sb.Length + "\n\n";
+
+                Console.WriteLine(sb.Length);
+                Console.WriteLine(sb.Length - maxLen);
+
+                if (sb.Length < maxLen)
+                {
+                    error += sb.ToString();
                 }
                 else
                 {
-                    for (int i = len - maxLen; i < len; i++)
-                    {
-                        error += file[i] + "\n";
-                    }
+                    error += sb.ToString(sb.Length - maxLen, maxLen);
                 }
-                vb.sendErrorLog(error);
+                vb.sendErrorLog(error, null);
                 
             }
             catch (Exception ex)
@@ -703,58 +749,137 @@ namespace MechZoneModPack
             }
         }
 
-        private void addBugToSpreadsheet(string text, string link)
+        public static void addBugToSpreadsheet(string text, string link)
         {
-            string error = "";
+
             try
             {
-                
-                string[] file = File.ReadAllLines(vb.appdata() + "\\ForgeModLoader-client-0.log");
-                int len = file.Length;
-                int maxLen = 2000;
-                error += "Länge: " + len + "\n\n";
+                HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create("https://docs.google.com/forms/d/1VIoN_o9TnAuQ5PptQj459c6R-dhXtXPvd-x-SFOBXQg/formResponse");
 
-                if (len < maxLen)
+                ASCIIEncoding encoding = new ASCIIEncoding();
+                string postData = "entry.1715453108=" + Properties.Settings.Default.email + " " + Properties.Settings.Default.nickname;
+                postData += "&entry.1075040391=" + link;
+                postData += "&entry.107304472=" + text;
+                byte[] data = encoding.GetBytes(postData);
+
+                httpWReq.Method = "POST";
+                httpWReq.ContentType = "application/x-www-form-urlencoded";
+                httpWReq.ContentLength = data.Length;
+
+                using (Stream stream = httpWReq.GetRequestStream())
                 {
-                    for (int i = 0; i < len; i++)
-                    {
-                        error += file[i] + "\n";
-                    }
+                    stream.Write(data, 0, data.Length);
                 }
-                else
-                {
-                    for (int i = len - maxLen; i < len; i++)
-                    {
-                        error += file[i] + "\n";
-                    }
-                }
+
+                HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
+                string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
             }
-            
-            HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create("https://docs.google.com/forms/d/1VIoN_o9TnAuQ5PptQj459c6R-dhXtXPvd-x-SFOBXQg/formResponse");
+        }
 
-            ASCIIEncoding encoding = new ASCIIEncoding();
-            string postData = "entry.1715453108=test";
-            postData += "&entry.1075040391=http://google.de";
-            postData += "&entry.107304472=" + error;
-            byte[] data = encoding.GetBytes(postData);
-
-            httpWReq.Method = "POST";
-            httpWReq.ContentType = "application/x-www-form-urlencoded";
-            httpWReq.ContentLength = data.Length;
-
-            using (Stream stream = httpWReq.GetRequestStream())
+        private string ImageToBase64String(Image image, ImageFormat format)
+        {
+            try
             {
-                stream.Write(data, 0, data.Length);
+                string base64;
+                using (MemoryStream memory = new MemoryStream())
+                {
+                    image.Save(memory, format);
+                    base64 = Convert.ToBase64String(memory.ToArray());
+                }
+                return base64;
             }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+                return null;
+            }
+        }
 
-            HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
-            string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+        private Image ImageFromBase64String(string base64)
+        {
+            try
+            {
+                if (base64 != null)
+                {
+                    Image result;
+                    using (MemoryStream memory = new MemoryStream(Convert.FromBase64String(base64)))
+                    {
+                        result = Image.FromStream(memory);
+                    }
+                    return result;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+                return null;
+            }
+        }
 
-            Console.WriteLine(responseString);
+        private void showDescription(int id)
+        {
+            modInfoImage.Image = ImageFromBase64String(modPackList.list[id].mainLogo);
+            modInfoDescription.Text = modPackList.list[id].longDescription;
+            selectedModPack.Text = "Selected ModPack:\n" + modPackList.list[id].name;
+        }
+
+        private void modInfoChangelogBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Changelog changelog = new Changelog();
+                changelog.webpage = new Uri(modPackList.list[Properties.Settings.Default.selectedModPack].changelogUrl);
+                changelog.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }
+        }
+
+        private void modInfoModListBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                modList list = new modList();
+                list.temp = fileList;
+                list.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
+            }
+        }
+
+        private void modInfoDownloadBtn_Click(object sender, EventArgs e)
+        {
+            if (!(!Directory.Exists(vb.appdata() + "\\modpacks\\" + modPackList.list[Properties.Settings.Default.selectedModPack].tag)))
+            {
+                vb.createFolderStructure(Properties.Settings.Default.selectedModPack, modPackList);
+                Download dl = new Download();
+                dl.tmpId = Properties.Settings.Default.selectedModPack;
+                dl.list = modPackList;
+                dl.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("You already Downloaded the ModPack. Click Login to Play or go to the Options to redownload the Pack");
+            }
         }
 	}
 }

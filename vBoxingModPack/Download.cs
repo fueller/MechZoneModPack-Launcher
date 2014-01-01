@@ -20,6 +20,28 @@ namespace MechZoneModPack
         bool first = true;
         bool downloading = false;
         bool canceled = false;
+        jsonClasses.modpacks modPackList;
+        int id;
+        int downloads = 0;
+        bool replaceFiles = false;
+
+        public jsonClasses.modpacks list
+        { 
+          get { return modPackList; }
+          set { modPackList = value; }
+        }
+
+        public int tmpId
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public bool replace
+        {
+            get { return replaceFiles; }
+            set { replaceFiles = value; }
+        }
 
         public Download()
         {
@@ -29,181 +51,17 @@ namespace MechZoneModPack
         private void Download_Load(object sender, EventArgs e)
         {
             progressBar1.Value = 0;
+            progressBar2.Value = 0;
             
         }
 
         private void Download_Shown(object sender, EventArgs e)
         {
-            
-            //MessageBox.Show(Properties.Settings.Default.updateFiles.ToString());
-            if (Properties.Settings.Default.updateFiles)
-            {
-                this.Close();
-            }
-            else
-            {
-                this.Update();
-                MechZoneModPack.mainForm.monitor.TrackFeatureStart("downloadFiles");
-
-                var mods = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
-                var assets = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\assets.json"));
-                var config = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\config.json"));
-                var libraries = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\libraries.json"));
-                var sonstiges = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\sonstiges.json"));
-                var delete = JsonConvert.DeserializeObject<jsonClasses.deleteFiles>(File.ReadAllText(vb.appdata() + "\\temp\\delete.json"));
-
-
-                progressBar1.Maximum = mods.files.Count() + assets.files.Count() + config.files.Count() + libraries.files.Count() + sonstiges.files.Count();
-                progressBar2.Maximum = 100;
-                progressBar2.Value = 0;
-
-                //delete
-                for (int i = 0; i < delete.files.Count(); i++)
-                {
-                    string file = vb.appdata() + "\\" + delete.files[i];
-
-                    if (File.Exists(file))
-                    {
-                        try
-                        {
-                            Console.WriteLine("Datei " + file + " existiert und wird gelöscht");
-                            File.Delete(file);
-                        }
-                        catch (Exception ex)
-                        {
-                            ErrorWindow err = new ErrorWindow();
-                            err.ex = ex;
-                            err.ShowDialog();
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Datei " + file + " existiert nicht und wird nicht gelöscht");
-                    }
-                }
-                
-                //assets                
-                for (int i = 0; i < assets.files.Count(); i++)
-                {
-
-                    int j = i + 1;
-                    label2.Text = "Lade Datei " + j + " von " + assets.files.Count() + " Dateien herunter!";
-                    label1.Text = assets.files[i].path;
-                    this.Update();
-                    Application.DoEvents();
-                    while (downloading)
-                    {
-                        this.Update();
-                        Application.DoEvents();
-                    }
-                    progressBar1.Value++;
-                    downloadFile(assets.files[i].url, vb.appdata() + assets.files[i].path, assets.files[i].md5);
-                    if (canceled)
-                    {
-                        break;
-                    }
-                }
-                this.Update();
-
-                //Sonstiges                
-                for (int i = 0; i < sonstiges.files.Count(); i++)
-                {
-                    int j = i + 1;
-                    label2.Text = "Lade Datei " + j + " von " + sonstiges.files.Count() + " Dateien herunter!";
-                    label1.Text = sonstiges.files[i].path;
-                    this.Update();
-                    Application.DoEvents();
-                    while (downloading)
-                    {
-                        this.Update();
-                        Application.DoEvents();
-                    }
-                    progressBar1.Value++;
-                    downloadFile(sonstiges.files[i].url, vb.appdata() + sonstiges.files[i].path, sonstiges.files[i].md5);
-                    if (canceled)
-                    {
-                        break;
-                    }
-                }
-                this.Update();
-
-                //libraries                
-                for (int i = 0; i < libraries.files.Count(); i++)
-                {
-
-                    int j = i + 1;
-                    label2.Text = "Lade Config " + j + " von " + libraries.files.Count() + " Libraries herunter!";
-                    label1.Text = libraries.files[i].path;
-                    this.Update();
-                    Application.DoEvents();
-                    while (downloading)
-                    {
-                        this.Update();
-                        Application.DoEvents();
-                    }
-                    progressBar1.Value++;
-                    downloadFile(libraries.files[i].url, vb.appdata() + libraries.files[i].path, libraries.files[i].md5);
-                    if (canceled)
-                    {
-                        break;
-                    }
-                }
-                this.Update();
-
-                //mods                
-                for (int i = 0; i < mods.files.Count(); i++)
-                {
-
-                    int j = i + 1;
-                    label2.Text = "Lade Mod " + j + " von " + mods.files.Count() + " Mods herunter!";
-                    label1.Text = mods.files[i].path;
-                    this.Update();
-                    Application.DoEvents();
-                    if (mods.files[i].enabled)
-                    {
-                        while (downloading)
-                        {
-                            this.Update();
-                            Application.DoEvents();
-                        }
-                        progressBar1.Value++;
-                        downloadFile(mods.files[i].url, vb.appdata() + mods.files[i].path, mods.files[i].md5);
-                    }
-                    if (canceled)
-                    {
-                        break;
-                    }
-                }
-                this.Update();
-
-                //configs                
-                for (int i = 0; i < config.files.Count(); i++)
-                {
-
-                    int j = i + 1;
-                    label2.Text = "Lade Config " + j + " von " + config.files.Count() + " Configs herunter!";
-                    label1.Text = config.files[i].path;
-                    this.Update();
-                    Application.DoEvents();
-                    if (config.files[i].enabled)
-                    {
-                        while (downloading)
-                        {
-                            this.Update();
-                            Application.DoEvents();
-                        }
-                        progressBar1.Value++;
-                        downloadFile(config.files[i].url, vb.appdata() + config.files[i].path, config.files[i].md5);
-                    }
-                    if (canceled)
-                    {
-                        break;
-                    }
-                }
-                downloading = false;
-                this.Update();
-                this.Close();
-            }
+            downloadFile(modPackList.list[id].modsFile,vb.appdata() + "\\modpacks\\" + modPackList.list[id].tag + "\\temp\\mods.json", null);
+            downloadFile(modPackList.list[id].configFile, vb.appdata() + "\\modpacks\\" + modPackList.list[id].tag + "\\temp\\config.json", null);
+            downloadFile(modPackList.list[id].librariesFile, vb.appdata() + "\\modpacks\\" + modPackList.list[id].tag + "\\temp\\libraries.json", null);
+            downloadFile(modPackList.list[id].assetsFile, vb.appdata() + "\\modpacks\\" + modPackList.list[id].tag + "\\temp\\assets.json", null);
+            jsonClasses.filesList mods = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\modpacks\\" + modPackList.list[id].tag + "\\temp\\mods.json"));
         }
 
         #region downlaod File
@@ -263,7 +121,7 @@ namespace MechZoneModPack
                         if (backup)
                         {                           
                             backup = true;
-                            string path = (vb.appdata() + "\\backup\\" + DateTime.Now.ToString("HH-mm-ss") + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + Path.GetFileName(save)).Replace(" ", "_");
+                            string path = (vb.appdata() + "\\" + modPackList.list[id].tag + "\\backup\\" + DateTime.Now.ToString("HH-mm-ss") + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + Path.GetFileName(save)).Replace(" ", "_");
 
                             string outputFolder = Path.GetDirectoryName(path);
                             if (!Directory.Exists(outputFolder))

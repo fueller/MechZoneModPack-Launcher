@@ -34,10 +34,7 @@ namespace MechZoneModPack
             {
                 richTextBox1.AppendText(ex.HelpLink + "\n");
             }
-            if (ex.HResult != null)
-            {
-                error += ex.HResult.ToString() + "\n";
-            }
+            error += ex.HResult.ToString() + "\n";
             if (ex.InnerException != null)
             {
                 if (ex.InnerException.HelpLink != null)
@@ -67,7 +64,8 @@ namespace MechZoneModPack
 
         private void button1_Click(object sender, EventArgs e)
         {
-            vb.sendErrorLog(error);
+
+            vb.sendErrorLog(error, ex);
         }
 
         private void ok_Click(object sender, EventArgs e)
