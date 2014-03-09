@@ -25,16 +25,16 @@ namespace MechZoneModPack
         {
             InitializeComponent();
         }
-        
+
         private void Download_Load(object sender, EventArgs e)
         {
             progressBar1.Value = 0;
-            
+
         }
 
         private void Download_Shown(object sender, EventArgs e)
         {
-            
+
             //MessageBox.Show(Properties.Settings.Default.updateFiles.ToString());
             if (Properties.Settings.Default.updateFiles)
             {
@@ -81,7 +81,7 @@ namespace MechZoneModPack
                         Console.WriteLine("Datei " + file + " existiert nicht und wird nicht gelöscht");
                     }
                 }
-                
+
                 //assets                
                 for (int i = 0; i < assets.files.Count(); i++)
                 {
@@ -259,9 +259,9 @@ namespace MechZoneModPack
                                 backup = false;
                             }
                         }
-                        
+
                         if (backup)
-                        {                           
+                        {
                             backup = true;
                             string path = (vb.appdata() + "\\backup\\" + DateTime.Now.ToString("HH-mm-ss") + "_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + Path.GetFileName(save)).Replace(" ", "_");
 
@@ -304,7 +304,7 @@ namespace MechZoneModPack
             }
             else
             {
-                
+
                 Console.WriteLine("Download finished");
             }
         }

@@ -123,8 +123,8 @@ namespace MechZoneModPack
         #region mcmodInfo
         public class mcmod
         {
-            public List<mcmod02> infos { get; set; }
-            public string modinfoversion { get; set; }
+            public int modinfoversion { get; set; }
+            public List<mcmod02> modlist { get; set; }
         }
 
         public class mcmod02
@@ -137,6 +137,7 @@ namespace MechZoneModPack
             public string url { get; set; }
             public string updateUrl { get; set; }
             public List<string> authors { get; set; }
+            public List<string> authorList { get; set; }
             public string credits { get; set; }
             public string logoFile { get; set; }
             public List<object> screenshots { get; set; }

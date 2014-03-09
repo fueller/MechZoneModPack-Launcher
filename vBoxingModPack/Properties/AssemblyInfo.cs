@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MechZone.net")]
 [assembly: AssemblyProduct("MechZone Mod Pack")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright ©  2013-2014")]
 [assembly: AssemblyTrademark("MechZone")]
 [assembly: AssemblyCulture("")]
 
