@@ -27,10 +27,10 @@ namespace MechZoneModPack
             set { modInfoDescription.Text = value; Invalidate(); }
         }
 
-        public Image modPackImage
+        public string modPackImage
         {
-            get { return modInfoImage.Image; }
-            set { modInfoImage.Image = value; Invalidate(); }
+            get { return modInfoImage.ImageLocation; }
+            set { modInfoImage.ImageLocation = value; Invalidate(); }
         }
 
         public int modPackID
@@ -48,7 +48,7 @@ namespace MechZoneModPack
         {
             modInfoName.Text = modPackName;
             modInfoDescription.Text = modPackDescription;
-            modInfoImage.Image = modPackImage;
+            modInfoImage.ImageLocation = modPackImage;
         }
     }
 }

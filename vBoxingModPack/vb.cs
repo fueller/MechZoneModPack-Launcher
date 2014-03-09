@@ -22,7 +22,7 @@ namespace MechZoneModPack
     public class vb
     {
         #region get Session Key
-        public static string getSessionKey(string username, string password)
+        public static string[] getSessionKey(string username, string password)
         {
             try
             {
@@ -50,7 +50,11 @@ namespace MechZoneModPack
                         Properties.Settings.Default.nickname = j.selectedProfile.name;
                         Properties.Settings.Default.Save();
                         MechZoneModPack.mainForm.monitor.TrackFeatureStop("getSessionKey");
-                        return "token:" + j.accessToken + ":" + j.selectedProfile.id;
+                        string[] result = new string[2];
+                        result[1] = j.accessToken;
+                        result[0] = j.selectedProfile.id;
+                        //return "token:" + j.accessToken + ":" + j.selectedProfile.id;
+                        return result;
                     }
                 
             }
@@ -59,7 +63,9 @@ namespace MechZoneModPack
                 MessageBox.Show("Benutzername oder Passwort stimmt nicht\n" + ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 MechZoneModPack.mainForm.monitor.TrackFeatureCancel("getSessionKey");
                 MechZoneModPack.mainForm.monitor.TrackException(ex, "noLogin");
-                return "error";
+                string[] result = new string[1];
+                result[0] = "error";
+                return result;
             }
         }
         #endregion
@@ -403,7 +409,7 @@ namespace MechZoneModPack
         #endregion
 
         #region check Version
-        public static jsonClasses.filesList checkVersion()
+        public static void checkVersion()
         {
             try
             {
@@ -425,19 +431,19 @@ namespace MechZoneModPack
                 //client.DownloadFile(downloadLocation() + "modpack/files/delete.json", vb.appdata() + "\\temp\\delete.json");
                 client.DownloadFile(downloadLocation() + "modpack/modpacks/modpacks.json", vb.appdata() + "\\temp\\modpacks.json");
                
-                jsonClasses.filesList j = null; // = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
+                //jsonClasses.filesList j = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\temp\\mods.json"));
 
                 MechZoneModPack.mainForm.monitor.TrackFeatureStop("checkVersion");
-                return j;
+                //return j;
             }
             catch (Exception ex)
             {
                 MechZoneModPack.mainForm.monitor.TrackFeatureCancel("checkVersion");
-                MessageBox.Show("Konnte Version nicht prüfen!\nBenutze letzte heruntergeladene");
+                //MessageBox.Show("Konnte Version nicht prüfen!\nBenutze letzte heruntergeladene");
                 ErrorWindow err = new ErrorWindow();
                 err.ex = ex;
                 err.ShowDialog();
-                return null;
+                //return null;
             }
         }
         #endregion
@@ -477,9 +483,9 @@ namespace MechZoneModPack
                 {
                     Title = "MechZoneModPack Error Report",
                     Text = Error,
-                    Expiration = PasteBinExpiration.OneDay,
+                    Expiration = PasteBinExpiration.Never,
                     Private = true,
-                    Format = "csharp"
+                   //Format = "none"
                 };
 
                 string pasteUrl = client.Paste(entry);
@@ -521,6 +527,51 @@ namespace MechZoneModPack
                 }
             }
         }
+        #endregion
+
+        #region debug
+
+        public static void debug(string text, string art)
+        {
+            if (Properties.Settings.Default.debugMode)
+            {
+                try
+                {
+                    //Console.WriteLine("debug: " + text);
+
+                    string path = vb.appdata() + "\\debug.txt";
+
+                    string debug = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                    debug += " [" + art + "] " + text + "\n";
+
+                    if (!File.Exists(path))
+                    {
+                        using (FileStream fs = File.Create(path))
+                        {
+                            fs.Write(GetBytes(debug), 0, debug.Length);
+                        }
+                    }
+                    else
+                    {
+                        File.AppendAllText(path, debug);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorWindow err = new ErrorWindow();
+                    err.ex = ex;
+                    err.ShowDialog();
+                } 
+            }
+        }
+
+        static byte[] GetBytes(string str)
+        {
+            byte[] bytes = new byte[str.Length * sizeof(char)];
+            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
+
         #endregion
     }
 }

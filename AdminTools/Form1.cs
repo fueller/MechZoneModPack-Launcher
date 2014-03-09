@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Web;
 using Newtonsoft.Json;
 using AdminTools;
 using MechZoneModPack;
@@ -24,8 +25,6 @@ namespace AdminTools
         {
             InitializeComponent();
         }
-        string fileStart = "{\n\"files\": [";
-        string fileEnd = "]}";
 
         #region getMD5fromFile
         public static string getMD5fromFile(string path)
@@ -41,6 +40,9 @@ namespace AdminTools
             }
             catch (Exception ex)
             {
+                StreamWriter file = new StreamWriter(@"d:\debug.txt",true);
+                file.WriteLine(ex.Message);
+                file.Close();
                 Console.WriteLine(ex.Message);
                 return null;
             }
@@ -48,7 +50,7 @@ namespace AdminTools
         #endregion
 
         #region get files in dir
-        List<string> getFilesInDir(string sDir, string replace, string subDir)
+        List<string> getFilesInDir(string sDir)
         {
             List<string> files = new List<string>();
             List<string> newFiles = new List<string>();
@@ -60,7 +62,7 @@ namespace AdminTools
                 foreach (string f in Directory.EnumerateFiles(sDir, "*.*", SearchOption.AllDirectories))
                 {
                     //Console.WriteLine(f.Replace(appdata() + replace, ""));
-                    files.Add(f.Replace(appdata() + subDir + replace, ""));                
+                    files.Add(f);                
                 }
 
                 
@@ -75,9 +77,6 @@ namespace AdminTools
                         duplicates.Add(s);
                     }
                 }
-                
-                MessageBox.Show("Count getFiles: " + newFiles.Count);
-                MessageBox.Show("Count Duplicates: " + duplicates.Count);
                 return newFiles;
             }
             catch (System.Exception ex)
@@ -100,194 +99,296 @@ namespace AdminTools
         #region assets
         private void generateAssetsList_Click(object sender, EventArgs e)
         {
-            string dir = @"C:\Users\Philip\AppData\Roaming\.minecraft\assets";
-            List<string> output = new List<string>();
-            List<string> files = getFilesInDir(dir, "\\assets", "\\.minecraft");
-            jsonClasses.filesList mainList = new jsonClasses.filesList();
-
-            MessageBox.Show("Assets start: " + files.Count);
-            foreach (string str in files)
+            folderBrowserDialog1.SelectedPath = appdata() + "\\.MechZoneModPack\\";
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                jsonClasses.files2 list = new jsonClasses.files2();
-                list.path = "\\assets" + str;
-                list.md5 = getMD5fromFile(appdata() + "\\.minecraft\\assets" + str);
-                list.url = "http://mechzone.net/modpack/files/minecraft/assets" + str.Replace("\\", "/");
-                list.server = false;
-                list.enabled = true;
+                string dir = folderBrowserDialog1.SelectedPath;
+                List<string> output = new List<string>();
+                List<string> files = getFilesInDir(dir);
 
-                output.Add(JsonConvert.SerializeObject(list));
-            }
-
-            saveFileDialog1.Filter = "json Files (*.json)|*.json";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (saveFileDialog1.FileName != "")
+                for (int i = 0; i < files.Count; i++)
                 {
-                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
-                    fs.Write(StringToByteArray(fileStart), 0, StringToByteArray(fileStart).Length);
-                    MessageBox.Show("Assets Count: " + output.Count);
-                    for (int i = 0; i < output.Count; i++)
-                    {
-                        fs.Write(StringToByteArray(output[i] + ","), 0, StringToByteArray(output[i] + ",").Length);
-                        fs.Write(StringToByteArray("\n"), 0, 1);
-                    }
-                    fs.Write(StringToByteArray(fileEnd), 0, StringToByteArray(fileEnd).Length);
-                    fs.Close();
+                    jsonClasses.files2 list = new jsonClasses.files2();
+                    list.path = "\\assets\\" + files[i].Replace(dir + "\\", "");
+                    list.md5 = getMD5fromFile(files[i]);
+                    list.url = "/assets/" + files[i].Replace(dir + "\\", "").Replace("\\", "/");
+                    list.server = false;
+                    list.enabled = true;
+
+                    output.Add(JsonConvert.SerializeObject(list));
                 }
+
+                #region save file
+                saveFileDialog1.Filter = "json Files (*.json)|*.json";
+                if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (saveFileDialog1.FileName != "")
+                    {
+                        string fileStart = "{\"files\": [";
+                        string fileEnd = "]}";
+                        string file = "";
+                        file += fileStart;
+                        for (int i = 0; i < output.Count; i++)
+                        {
+                            string add = ",";
+                            if (i == output.Count - 1)
+                            {
+                                add = "";
+                            }
+                            file += output[i] + add;
+                            file += "\n";
+                        }
+                        file += fileEnd;
+                        Console.WriteLine(file);
+                        StreamWriter file2 = new StreamWriter(@"d:\debug.txt",true);
+                        file2.WriteLine(file);
+                        file2.Close();
+                        jsonClasses.filesList filesList = JsonConvert.DeserializeObject<jsonClasses.filesList>(file);
+                        string done = JsonConvert.SerializeObject(filesList, Formatting.Indented);
+
+                        System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                        fs.Write(StringToByteArray(done), 0, StringToByteArray(done).Length);
+                        fs.Close();
+                    }
+                }
+                #endregion
             }
-            MessageBox.Show("Done");
         }
         #endregion
 
         #region mods
         private void generateModList_Click(object sender, EventArgs e)
         {
-            string dir = @"C:\Users\Philip\AppData\Roaming\.MechZoneModPack\mods";
-            List<string> output = new List<string>();
-            List<string> files = getFilesInDir(dir, "\\mods", "\\.MechZoneModPack");
-            jsonClasses.filesList mainList = new jsonClasses.filesList();
-
-            foreach (string str in files)
+            folderBrowserDialog1.SelectedPath = appdata() + "\\.MechZoneModPack\\";
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                Console.WriteLine(str);
-                jsonClasses.files2 list = new jsonClasses.files2();
-                string path = appdata() + "\\.MechZoneModPack\\mods" + str;
-                list.path = "\\mods" + str;
-                list.md5 = getMD5fromFile(path);
-                list.url = "http://mechzone.net/modpack/files/minecraft/mods" + str.Replace("\\", "/");
-                list.server = true;
-                list.enabled = true;
-                string strMod = str;
+                string dir = folderBrowserDialog1.SelectedPath;
+                List<string> output = new List<string>();
+                List<string> files = getFilesInDir(dir);
 
-                try
+                for (int i = 0; i < files.Count; i++)
                 {
-
-                    FastZip fz = new FastZip();
-                    fz.ExtractZip(path, @"D:\temp\mods\", "mcmod.info");
-                    var itemList = JsonConvert.DeserializeObject<List<jsonClasses.mcmod02>>(File.ReadAllText(@"D:\temp\mods\mcmod.info"));
-
-                    list.version += itemList[0].version;
-                    list.name += itemList[0].name;
-                    list.description += itemList[0].description;
-                    list.forumLink += itemList[0].url;
-                    for (int j = 0; j < itemList[0].authors.Count; j++)
+                    jsonClasses.files2 list = new jsonClasses.files2();
+                    list.path = "\\mods\\" + files[i].Replace(dir + "\\", "");
+                    list.md5 = getMD5fromFile(files[i]);
+                    list.url = "/mods/" + files[i].Replace(dir + "\\", "").Replace("\\", "/");
+                    list.server = true;
+                    list.enabled = true;
+                    #region mcmod.info
+                    try
                     {
-                        list.authors += itemList[0].authors[j] + " "; 
+                        FastZip fz = new FastZip();
+                        fz.ExtractZip(files[i], @"D:\temp\mods\", "mcmod.info");
+                        List<jsonClasses.mcmod02> itemList = JsonConvert.DeserializeObject<List<jsonClasses.mcmod02>>(File.ReadAllText(@"D:\temp\mods\mcmod.info"));
+
+                        list.version += itemList[0].version;
+                        list.name += itemList[0].name;
+                        list.description += itemList[0].description;
+                        if (itemList[0].url == null || itemList[0].url == "")
+                        {
+                            list.forumLink += "http://gog.is/" + list.name;
+                        }
+                        else
+                        {
+                            list.forumLink += itemList[0].url;
+                        }
+                        
+                        for (int j = 0; j < itemList[0].authors.Count; j++)
+                        {
+                            string add = ", ";
+                            if (j == itemList[0].authors.Count-1)
+                            {
+                                add = "";
+                            }
+                            list.authors += itemList[0].authors[j] + add;
+                        }
+                        
+                        for (int j = 0; j < itemList[0].authorList.Count; j++)
+                        {
+                            string add = ", ";
+                            if (j == itemList[0].authorList.Count - 1)
+                            {
+                                add = "";
+                            }
+                            list.authors += itemList[0].authorList[j] + add;
+                        }
+
+                        File.Delete(@"D:\temp\mods\mcmod.info");
                     }
-
-                    File.Delete(@"D:\temp\mods\mcmod.info");
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show(ex.Message);
-                    Console.WriteLine(ex.Message + " | " + strMod);
-                    list.name = str.Replace(".zip", "").Replace(".jar", "").Replace("\\", ""); ;
-                }
-
-                output.Add(JsonConvert.SerializeObject(list));
-            }
-
-            saveFileDialog1.Filter = "json Files (*.json)|*.json";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (saveFileDialog1.FileName != "")
-                {
-                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
-                    fs.Write(StringToByteArray(fileStart), 0, StringToByteArray(fileStart).Length);
-                    for (int i = 0; i < output.Count; i++)
+                    catch (Exception ex)
                     {
-                        fs.Write(StringToByteArray(output[i] + ","), 0, StringToByteArray(output[i] + ",").Length);
-                        fs.Write(StringToByteArray("\n"), 0, 1);
+                        Console.WriteLine(ex.Message + " | " + files[i]);
+                        StreamWriter file2 = new StreamWriter(@"d:\debug.txt",true);
+                        file2.WriteLine(ex.Message + " | " + files[i]);
+                        file2.Close();
+                        list.name = files[i].Replace(dir + "\\", "").Replace(".zip", "").Replace(".jar", "").Replace("\\", "");
+                        if (list.forumLink == null || list.forumLink == "")
+                        {
+                            list.forumLink += "http://gog.is/" + list.name;
+                        }
+                        File.Delete(@"D:\temp\mods\mcmod.info");
                     }
-                    fs.Write(StringToByteArray(fileEnd), 0, StringToByteArray(fileEnd).Length);
-                    fs.Close();
+                    #endregion
+                    output.Add(JsonConvert.SerializeObject(list));
+
                 }
+                #region savefile
+                saveFileDialog1.Filter = "json Files (*.json)|*.json";
+                if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (saveFileDialog1.FileName != "")
+                    {
+                        string fileStart = "{\"files\": [";
+                        string fileEnd = "]}";
+                        string file = "";
+                        file += fileStart;
+                        for (int i = 0; i < output.Count; i++)
+                        {
+                            string add = ",";
+                            if (i == output.Count-1)
+                            {
+                                add = "";
+                            }
+                            file += output[i] + add;
+                            file += "\n";
+                        }
+                        file += fileEnd;
+                        Console.WriteLine(file);
+                        StreamWriter file2 = new StreamWriter(@"d:\debug.txt",true);
+                        file2.WriteLine(file);
+                        file2.Close();
+                        jsonClasses.filesList filesList = JsonConvert.DeserializeObject<jsonClasses.filesList>(file);
+                        string done = JsonConvert.SerializeObject(filesList, Formatting.Indented);
+                        
+                        System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                        fs.Write(StringToByteArray(done), 0, StringToByteArray(done).Length);
+                        fs.Close();
+                    }
+                }
+                #endregion
             }
-            MessageBox.Show("Done");
         }
         #endregion
 
         #region config
         private void generateConfigList_Click(object sender, EventArgs e)
         {
-            string dir = @"C:\Users\Philip\AppData\Roaming\.MechZoneModPack\config";
-            List<string> output = new List<string>();
-            List<string> files = getFilesInDir(dir, "\\config", "\\.MechZoneModPack");
-            jsonClasses.filesList mainList = new jsonClasses.filesList();
-
-            foreach (string str in files)
+            folderBrowserDialog1.SelectedPath = appdata() + "\\.MechZoneModPack\\";
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                jsonClasses.files2 list = new jsonClasses.files2();
-                list.path = "\\config" + str;
-                list.md5 = getMD5fromFile(appdata() + "\\.MechZoneModPack\\config" + str);
-                list.url = "http://mechzone.net/modpack/files/minecraft/config" + str.Replace("\\", "/");
-                list.server = true;
-                list.config = true;
-                list.enabled = true;
+                string dir = folderBrowserDialog1.SelectedPath;
+                List<string> output = new List<string>();
+                List<string> files = getFilesInDir(dir);
 
-                output.Add(JsonConvert.SerializeObject(list));
-            }
-
-            saveFileDialog1.Filter = "json Files (*.json)|*.json";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (saveFileDialog1.FileName != "")
+                for (int i = 0; i < files.Count; i++)
                 {
-                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
-                    fs.Write(StringToByteArray(fileStart), 0, StringToByteArray(fileStart).Length);
-                    for (int i = 0; i < output.Count; i++)
-                    {
-                        fs.Write(StringToByteArray(output[i] + ","), 0, StringToByteArray(output[i] + ",").Length);
-                        fs.Write(StringToByteArray("\n"), 0, 1);
-                    }
-                    fs.Write(StringToByteArray(fileEnd), 0, StringToByteArray(fileEnd).Length);
-                    fs.Close();
+                    jsonClasses.files2 list = new jsonClasses.files2();
+                    list.path = "\\config\\" + files[i].Replace(dir + "\\", "");
+                    list.md5 = getMD5fromFile(files[i]);
+                    list.url = "/config/" + files[i].Replace(dir + "\\", "").Replace("\\", "/");
+                    list.server = true;
+                    list.config = true;
+                    list.enabled = true;
+                    output.Add(JsonConvert.SerializeObject(list));
                 }
+                #region save file
+                saveFileDialog1.Filter = "json Files (*.json)|*.json";
+                if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (saveFileDialog1.FileName != "")
+                    {
+                        string fileStart = "{\"files\": [";
+                        string fileEnd = "]}";
+                        string file = "";
+                        file += fileStart;
+                        for (int i = 0; i < output.Count; i++)
+                        {
+                            string add = ",";
+                            if (i == output.Count - 1)
+                            {
+                                add = "";
+                            }
+                            file += output[i] + add;
+                            file += "\n";
+                        }
+                        file += fileEnd;
+                        Console.WriteLine(file);
+                        StreamWriter file2 = new StreamWriter(@"d:\debug.txt",true);
+                        file2.WriteLine(file);
+                        file2.Close();
+                        jsonClasses.filesList filesList = JsonConvert.DeserializeObject<jsonClasses.filesList>(file);
+                        string done = JsonConvert.SerializeObject(filesList, Formatting.Indented);
+
+                        System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                        fs.Write(StringToByteArray(done), 0, StringToByteArray(done).Length);
+                        fs.Close();
+                    }
+                }
+                #endregion
             }
-            MessageBox.Show("Done");
         }
         #endregion
 
         #region libraries
         private void generateLibrariesList_Click(object sender, EventArgs e)
         {
-            string dir = @"C:\Users\Philip\AppData\Roaming\.MechZoneModPack\libraries";
-            List<string> output = new List<string>();
-            List<string> files = getFilesInDir(dir, "\\libraries", "\\.MechZoneModPack");
-            jsonClasses.filesList mainList = new jsonClasses.filesList();
-
-            foreach (string str in files)
+            folderBrowserDialog1.SelectedPath = appdata() + "\\.MechZoneModPack\\";
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
             {
-                jsonClasses.files2 list = new jsonClasses.files2();
-                list.path = "\\libraries" + str;
-                list.md5 = getMD5fromFile(appdata() + "\\.MechZoneModPack\\libraries" + str);
-                list.url = "http://mechzone.net/modpack/files/minecraft/libraries" + str.Replace("\\", "/");
-                list.server = true;
+                string dir = folderBrowserDialog1.SelectedPath;
+                List<string> output = new List<string>();
+                List<string> files = getFilesInDir(dir);
 
-                output.Add(JsonConvert.SerializeObject(list));
-            }
-
-            saveFileDialog1.Filter = "json Files (*.json)|*.json";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (saveFileDialog1.FileName != "")
+                for (int i = 0; i < files.Count; i++)
                 {
-                    System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
-                    fs.Write(StringToByteArray(fileStart), 0, StringToByteArray(fileStart).Length);
-                    for (int i = 0; i < output.Count; i++)
-                    {
-                        fs.Write(StringToByteArray(output[i] + ","), 0, StringToByteArray(output[i] + ",").Length);
-                        fs.Write(StringToByteArray("\n"), 0, 1);
-                    }
-                    fs.Write(StringToByteArray(fileEnd), 0, StringToByteArray(fileEnd).Length);
-                    fs.Close();
+                    jsonClasses.files2 list = new jsonClasses.files2();
+                    list.path = "\\libraries\\" + files[i].Replace(dir + "\\", "");
+                    list.md5 = getMD5fromFile(files[i]);
+                    list.url = "/libraries/" + files[i].Replace(dir + "\\", "").Replace("\\", "/");
+                    list.server = true;
+
+                    output.Add(JsonConvert.SerializeObject(list));
                 }
+
+                #region save file
+                saveFileDialog1.Filter = "json Files (*.json)|*.json";
+                if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (saveFileDialog1.FileName != "")
+                    {
+                        string fileStart = "{\"files\": [";
+                        string fileEnd = "]}";
+                        string file = "";
+                        file += fileStart;
+                        for (int i = 0; i < output.Count; i++)
+                        {
+                            string add = ",";
+                            if (i == output.Count - 1)
+                            {
+                                add = "";
+                            }
+                            file += output[i] + add;
+                            file += "\n";
+                        }
+                        file += fileEnd;
+                        Console.WriteLine(file);
+                        StreamWriter file2 = new StreamWriter(@"d:\debug.txt",true);
+                        file2.WriteLine(file);
+                        file2.Close();
+                        jsonClasses.filesList filesList = JsonConvert.DeserializeObject<jsonClasses.filesList>(file);
+                        string done = JsonConvert.SerializeObject(filesList, Formatting.Indented);
+
+                        System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+                        fs.Write(StringToByteArray(done), 0, StringToByteArray(done).Length);
+                        fs.Close();
+                    }
+                }
+                #endregion
             }
-            MessageBox.Show("Done");
         }
         #endregion
 

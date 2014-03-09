@@ -106,19 +106,6 @@ namespace MechZoneModPack
         }
         #endregion
 
-        #region version
-        public class version
-        {
-            public string natives { get; set; }
-            public string mods { get; set; }
-            public string config { get; set; }
-            public string libraries { get; set; }
-            public string forge { get; set; }
-            public string minecraft { get; set; }
-            public bool update { get; set; }
-        }
-        #endregion
-
         #region mcmodInfo
         public class mcmod
         {
@@ -161,15 +148,35 @@ namespace MechZoneModPack
             public string configVersion { get; set; }
             public string deleteVersion { get; set; }
             public string sonstigesVersion { get; set; }
+            public string assetsVersion { get; set; }
+            public string nativesVersion { get; set; }
+            public string librariesVersion { get; set; }
             public string modsFile { get; set; }
             public string configFile { get; set; }
             public string assetsFile { get; set; }
             public string librariesFile { get; set; }
+            public string nativesFile { get; set; }
             public string changelogUrl { get; set; }
             public string versionsPath { get; set; }
+            public string jar { get; set; }
             public string logo { get; set; }
             public string mainLogo { get; set; }
             public List<string> folders { get; set; }
+            public string deleteFile { get; set; }
+            public string arguments { get; set; }
+        }
+        #endregion
+
+        #region version
+        public class version
+        {
+            public string modsVersion { get; set; }
+            public string configVersion { get; set; }
+            public string deleteVersion { get; set; }
+            public string sonstigesVersion { get; set; }
+            public string assetsVersion { get; set; }
+            public string nativesVersion { get; set; }
+            public string librariesVersion { get; set; }
         }
         #endregion
     }

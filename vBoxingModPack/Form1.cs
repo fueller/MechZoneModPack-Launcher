@@ -32,7 +32,7 @@ namespace MechZoneModPack
         public static IAnalyticsMonitor monitor = AnalyticsMonitorFactory.CreateMonitor("A645BAB7505648C3AE67645A9DB77EF7");
         List<modPackList> modPacks = new List<modPackList>();
         jsonClasses.modpacks modPackList;
-        jsonClasses.filesList fileList;
+        int selected = Properties.Settings.Default.selectedModPack;
                 
         public mainForm()
 		{
@@ -46,6 +46,8 @@ namespace MechZoneModPack
             if (Debugger.IsAttached)
             {
                 button1.Visible = true;
+                usernameText.Text = "philip.lawall@web.de";
+                debugCheck.Checked = true;
             }
             else
             {
@@ -114,114 +116,263 @@ namespace MechZoneModPack
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            monitor.TrackFeature("login");
-            logTextBox.Clear();
             try
             {
-                monitor.TrackFeatureStart("loginProzedure");
-                //string version = "1.6.4";
-                string name = "1.6.4-Forge";
-                //string name = "1.7.2-Forge";
+                selected = Properties.Settings.Default.selectedModPack;
+                modPackList = JsonConvert.DeserializeObject<jsonClasses.modpacks>(File.ReadAllText(vb.appdata() + "\\temp\\modpacks.json"));
+                logTextBox.Clear();
+                #region old login and start
 
-                //Download dl = new Download();
-                //dl.ShowDialog();
-
-
-                string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
-                if (session == "error")
+                /*if (Properties.Settings.Default.selectedModPack == 0)
+            {
+                monitor.TrackFeature("login");
+                logTextBox.Clear();
+                try
                 {
-                    monitor.TrackFeatureCancel("loginProzedure");
-                }
-                else
-                {
-                    //MessageBox.Show(session);
-                    //MessageBox.Show(vb.GetJavaInstallationPath().ToString());
-                    //process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
-                    //process1.StartInfo.WorkingDirectory = vb.appdata() + "";
-                    string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
+                    monitor.TrackFeatureStart("loginProzedure");
+                    //string version = "1.6.4";
+                    string name = "1.6.4-Forge";
+                    //string name = "1.7.2-Forge";
 
-                    if (ramComb.Checked)
+                    Download dl = new Download();
+                    dl.ShowDialog();
+
+
+                    string session = vb.getSessionKey(usernameText.Text, passwordText.Text);
+                    if (session == "error")
                     {
-                        arguments += "-Xmx" + ramSelect.Text.Replace(" MB", "") + "M";
+                        monitor.TrackFeatureCancel("loginProzedure");
                     }
                     else
                     {
-                        arguments += "-Xmx1G";
-                    }
-                    arguments += " " + extraJavaParameterText.Text;
-                    arguments += " -Djava.library.path="
-                        + vb.appdata() + "\\versions\\" + name + "\\" + name + "-natives -cp "
-                        + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\minecraftforge.jar;"
-                        + vb.appdata() + "\\libraries\\com\\mumfrey\\liteloader\\1.6.4\\liteloader-1.6.4.jar;"
-                        + vb.appdata() + "\\libraries\\net\\minecraft\\launchwrapper\\1.8\\launchwrapper-1.8.jar;"
-                        + vb.appdata() + "\\libraries\\org\\ow2\\asm\\asm-all\\4.1\\asm-all-4.1.jar;"
-                        + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-library\\2.10.2\\scala-library-2.10.2.jar;"
-                        + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-compiler\\2.10.2\\scala-compiler-2.10.2.jar;"
-                        + vb.appdata() + "\\libraries\\lzma\\lzma\\0.0.1\\lzma-0.0.1.jar;"
-                        + vb.appdata() + "\\libraries\\net\\sf\\jopt-simple\\jopt-simple\\4.5\\jopt-simple-4.5.jar;"
-                        + vb.appdata() + "\\libraries\\com\\paulscode\\codecjorbis\\20101023\\codecjorbis-20101023.jar;"
-                        + vb.appdata() + "\\libraries\\com\\paulscode\\codecwav\\20101023\\codecwav-20101023.jar;"
-                        + vb.appdata() + "\\libraries\\com\\paulscode\\libraryjavasound\\20101123\\libraryjavasound-20101123.jar;"
-                        + vb.appdata() + "\\libraries\\com\\paulscode\\librarylwjglopenal\\20100824\\librarylwjglopenal-20100824.jar;"
-                        + vb.appdata() + "\\libraries\\com\\paulscode\\soundsystem\\20120107\\soundsystem-20120107.jar;"
-                        + vb.appdata() + "\\libraries\\argo\\argo\\2.25_fixed\\argo-2.25_fixed.jar;"
-                        + vb.appdata() + "\\libraries\\org\\bouncycastle\\bcprov-jdk15on\\1.47\\bcprov-jdk15on-1.47.jar;"
-                        + vb.appdata() + "\\libraries\\com\\google\\guava\\guava\\14.0\\guava-14.0.jar;"
-                        + vb.appdata() + "\\libraries\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar;"
-                        + vb.appdata() + "\\libraries\\commons-io\\commons-io\\2.4\\commons-io-2.4.jar;"
-                        + vb.appdata() + "\\libraries\\net\\java\\jinput\\jinput\\2.0.5\\jinput-2.0.5.jar;"
-                        + vb.appdata() + "\\libraries\\net\\java\\jutils\\jutils\\1.0.0\\jutils-1.0.0.jar;"
-                        + vb.appdata() + "\\libraries\\com\\google\\code\\gson\\gson\\2.2.2\\gson-2.2.2.jar;"
-                        + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl\\2.9.0\\lwjgl-2.9.0.jar;"
-                        + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl_util\\2.9.0\\lwjgl_util-2.9.0.jar;"
-                        + vb.appdata() + "\\versions\\" + name + "\\" + name + ".jar net.minecraft.launchwrapper.Launch "
-                        + "--username " + Properties.Settings.Default.nickname + " --session " + session + " --version " + name + " --gameDir "
-                        + vb.appdata() + " --assetsDir "
-                        + vb.appdata() + "\\assets --tweakClass cpw.mods.fml.common.launcher.FMLTweaker --tweakClass com.mumfrey.liteloader.launch.LiteLoaderTweaker";
+                        //MessageBox.Show(session);
+                        //MessageBox.Show(vb.GetJavaInstallationPath().ToString());
+                        //process1.StartInfo.FileName = vb.GetJavaInstallationPath() + "javaw.exe";
+                        //process1.StartInfo.WorkingDirectory = vb.appdata() + "";
+                        string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
 
-                    if (resolutionComb.Checked)
-                    {
-                        arguments += " --width " + resWidth.Value + " --height " + resHeight.Value;
-                    }
-
-                    //MessageBox.Show(arguments);
-                    //process1.StartInfo.Arguments = arguments;
-                    //process1.StartInfo.RedirectStandardOutput = true;
-                    //process1.StartInfo.UseShellExecute = false;
-                    //StreamReader reader = process1.StandardOutput;
-                    
-                    ProcessStartInfo start = new ProcessStartInfo();
-
-                    string javaPath = vb.GetJavaInstallationPath();
-                    if (javaPath == null)
-                    {
-                        MessageBox.Show("Die javaw Datei konnte nicht gefunden werden!\nBitte wähle diese nun aus!\nSie liegt meist unter \"C:\\Program Files (x86)\\Java\\jre7\\bin\\javaw.exe\"\noder \"C:\\Program Files\\Java\\jre7\\bin\\javaw.exe\"","Could not find File!",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                        if (openJavaFile.ShowDialog() == DialogResult.OK)
+                        if (ramComb.Checked)
                         {
-                            javaPath = openJavaFile.FileName;
-                            Properties.Settings.Default.javaPath = javaPath;
-                            Properties.Settings.Default.Save();
-                            javaPathLabel.Text = Properties.Settings.Default.javaPath;
+                            arguments += "-Xmx" + ramSelect.Text.Replace(" MB", "") + "M";
+                        }
+                        else
+                        {
+                            arguments += "-Xmx1G";
+                        }
+                        arguments += " " + extraJavaParameterText.Text;
+                        arguments += " -Djava.library.path="
+                            + vb.appdata() + "\\versions\\" + name + "\\" + name + "-natives -cp "
+                            + vb.appdata() + "\\libraries\\net\\minecraftforge\\minecraftforge\\minecraftforge.jar;"
+                            //+ vb.appdata() + "\\libraries\\com\\mumfrey\\liteloader\\1.6.4\\liteloader-1.6.4.jar;"
+                            + vb.appdata() + "\\libraries\\net\\minecraft\\launchwrapper\\1.8\\launchwrapper-1.8.jar;"
+                            + vb.appdata() + "\\libraries\\org\\ow2\\asm\\asm-all\\4.1\\asm-all-4.1.jar;"
+                            + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-library\\2.10.2\\scala-library-2.10.2.jar;"
+                            + vb.appdata() + "\\libraries\\org\\scala-lang\\scala-compiler\\2.10.2\\scala-compiler-2.10.2.jar;"
+                            + vb.appdata() + "\\libraries\\lzma\\lzma\\0.0.1\\lzma-0.0.1.jar;"
+                            + vb.appdata() + "\\libraries\\net\\sf\\jopt-simple\\jopt-simple\\4.5\\jopt-simple-4.5.jar;"
+                            + vb.appdata() + "\\libraries\\com\\paulscode\\codecjorbis\\20101023\\codecjorbis-20101023.jar;"
+                            + vb.appdata() + "\\libraries\\com\\paulscode\\codecwav\\20101023\\codecwav-20101023.jar;"
+                            + vb.appdata() + "\\libraries\\com\\paulscode\\libraryjavasound\\20101123\\libraryjavasound-20101123.jar;"
+                            + vb.appdata() + "\\libraries\\com\\paulscode\\librarylwjglopenal\\20100824\\librarylwjglopenal-20100824.jar;"
+                            + vb.appdata() + "\\libraries\\com\\paulscode\\soundsystem\\20120107\\soundsystem-20120107.jar;"
+                            + vb.appdata() + "\\libraries\\argo\\argo\\2.25_fixed\\argo-2.25_fixed.jar;"
+                            + vb.appdata() + "\\libraries\\org\\bouncycastle\\bcprov-jdk15on\\1.47\\bcprov-jdk15on-1.47.jar;"
+                            + vb.appdata() + "\\libraries\\com\\google\\guava\\guava\\14.0\\guava-14.0.jar;"
+                            + vb.appdata() + "\\libraries\\org\\apache\\commons\\commons-lang3\\3.1\\commons-lang3-3.1.jar;"
+                            + vb.appdata() + "\\libraries\\commons-io\\commons-io\\2.4\\commons-io-2.4.jar;"
+                            + vb.appdata() + "\\libraries\\net\\java\\jinput\\jinput\\2.0.5\\jinput-2.0.5.jar;"
+                            + vb.appdata() + "\\libraries\\net\\java\\jutils\\jutils\\1.0.0\\jutils-1.0.0.jar;"
+                            + vb.appdata() + "\\libraries\\com\\google\\code\\gson\\gson\\2.2.2\\gson-2.2.2.jar;"
+                            + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl\\2.9.0\\lwjgl-2.9.0.jar;"
+                            + vb.appdata() + "\\libraries\\org\\lwjgl\\lwjgl\\lwjgl_util\\2.9.0\\lwjgl_util-2.9.0.jar;"
+                            + vb.appdata() + "\\versions\\" + name + "\\" + name + ".jar net.minecraft.launchwrapper.Launch "
+                            + "--username " + Properties.Settings.Default.nickname + " --session " + session + " --version " + name + " --gameDir "
+                            + vb.appdata() + " --assetsDir "
+                            + vb.appdata() + "\\assets --tweakClass cpw.mods.fml.common.launcher.FMLTweaker";
+                        //+ " --tweakClass com.mumfrey.liteloader.launch.LiteLoaderTweaker";
+
+                        if (resolutionComb.Checked)
+                        {
+                            arguments += " --width " + resWidth.Value + " --height " + resHeight.Value;
+                        }
+
+                        //MessageBox.Show(arguments);
+                        //process1.StartInfo.Arguments = arguments;
+                        //process1.StartInfo.RedirectStandardOutput = true;
+                        //process1.StartInfo.UseShellExecute = false;
+                        //StreamReader reader = process1.StandardOutput;
+
+                        ProcessStartInfo start = new ProcessStartInfo();
+
+                        string javaPath = vb.GetJavaInstallationPath();
+                        if (javaPath == null)
+                        {
+                            MessageBox.Show("Die javaw Datei konnte nicht gefunden werden!\nBitte wähle diese nun aus!\nSie liegt meist unter \"C:\\Program Files (x86)\\Java\\jre7\\bin\\javaw.exe\"\noder \"C:\\Program Files\\Java\\jre7\\bin\\javaw.exe\"", "Could not find File!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            if (openJavaFile.ShowDialog() == DialogResult.OK)
+                            {
+                                javaPath = openJavaFile.FileName;
+                                Properties.Settings.Default.javaPath = javaPath;
+                                Properties.Settings.Default.Save();
+                                javaPathLabel.Text = Properties.Settings.Default.javaPath;
+                            }
+                        }
+
+                        start.FileName = javaPath;
+
+                        start.Arguments = arguments;
+                        start.RedirectStandardError = true;
+                        start.UseShellExecute = false;
+                        start.WorkingDirectory = vb.appdata();
+
+
+                        using (Process process = Process.Start(start))
+                        {
+
+                            process.ErrorDataReceived += ErrorReceived;
+                            process.BeginErrorReadLine();
+                        }
+
+
+                        monitor.TrackFeatureStop("loginProzedure");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorWindow err = new ErrorWindow();
+                    err.ex = ex;
+                    err.ShowDialog();
+                    monitor.TrackException(ex, "loginButton");
+                }
+            }
+            else
+            {*/
+                #endregion
+
+                if (!Directory.Exists(vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag))
+                {
+                    vb.debug("Directory doesn't exist", "Login");
+                    DialogResult result = MessageBox.Show("ModPack not downloaded!\nDo you want to download the Pack?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (result == DialogResult.Yes)
+                    {
+                        vb.debug("Start Download", "Login");
+                        vb.createFolderStructure(selected, modPackList);
+                        List<bool> download = new List<bool>();
+                        for (int i = 0; i < 7; i++)
+                        {
+                            download.Add(false);
+                        }
+                        DownloadNew dl = new DownloadNew();
+                        dl.packID = Properties.Settings.Default.selectedModPack;
+                        dl.modPackList = modPackList;
+                        dl.select = download;
+                        dl.ShowDialog();
+                        MessageBox.Show("Download Complete\nPlease login again to start the Game", "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }else{/*Console.WriteLine("*Do nothing*");*/}
+                }
+                else
+                {
+                    vb.debug("Directory exist", "Login");
+                    //Check Version
+                    List<bool> versions = newVersionAvailable(selected);
+                    bool newVersion = false;
+                    for (int i = 0; i < versions.Count; i++)
+                    {
+                        if (versions[i] != true)
+                        {
+                            newVersion = true;
                         }
                     }
-                    
-                    start.FileName = javaPath;
-                    
-                    start.Arguments = arguments;
-                    start.RedirectStandardError = true;
-                    start.UseShellExecute = false;
-                    start.WorkingDirectory = vb.appdata();
-                    
-
-                    using (Process process = Process.Start(start))
+                    if (newVersion)
                     {
-                        
-                        process.ErrorDataReceived += ErrorReceived;
-                        process.BeginErrorReadLine();
-                    }
-                    
+                        DialogResult result = MessageBox.Show("A new ModPack version is available!\nDo you want to update your Pack?", "New Version available", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                        vb.debug("New Version available", "Login");
+                        if (result == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            DownloadNew dl = new DownloadNew();
+                            dl.packID = Properties.Settings.Default.selectedModPack;
+                            dl.modPackList = modPackList;
+                            dl.select = versions;
+                            dl.ShowDialog();
 
-                    monitor.TrackFeatureStop("loginProzedure");
+                            string localVersionPath = vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag + "\\localVersion.json";
+
+                            File.Delete(localVersionPath);
+
+                                using(StreamWriter sw = new StreamWriter(localVersionPath))
+	                            {
+                                    jsonClasses.version generateVersion = new jsonClasses.version();
+                                    generateVersion.configVersion = modPackList.list[selected].configVersion;
+                                    generateVersion.deleteVersion = modPackList.list[selected].deleteVersion;
+                                    generateVersion.modsVersion = modPackList.list[selected].modsVersion;
+                                    generateVersion.sonstigesVersion = modPackList.list[selected].sonstigesVersion;
+                                    generateVersion.assetsVersion = modPackList.list[selected].assetsVersion;
+                                    generateVersion.nativesVersion = modPackList.list[selected].nativesVersion;
+                                    generateVersion.librariesVersion = modPackList.list[selected].librariesVersion;
+
+                                    string json = JsonConvert.SerializeObject(generateVersion,Formatting.Indented);
+                                    sw.Write(json);
+	                            }
+                        }
+                        
+                        
+                    }
+                    Console.WriteLine(newVersion.ToString());
+                }
+                {
+                    vb.debug("Starting Minecraft", "Login");
+                    string[] session = vb.getSessionKey(usernameText.Text, passwordText.Text);
+                    if (session[1] == "error") { Console.WriteLine("error"); }
+                    else
+                    {
+                        string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
+                        if (ramComb.Checked)
+                        {
+                            arguments += "-Xmx" + ramSelect.Text.Replace(" MB", "") + "M";
+                        }
+                        else
+                        {
+                            arguments += "-Xmx1G";
+                        }
+                        arguments += " " + extraJavaParameterText.Text + " ";
+                        arguments += modPackList.list[selected].arguments.Replace("%APPDATA%", vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag).Replace("%USERNAME%", Properties.Settings.Default.nickname).Replace("%UUID%", session[0]).Replace("%VERSION%", modPackList.list[selected].versionsPath).Replace("%ACCESSTOKEN%", session[1]);
+                        if (resolutionComb.Checked)
+                        {
+                            arguments += " --width " + resWidth.Value + " --height " + resHeight.Value;
+                        }
+                        
+                        //MessageBox.Show(arguments);
+                        vb.debug("Logging in", "Arguments");
+                        vb.debug(arguments, "Arguments");
+                        ProcessStartInfo start = new ProcessStartInfo();
+
+                        string javaPath = vb.GetJavaInstallationPath();
+                        if (javaPath == null)
+                        {
+                            MessageBox.Show("Die javaw Datei konnte nicht gefunden werden!\nBitte wähle diese nun aus!\nSie liegt meist unter \"C:\\Program Files (x86)\\Java\\jre7\\bin\\javaw.exe\"\noder \"C:\\Program Files\\Java\\jre7\\bin\\javaw.exe\"", "Could not find File!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            if (openJavaFile.ShowDialog() == DialogResult.OK)
+                            {
+                                javaPath = openJavaFile.FileName;
+                                Properties.Settings.Default.javaPath = javaPath;
+                                Properties.Settings.Default.Save();
+                                javaPathLabel.Text = Properties.Settings.Default.javaPath;
+                            }
+                        }
+
+                        start.FileName = javaPath;
+
+                        start.Arguments = arguments;
+                        start.RedirectStandardError = true;
+                        start.UseShellExecute = false;
+                        start.WorkingDirectory = vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag;
+                        using (Process process = Process.Start(start))
+                        {
+                            vb.debug("Minecraft Startet", "Login");
+                            process.ErrorDataReceived += ErrorReceived;
+                            process.BeginErrorReadLine();
+                        }
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -229,8 +380,62 @@ namespace MechZoneModPack
                 ErrorWindow err = new ErrorWindow();
                 err.ex = ex;
                 err.ShowDialog();
-                monitor.TrackException(ex, "loginButton");
-            } 
+            }
+        }
+
+        private List<bool> newVersionAvailable(int modpack)
+        {
+            List<bool> result = new List<bool>();
+            
+
+            string localVersionPath = vb.appdata() + "\\modpacks\\" + modPackList.list[modpack].tag + "\\localVersion.json";
+            jsonClasses.version localVersions = null; /* = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(localVersion));*/
+            
+            if (!File.Exists(localVersionPath))
+	        {
+		        using(StreamWriter sw = new StreamWriter(localVersionPath))
+	            {
+                    jsonClasses.version generateVersion = new jsonClasses.version();
+                    generateVersion.configVersion = modPackList.list[modpack].configVersion;
+                    generateVersion.deleteVersion = modPackList.list[modpack].deleteVersion;
+                    generateVersion.modsVersion = modPackList.list[modpack].modsVersion;
+                    generateVersion.sonstigesVersion = modPackList.list[modpack].sonstigesVersion;
+                    generateVersion.assetsVersion = modPackList.list[modpack].assetsVersion;
+                    generateVersion.nativesVersion = modPackList.list[modpack].nativesVersion;
+                    generateVersion.librariesVersion = modPackList.list[modpack].librariesVersion;
+
+                    string json = JsonConvert.SerializeObject(generateVersion,Formatting.Indented);
+                    sw.Write(json);
+	            }
+                localVersions = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(localVersionPath));
+	        }
+            else
+            {
+                localVersions = JsonConvert.DeserializeObject<jsonClasses.version>(File.ReadAllText(localVersionPath));
+            }
+
+            if (modPackList.list[modpack].modsVersion == localVersions.modsVersion) {result.Add(true);}
+            else {result.Add(false);}
+
+            if (modPackList.list[modpack].configVersion == localVersions.configVersion) { result.Add(true); }
+            else { result.Add(false); }
+
+            if (modPackList.list[modpack].deleteVersion == localVersions.deleteVersion) { result.Add(true); }
+            else { result.Add(false); }
+
+            if (modPackList.list[modpack].sonstigesVersion == localVersions.sonstigesVersion) { result.Add(true); }
+            else { result.Add(false); }
+
+            if (modPackList.list[modpack].assetsVersion == localVersions.assetsVersion) { result.Add(true); }
+            else { result.Add(false); }
+
+            if (modPackList.list[modpack].nativesVersion == localVersions.nativesVersion) { result.Add(true); }
+            else { result.Add(false); }
+
+            if (modPackList.list[modpack].librariesVersion == localVersions.librariesVersion) { result.Add(true); }
+            else { result.Add(false); }
+
+            return result;
         }
 
         delegate void logTextAdd(string text);
@@ -454,7 +659,7 @@ namespace MechZoneModPack
                 status();                
             }
 
-            fileList = vb.checkVersion();
+            vb.checkVersion();
 
             try
             {
@@ -470,14 +675,28 @@ namespace MechZoneModPack
                     modPacks[i].modPackDescription = modPackList.list[i].shortDescription;
                     modPacks[i].modPackID = i;
                     modPacks[i].Click += modInfoChangelogButton_Click;
-                    modPacks[i].modPackImage = ImageFromBase64String(modPackList.list[i].logo);
+                    modPacks[i].modPackImage = vb.downloadLocation() + "/modpack/modpacks/" + modPackList.list[i].tag + "/" + modPackList.list[i].logo;
                     panel1.Controls.Add(modPacks[i]);
                 }
             
 
             this.Update();
-            modPacks[Properties.Settings.Default.selectedModPack].BorderStyle = BorderStyle.Fixed3D;
-            showDescription(Properties.Settings.Default.selectedModPack);
+            try
+            {
+                modPacks[Properties.Settings.Default.selectedModPack].BorderStyle = BorderStyle.Fixed3D;
+            }
+            catch (Exception)
+            {
+                modPacks[0].BorderStyle = BorderStyle.Fixed3D;
+            }
+            try
+            {
+                showDescription(Properties.Settings.Default.selectedModPack);
+            }
+            catch (Exception)
+            {
+                showDescription(0);
+            }
             }
             catch (Exception ex)
             {
@@ -497,6 +716,8 @@ namespace MechZoneModPack
                     modPacks[i].BorderStyle = BorderStyle.Fixed3D;
                     Properties.Settings.Default.selectedModPack = i;
                     Properties.Settings.Default.Save();
+                    int selected = Properties.Settings.Default.selectedModPack;
+                    //Console.WriteLine(selected.ToString());
                     showDescription(i);
 	            }
 			}
@@ -628,20 +849,20 @@ namespace MechZoneModPack
 
         private void sendErrorLog_Click(object sender, EventArgs e)
         {
-            vb.sendErrorLog(logTextBox.Text, null);
+            sendLastCrashLog_Click(sender, e);
+            //vb.sendErrorLog(logTextBox.Text, null);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var serverInfo = new NbtCompound("Server");
-            serverInfo.Add(new NbtString("Name", "MechZone.net Minecraft Server"));
-            serverInfo.Add(new NbtInt("Players", 0));
-            serverInfo.Add(new NbtInt("MaxPlayers", 20));
-            var serverFile = new NbtFile(serverInfo);
-            serverFile.SaveToFile("server.nbt", NbtCompression.None);
+            List<bool> test = newVersionAvailable(Properties.Settings.Default.selectedModPack);
+            MessageBox.Show("");
             
-            
-            
+            /*DownloadNew test = new DownloadNew();
+            //test.packID = Properties.Settings.Default.selectedModPack;
+            test.packID = 1;
+            test.modPackList = modPackList;
+            test.ShowDialog();*/
             /*try
             {
                 int nix = 0;
@@ -654,19 +875,25 @@ namespace MechZoneModPack
                 err.ShowDialog();
             }*/
             
-            /*Image test = Image.FromFile(@"D:\temp\test2.png");
+            /*Image test = Image.FromFile(@"D:\temp\test.png");
             string result = ImageToBase64String(test, ImageFormat.Png);
-            Console.WriteLine(result);*/
+            StreamWriter write = new StreamWriter(@"D:\temp\test.txt");
+            write.Write(result);*/
+            //Console.Write("done");
+            //Console.WriteLine(result);
         }
 
         private void sendLastCrashLog_Click(object sender, EventArgs e)
         {
+            selected = Properties.Settings.Default.selectedModPack;
             try
             {
-                var directory = new DirectoryInfo(vb.appdata() + "\\crash-reports");
+                var directory = new DirectoryInfo(vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag + "\\crash-reports");
                 var myFile = (from f in directory.GetFiles() orderby f.LastWriteTime descending select f).First();
                 StreamReader reader = new StreamReader(myFile.OpenRead());
-                vb.sendErrorLog(reader.ReadToEnd(), null);
+                string error = "Modpack: " + modPackList.list[selected].name + "\n\n";
+                error += reader.ReadToEnd();
+                vb.sendErrorLog(error, null);
                 reader.Close();
             }
             catch (Exception ex)
@@ -679,13 +906,14 @@ namespace MechZoneModPack
 
         private void sendLastClientLog_Click(object sender, EventArgs e)
         {
+            selected = Properties.Settings.Default.selectedModPack;
             try
             {
                 string error = "";
 
                 StringBuilder sb = new StringBuilder();
 
-                Stream stream = File.Open(vb.appdata() + "\\ForgeModLoader-client-0.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                Stream stream = File.Open(vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag + "\\ForgeModLoader-client-0.log", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 StreamReader reader = new StreamReader(stream);
 
                 String line;
@@ -694,10 +922,10 @@ namespace MechZoneModPack
                     sb.AppendLine(line);
                 }
                 int maxLen = 150000;
-                error += "Länge: " + sb.Length + "\n\n";
+                error += "Länge: " + sb.Length + " Modpack: " + modPackList.list[selected].name + "\n\n";
 
-                Console.WriteLine(sb.Length);
-                Console.WriteLine(sb.Length - maxLen);
+                //Console.WriteLine(sb.Length);
+                //Console.WriteLine(sb.Length - maxLen);
 
                 if (sb.Length < maxLen)
                 {
@@ -782,6 +1010,7 @@ namespace MechZoneModPack
             }
         }
 
+        #region image
         private string ImageToBase64String(Image image, ImageFormat format)
         {
             try
@@ -826,10 +1055,11 @@ namespace MechZoneModPack
                 return null;
             }
         }
+        #endregion
 
         private void showDescription(int id)
         {
-            modInfoImage.Image = ImageFromBase64String(modPackList.list[id].mainLogo);
+            modInfoImage.ImageLocation = vb.downloadLocation() + "/modpack/modpacks/" + modPackList.list[id].tag + "/" + modPackList.list[id].mainLogo;
             modInfoDescription.Text = modPackList.list[id].longDescription;
             selectedModPack.Text = "Selected ModPack:\n" + modPackList.list[id].name;
         }
@@ -852,10 +1082,22 @@ namespace MechZoneModPack
 
         private void modInfoModListBtn_Click(object sender, EventArgs e)
         {
+            selected = Properties.Settings.Default.selectedModPack;
+            //Console.WriteLine(selected);
             try
             {
                 modList list = new modList();
-                list.temp = fileList;
+
+                if (File.Exists(vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag + "\\temp\\mods.json"))
+                {
+                    File.Delete(vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag + "\\temp\\mods.json");
+                }
+
+                
+                vb.downloadFile(modPackList.list[selected].modsFile, vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag + "\\temp\\mods.json", null);
+                jsonClasses.filesList mods = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag + "\\temp\\mods.json"));
+                
+                list.temp = mods;
                 list.ShowDialog();
             }
             catch (Exception ex)
@@ -868,18 +1110,34 @@ namespace MechZoneModPack
 
         private void modInfoDownloadBtn_Click(object sender, EventArgs e)
         {
-            if (!(!Directory.Exists(vb.appdata() + "\\modpacks\\" + modPackList.list[Properties.Settings.Default.selectedModPack].tag)))
+            if (MessageBox.Show("Do you realy want to redownload the Pack?","Question",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                vb.createFolderStructure(Properties.Settings.Default.selectedModPack, modPackList);
-                Download dl = new Download();
-                dl.tmpId = Properties.Settings.Default.selectedModPack;
-                dl.list = modPackList;
+                //vb.createFolderStructure(Properties.Settings.Default.selectedModPack, modPackList);
+                List<bool> download = new List<bool>();
+                for (int i = 0; i < 7; i++)
+                {
+                    download.Add(false);
+                }
+                DownloadNew dl = new DownloadNew();
+                dl.packID = Properties.Settings.Default.selectedModPack;
+                dl.modPackList = modPackList;
+                dl.select = download;
                 dl.ShowDialog();
+                MessageBox.Show("Download Complete\nPlease login to start the Game", "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else
-            {
-                MessageBox.Show("You already Downloaded the ModPack. Click Login to Play or go to the Options to redownload the Pack");
-            }
+        }
+
+        private void infoBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            //Console.WriteLine(e.Url.ToString());
+            e.Cancel = true;
+            Process.Start(e.Url.ToString());
+        }
+
+        private void debugCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.debugMode = debugCheck.Checked;
+            Properties.Settings.Default.Save();
         }
 	}
 }

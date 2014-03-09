@@ -35,6 +35,7 @@
             this.generateLibrariesList = new System.Windows.Forms.Button();
             this.itempanelToJson = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // generateModList
@@ -124,6 +125,7 @@
         private System.Windows.Forms.Button generateLibrariesList;
         private System.Windows.Forms.Button itempanelToJson;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

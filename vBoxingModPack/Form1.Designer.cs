@@ -52,6 +52,7 @@
             this.infoBrowser = new System.Windows.Forms.WebBrowser();
             this.modPackTabPage = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.modInfoDownloadBtn = new System.Windows.Forms.Button();
             this.modInfoModListBtn = new System.Windows.Forms.Button();
             this.modInfoChangelogBtn = new System.Windows.Forms.Button();
             this.modInfoDescription = new System.Windows.Forms.RichTextBox();
@@ -59,6 +60,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabTexturePack = new System.Windows.Forms.TabPage();
             this.optionTabPage = new System.Windows.Forms.TabPage();
+            this.debugCheck = new System.Windows.Forms.CheckBox();
             this.changeJavaPath = new System.Windows.Forms.Button();
             this.javaPathLabel = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -95,7 +97,6 @@
             this.loginStatus = new System.Windows.Forms.PictureBox();
             this.websiteStatus = new System.Windows.Forms.PictureBox();
             this.sendLogBG = new System.Windows.Forms.PictureBox();
-            this.modInfoDownloadBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
             this.infosMain.SuspendLayout();
@@ -277,6 +278,7 @@
             resources.ApplyResources(this.infoBrowser, "infoBrowser");
             this.infoBrowser.Name = "infoBrowser";
             this.infoBrowser.Url = new System.Uri("http://mechzone.net/modpack/launcher/info/info.html", System.UriKind.Absolute);
+            this.infoBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.infoBrowser_Navigating);
             // 
             // modPackTabPage
             // 
@@ -295,6 +297,13 @@
             this.panel2.Controls.Add(this.modInfoImage);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // modInfoDownloadBtn
+            // 
+            resources.ApplyResources(this.modInfoDownloadBtn, "modInfoDownloadBtn");
+            this.modInfoDownloadBtn.Name = "modInfoDownloadBtn";
+            this.modInfoDownloadBtn.UseVisualStyleBackColor = true;
+            this.modInfoDownloadBtn.Click += new System.EventHandler(this.modInfoDownloadBtn_Click);
             // 
             // modInfoModListBtn
             // 
@@ -339,6 +348,7 @@
             // optionTabPage
             // 
             resources.ApplyResources(this.optionTabPage, "optionTabPage");
+            this.optionTabPage.Controls.Add(this.debugCheck);
             this.optionTabPage.Controls.Add(this.changeJavaPath);
             this.optionTabPage.Controls.Add(this.javaPathLabel);
             this.optionTabPage.Controls.Add(this.label10);
@@ -361,6 +371,13 @@
             this.optionTabPage.Controls.Add(this.pictureBox1);
             this.optionTabPage.Name = "optionTabPage";
             this.optionTabPage.UseVisualStyleBackColor = true;
+            // 
+            // debugCheck
+            // 
+            resources.ApplyResources(this.debugCheck, "debugCheck");
+            this.debugCheck.Name = "debugCheck";
+            this.debugCheck.UseVisualStyleBackColor = true;
+            this.debugCheck.CheckedChanged += new System.EventHandler(this.debugCheck_CheckedChanged);
             // 
             // changeJavaPath
             // 
@@ -602,13 +619,6 @@
             this.sendLogBG.Name = "sendLogBG";
             this.sendLogBG.TabStop = false;
             // 
-            // modInfoDownloadBtn
-            // 
-            resources.ApplyResources(this.modInfoDownloadBtn, "modInfoDownloadBtn");
-            this.modInfoDownloadBtn.Name = "modInfoDownloadBtn";
-            this.modInfoDownloadBtn.UseVisualStyleBackColor = true;
-            this.modInfoDownloadBtn.Click += new System.EventHandler(this.modInfoDownloadBtn_Click);
-            // 
             // mainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -734,6 +744,7 @@
         private System.Windows.Forms.Button modInfoModListBtn;
         private System.Windows.Forms.Button modInfoChangelogBtn;
         private System.Windows.Forms.Button modInfoDownloadBtn;
+        private System.Windows.Forms.CheckBox debugCheck;
 	}
 }
 
