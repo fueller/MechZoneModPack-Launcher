@@ -36,7 +36,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.php</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationRevision>65</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -201,12 +201,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Download.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Download.Designer.cs">
-      <DependentUpon>Download.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,9 +219,6 @@
     </Compile>
     <EmbeddedResource Include="Changelog.resx">
       <DependentUpon>Changelog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Download.resx">
-      <DependentUpon>Download.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DownloadNew.resx">
       <DependentUpon>DownloadNew.cs</DependentUpon>

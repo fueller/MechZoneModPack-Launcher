@@ -228,32 +228,43 @@ namespace MechZoneModPack
                 ErrorWindow err = new ErrorWindow();
                 err.ex = ex;
                 err.ShowDialog();
-                MechZoneModPack.mainForm.monitor.TrackException(ex, "GetJavaPath");
                 return null;
             }
         }
         #endregion
 
         #region get Server Status
-        public static dynamic getServerStatus()
+        public static jsonClasses.serverStatus getServerStatus()
         {
             try
             {
                 MechZoneModPack.mainForm.monitor.TrackFeatureStart("getServerStatus");
                 WebClient client = new WebClient();
+                client.Headers.Add("User-Agent: Other");
                 client.Proxy = null;
-                var response = client.DownloadString(new Uri("http://xpaw.ru/mcstatus/status.json"));
-                dynamic data = new JsonFx.Json.JsonReader().Read(response);
+                string file = appdata() + "\\temp\\status.json";
+                Uri url = new Uri("http://xpaw.ru/mcstatus/status.json");
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                    client.DownloadFile(url, appdata() + "\\temp\\status.json");
+                }
+                else
+                {
+                    client.DownloadFile(url, appdata() + "\\temp\\status.json");
+                }
+
+                jsonClasses.serverStatus data = JsonConvert.DeserializeObject<jsonClasses.serverStatus>(File.ReadAllText(file));
                 MechZoneModPack.mainForm.monitor.TrackFeatureStop("getServerStatus");
                 return data;
             }
-            catch (Exception /*ex*/)
+            catch (Exception ex)
             {
-                //ErrorWindow err = new ErrorWindow();
-                //err.ex = ex;
-                //err.ShowDialog();
+                ErrorWindow err = new ErrorWindow();
+                err.ex = ex;
+                err.ShowDialog();
                 MechZoneModPack.mainForm.monitor.TrackFeatureCancel("getServerStatus");
-                //MechZoneModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
+                MechZoneModPack.mainForm.monitor.TrackException(ex, "noServerStatus");
                 return null;
             }
         }

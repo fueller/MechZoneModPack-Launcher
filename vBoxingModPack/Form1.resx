@@ -329,7 +329,7 @@
     <value>optionTabPage</value>
   </data>
   <data name="&gt;&gt;noServerCheckOnStart.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="updateStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -425,7 +425,7 @@
     <value>optionTabPage</value>
   </data>
   <data name="&gt;&gt;ramComb.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ramSelect.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -452,7 +452,7 @@
     <value>optionTabPage</value>
   </data>
   <data name="&gt;&gt;ramSelect.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="resX.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -485,7 +485,7 @@
     <value>optionTabPage</value>
   </data>
   <data name="&gt;&gt;resX.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="resHeight.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -509,7 +509,7 @@
     <value>optionTabPage</value>
   </data>
   <data name="&gt;&gt;resHeight.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="resWidth.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -533,7 +533,7 @@
     <value>optionTabPage</value>
   </data>
   <data name="&gt;&gt;resWidth.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="resolutionComb.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -566,7 +566,7 @@
     <value>optionTabPage</value>
   </data>
   <data name="&gt;&gt;resolutionComb.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="mojangStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -597,21 +597,6 @@
   </data>
   <data name="infosTabPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
-  </data>
-  <data name="infoBrowser.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="infoBrowser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="infoBrowser.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>20, 20</value>
-  </data>
-  <data name="infoBrowser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>739, 329</value>
-  </data>
-  <data name="infoBrowser.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;infoBrowser.Name" xml:space="preserve">
     <value>infoBrowser</value>
@@ -650,6 +635,849 @@
     <value>infosMain</value>
   </data>
   <data name="&gt;&gt;infosTabPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>modPackTabPage</value>
+  </data>
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>modPackTabPage</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="modPackTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="modPackTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="modPackTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>745, 335</value>
+  </data>
+  <data name="modPackTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="modPackTabPage.Text" xml:space="preserve">
+    <value>ModPacks</value>
+  </data>
+  <data name="&gt;&gt;modPackTabPage.Name" xml:space="preserve">
+    <value>modPackTabPage</value>
+  </data>
+  <data name="&gt;&gt;modPackTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modPackTabPage.Parent" xml:space="preserve">
+    <value>infosMain</value>
+  </data>
+  <data name="&gt;&gt;modPackTabPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabTexturePack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabTexturePack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>745, 335</value>
+  </data>
+  <data name="tabTexturePack.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="tabTexturePack.Text" xml:space="preserve">
+    <value>Texture Pack</value>
+  </data>
+  <data name="&gt;&gt;tabTexturePack.Name" xml:space="preserve">
+    <value>tabTexturePack</value>
+  </data>
+  <data name="&gt;&gt;tabTexturePack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabTexturePack.Parent" xml:space="preserve">
+    <value>infosMain</value>
+  </data>
+  <data name="&gt;&gt;tabTexturePack.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="optionTabPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="updateServerTime.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="updateServerTime.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="updateServerTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 289</value>
+  </data>
+  <data name="updateServerTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 21</value>
+  </data>
+  <data name="updateServerTime.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="updateServerTime.Text" xml:space="preserve">
+    <value>Server Status update 60 sec</value>
+  </data>
+  <data name="&gt;&gt;updateServerTime.Name" xml:space="preserve">
+    <value>updateServerTime</value>
+  </data>
+  <data name="&gt;&gt;updateServerTime.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updateServerTime.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;updateServerTime.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="debugCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="debugCheck.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="debugCheck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 271</value>
+  </data>
+  <data name="debugCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 17</value>
+  </data>
+  <data name="debugCheck.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="debugCheck.Text" xml:space="preserve">
+    <value>Debug Mode</value>
+  </data>
+  <data name="&gt;&gt;debugCheck.Name" xml:space="preserve">
+    <value>debugCheck</value>
+  </data>
+  <data name="&gt;&gt;debugCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;debugCheck.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;debugCheck.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="changeJavaPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="changeJavaPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 226</value>
+  </data>
+  <data name="changeJavaPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="changeJavaPath.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="changeJavaPath.Text" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="&gt;&gt;changeJavaPath.Name" xml:space="preserve">
+    <value>changeJavaPath</value>
+  </data>
+  <data name="&gt;&gt;changeJavaPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;changeJavaPath.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;changeJavaPath.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="javaPathLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="javaPathLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="javaPathLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 251</value>
+  </data>
+  <data name="javaPathLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="javaPathLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="javaPathLabel.Text" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;javaPathLabel.Name" xml:space="preserve">
+    <value>javaPathLabel</value>
+  </data>
+  <data name="&gt;&gt;javaPathLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;javaPathLabel.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;javaPathLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 231</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Java Path</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="sendLastClientLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="sendLastClientLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>443, 33</value>
+  </data>
+  <data name="sendLastClientLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 23</value>
+  </data>
+  <data name="sendLastClientLog.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="sendLastClientLog.Text" xml:space="preserve">
+    <value>Send last Client Log</value>
+  </data>
+  <data name="&gt;&gt;sendLastClientLog.Name" xml:space="preserve">
+    <value>sendLastClientLog</value>
+  </data>
+  <data name="&gt;&gt;sendLastClientLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sendLastClientLog.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;sendLastClientLog.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="sendLastCrashLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="sendLastCrashLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>443, 4</value>
+  </data>
+  <data name="sendLastCrashLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 23</value>
+  </data>
+  <data name="sendLastCrashLog.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="sendLastCrashLog.Text" xml:space="preserve">
+    <value>Send last Crash Log</value>
+  </data>
+  <data name="&gt;&gt;sendLastCrashLog.Name" xml:space="preserve">
+    <value>sendLastCrashLog</value>
+  </data>
+  <data name="&gt;&gt;sendLastCrashLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sendLastCrashLog.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;sendLastCrashLog.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="updateFiles.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="updateFiles.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="updateFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="updateFiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 6</value>
+  </data>
+  <data name="updateFiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 17</value>
+  </data>
+  <data name="updateFiles.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="updateFiles.Text" xml:space="preserve">
+    <value>No file update Check</value>
+  </data>
+  <data name="&gt;&gt;updateFiles.Name" xml:space="preserve">
+    <value>updateFiles</value>
+  </data>
+  <data name="&gt;&gt;updateFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updateFiles.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;updateFiles.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="extraJavaPrameters.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="extraJavaPrameters.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="extraJavaPrameters.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="extraJavaPrameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 149</value>
+  </data>
+  <data name="extraJavaPrameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 13</value>
+  </data>
+  <data name="extraJavaPrameters.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="extraJavaPrameters.Text" xml:space="preserve">
+    <value>Extra Java Parameter</value>
+  </data>
+  <data name="&gt;&gt;extraJavaPrameters.Name" xml:space="preserve">
+    <value>extraJavaPrameters</value>
+  </data>
+  <data name="&gt;&gt;extraJavaPrameters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;extraJavaPrameters.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;extraJavaPrameters.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="extraJavaParameterText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 168</value>
+  </data>
+  <data name="extraJavaParameterText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 20</value>
+  </data>
+  <data name="extraJavaParameterText.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="extraJavaParameterText.Text" xml:space="preserve">
+    <value>-XX:PermSize=256m</value>
+  </data>
+  <data name="&gt;&gt;extraJavaParameterText.Name" xml:space="preserve">
+    <value>extraJavaParameterText</value>
+  </data>
+  <data name="&gt;&gt;extraJavaParameterText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;extraJavaParameterText.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;extraJavaParameterText.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>223, 10</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="themeSelecter.Items" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="themeSelecter.Items1" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="themeSelecter.Items2" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="themeSelecter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>270, 7</value>
+  </data>
+  <data name="themeSelecter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="themeSelecter.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;themeSelecter.Name" xml:space="preserve">
+    <value>themeSelecter</value>
+  </data>
+  <data name="&gt;&gt;themeSelecter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;themeSelecter.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;themeSelecter.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="openDirectory.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="openDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 194</value>
+  </data>
+  <data name="openDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 23</value>
+  </data>
+  <data name="openDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="openDirectory.Text" xml:space="preserve">
+    <value>Installation Folder</value>
+  </data>
+  <data name="&gt;&gt;openDirectory.Name" xml:space="preserve">
+    <value>openDirectory</value>
+  </data>
+  <data name="&gt;&gt;openDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openDirectory.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;openDirectory.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>415, 6</value>
+  </data>
+  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1, 323</value>
+  </data>
+  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
+    <value>pictureBox2</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 6</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1, 323</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="optionTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="optionTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="optionTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>745, 335</value>
+  </data>
+  <data name="optionTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="optionTabPage.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;optionTabPage.Name" xml:space="preserve">
+    <value>optionTabPage</value>
+  </data>
+  <data name="&gt;&gt;optionTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;optionTabPage.Parent" xml:space="preserve">
+    <value>infosMain</value>
+  </data>
+  <data name="&gt;&gt;optionTabPage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="contactTabPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="&gt;&gt;linkLabel3.Name" xml:space="preserve">
+    <value>linkLabel3</value>
+  </data>
+  <data name="&gt;&gt;linkLabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabel3.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;linkLabel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;linkLabel2.Name" xml:space="preserve">
+    <value>linkLabel2</value>
+  </data>
+  <data name="&gt;&gt;linkLabel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabel2.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;linkLabel2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;linkLabel1.Name" xml:space="preserve">
+    <value>linkLabel1</value>
+  </data>
+  <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="contactTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="contactTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>745, 335</value>
+  </data>
+  <data name="contactTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="contactTabPage.Text" xml:space="preserve">
+    <value>Contact / Bug Reports</value>
+  </data>
+  <data name="&gt;&gt;contactTabPage.Name" xml:space="preserve">
+    <value>contactTabPage</value>
+  </data>
+  <data name="&gt;&gt;contactTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;contactTabPage.Parent" xml:space="preserve">
+    <value>infosMain</value>
+  </data>
+  <data name="&gt;&gt;contactTabPage.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;logTextBox.Name" xml:space="preserve">
+    <value>logTextBox</value>
+  </data>
+  <data name="&gt;&gt;logTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logTextBox.Parent" xml:space="preserve">
+    <value>logTabPage</value>
+  </data>
+  <data name="&gt;&gt;logTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="logTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="logTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="logTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>745, 335</value>
+  </data>
+  <data name="logTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="logTabPage.Text" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="&gt;&gt;logTabPage.Name" xml:space="preserve">
+    <value>logTabPage</value>
+  </data>
+  <data name="&gt;&gt;logTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logTabPage.Parent" xml:space="preserve">
+    <value>infosMain</value>
+  </data>
+  <data name="&gt;&gt;logTabPage.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="infosMain.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>58, 18</value>
+  </data>
+  <data name="infosMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 63</value>
+  </data>
+  <data name="infosMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>753, 361</value>
+  </data>
+  <data name="infosMain.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;infosMain.Name" xml:space="preserve">
+    <value>infosMain</value>
+  </data>
+  <data name="&gt;&gt;infosMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;infosMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;infosMain.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="infoBrowser.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="infoBrowser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="infoBrowser.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="infoBrowser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>739, 329</value>
+  </data>
+  <data name="infoBrowser.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;infoBrowser.Name" xml:space="preserve">
+    <value>infoBrowser</value>
+  </data>
+  <data name="&gt;&gt;infoBrowser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.WebBrowser, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;infoBrowser.Parent" xml:space="preserve">
+    <value>infosTabPage</value>
+  </data>
+  <data name="&gt;&gt;infoBrowser.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;modInfoDownloadBtn.Name" xml:space="preserve">
+    <value>modInfoDownloadBtn</value>
+  </data>
+  <data name="&gt;&gt;modInfoDownloadBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modInfoDownloadBtn.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;modInfoDownloadBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;modInfoModListBtn.Name" xml:space="preserve">
+    <value>modInfoModListBtn</value>
+  </data>
+  <data name="&gt;&gt;modInfoModListBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modInfoModListBtn.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;modInfoModListBtn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;modInfoChangelogBtn.Name" xml:space="preserve">
+    <value>modInfoChangelogBtn</value>
+  </data>
+  <data name="&gt;&gt;modInfoChangelogBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modInfoChangelogBtn.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;modInfoChangelogBtn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;modInfoDescription.Name" xml:space="preserve">
+    <value>modInfoDescription</value>
+  </data>
+  <data name="&gt;&gt;modInfoDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modInfoDescription.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;modInfoDescription.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;modInfoImage.Name" xml:space="preserve">
+    <value>modInfoImage</value>
+  </data>
+  <data name="&gt;&gt;modInfoImage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modInfoImage.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;modInfoImage.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>358, 0</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 335</value>
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>modPackTabPage</value>
+  </data>
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="modInfoDownloadBtn.Location" type="System.Drawing.Point, System.Drawing">
@@ -782,27 +1610,6 @@ Mehr infos über das modpack unter http://mechzone.net/modpack1Link</value>
   <data name="&gt;&gt;modInfoImage.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 0</value>
-  </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 335</value>
-  </data>
-  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
-    <value>panel2</value>
-  </data>
-  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
-    <value>modPackTabPage</value>
-  </data>
-  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="panel1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -826,492 +1633,6 @@ Mehr infos über das modpack unter http://mechzone.net/modpack1Link</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="modPackTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="modPackTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="modPackTabPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 335</value>
-  </data>
-  <data name="modPackTabPage.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="modPackTabPage.Text" xml:space="preserve">
-    <value>ModPacks</value>
-  </data>
-  <data name="&gt;&gt;modPackTabPage.Name" xml:space="preserve">
-    <value>modPackTabPage</value>
-  </data>
-  <data name="&gt;&gt;modPackTabPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;modPackTabPage.Parent" xml:space="preserve">
-    <value>infosMain</value>
-  </data>
-  <data name="&gt;&gt;modPackTabPage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabTexturePack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabTexturePack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 335</value>
-  </data>
-  <data name="tabTexturePack.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="tabTexturePack.Text" xml:space="preserve">
-    <value>Texture Pack</value>
-  </data>
-  <data name="&gt;&gt;tabTexturePack.Name" xml:space="preserve">
-    <value>tabTexturePack</value>
-  </data>
-  <data name="&gt;&gt;tabTexturePack.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabTexturePack.Parent" xml:space="preserve">
-    <value>infosMain</value>
-  </data>
-  <data name="&gt;&gt;tabTexturePack.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="optionTabPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="debugCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="debugCheck.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="debugCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 271</value>
-  </data>
-  <data name="debugCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 17</value>
-  </data>
-  <data name="debugCheck.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="debugCheck.Text" xml:space="preserve">
-    <value>Debug Mode</value>
-  </data>
-  <data name="&gt;&gt;debugCheck.Name" xml:space="preserve">
-    <value>debugCheck</value>
-  </data>
-  <data name="&gt;&gt;debugCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;debugCheck.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;debugCheck.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="changeJavaPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="changeJavaPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 226</value>
-  </data>
-  <data name="changeJavaPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="changeJavaPath.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="changeJavaPath.Text" xml:space="preserve">
-    <value>Change</value>
-  </data>
-  <data name="&gt;&gt;changeJavaPath.Name" xml:space="preserve">
-    <value>changeJavaPath</value>
-  </data>
-  <data name="&gt;&gt;changeJavaPath.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;changeJavaPath.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;changeJavaPath.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="javaPathLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="javaPathLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="javaPathLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 251</value>
-  </data>
-  <data name="javaPathLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
-  </data>
-  <data name="javaPathLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="javaPathLabel.Text" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="&gt;&gt;javaPathLabel.Name" xml:space="preserve">
-    <value>javaPathLabel</value>
-  </data>
-  <data name="&gt;&gt;javaPathLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;javaPathLabel.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;javaPathLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 231</value>
-  </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
-  </data>
-  <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Java Path</value>
-  </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
-  </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="sendLastClientLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="sendLastClientLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 33</value>
-  </data>
-  <data name="sendLastClientLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 23</value>
-  </data>
-  <data name="sendLastClientLog.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="sendLastClientLog.Text" xml:space="preserve">
-    <value>Send last Client Log</value>
-  </data>
-  <data name="&gt;&gt;sendLastClientLog.Name" xml:space="preserve">
-    <value>sendLastClientLog</value>
-  </data>
-  <data name="&gt;&gt;sendLastClientLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sendLastClientLog.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;sendLastClientLog.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="sendLastCrashLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="sendLastCrashLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 4</value>
-  </data>
-  <data name="sendLastCrashLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 23</value>
-  </data>
-  <data name="sendLastCrashLog.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="sendLastCrashLog.Text" xml:space="preserve">
-    <value>Send last Crash Log</value>
-  </data>
-  <data name="&gt;&gt;sendLastCrashLog.Name" xml:space="preserve">
-    <value>sendLastCrashLog</value>
-  </data>
-  <data name="&gt;&gt;sendLastCrashLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sendLastCrashLog.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;sendLastCrashLog.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="updateFiles.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="updateFiles.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="updateFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="updateFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 6</value>
-  </data>
-  <data name="updateFiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 17</value>
-  </data>
-  <data name="updateFiles.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="updateFiles.Text" xml:space="preserve">
-    <value>No file update Check</value>
-  </data>
-  <data name="&gt;&gt;updateFiles.Name" xml:space="preserve">
-    <value>updateFiles</value>
-  </data>
-  <data name="&gt;&gt;updateFiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;updateFiles.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;updateFiles.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="extraJavaPrameters.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="extraJavaPrameters.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="extraJavaPrameters.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="extraJavaPrameters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 149</value>
-  </data>
-  <data name="extraJavaPrameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 13</value>
-  </data>
-  <data name="extraJavaPrameters.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="extraJavaPrameters.Text" xml:space="preserve">
-    <value>Extra Java Parameter</value>
-  </data>
-  <data name="&gt;&gt;extraJavaPrameters.Name" xml:space="preserve">
-    <value>extraJavaPrameters</value>
-  </data>
-  <data name="&gt;&gt;extraJavaPrameters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;extraJavaPrameters.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;extraJavaPrameters.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="extraJavaParameterText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 168</value>
-  </data>
-  <data name="extraJavaParameterText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 20</value>
-  </data>
-  <data name="extraJavaParameterText.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="extraJavaParameterText.Text" xml:space="preserve">
-    <value>-XX:PermSize=256m</value>
-  </data>
-  <data name="&gt;&gt;extraJavaParameterText.Name" xml:space="preserve">
-    <value>extraJavaParameterText</value>
-  </data>
-  <data name="&gt;&gt;extraJavaParameterText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;extraJavaParameterText.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;extraJavaParameterText.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 10</value>
-  </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
-  </data>
-  <data name="label9.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Theme</value>
-  </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
-  </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="themeSelecter.Items" xml:space="preserve">
-    <value>Dark</value>
-  </data>
-  <data name="themeSelecter.Items1" xml:space="preserve">
-    <value>Light</value>
-  </data>
-  <data name="themeSelecter.Items2" xml:space="preserve">
-    <value>None</value>
-  </data>
-  <data name="themeSelecter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 7</value>
-  </data>
-  <data name="themeSelecter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="themeSelecter.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;themeSelecter.Name" xml:space="preserve">
-    <value>themeSelecter</value>
-  </data>
-  <data name="&gt;&gt;themeSelecter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;themeSelecter.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;themeSelecter.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="openDirectory.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="openDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 194</value>
-  </data>
-  <data name="openDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 23</value>
-  </data>
-  <data name="openDirectory.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="openDirectory.Text" xml:space="preserve">
-    <value>Installation Folder</value>
-  </data>
-  <data name="&gt;&gt;openDirectory.Name" xml:space="preserve">
-    <value>openDirectory</value>
-  </data>
-  <data name="&gt;&gt;openDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openDirectory.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;openDirectory.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>415, 6</value>
-  </data>
-  <data name="pictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 323</value>
-  </data>
-  <data name="pictureBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Name" xml:space="preserve">
-    <value>pictureBox2</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 6</value>
-  </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1, 323</value>
-  </data>
-  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
-    <value>pictureBox1</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="optionTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="optionTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="optionTabPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 335</value>
-  </data>
-  <data name="optionTabPage.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="optionTabPage.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="&gt;&gt;optionTabPage.Name" xml:space="preserve">
-    <value>optionTabPage</value>
-  </data>
-  <data name="&gt;&gt;optionTabPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;optionTabPage.Parent" xml:space="preserve">
-    <value>infosMain</value>
-  </data>
-  <data name="&gt;&gt;optionTabPage.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="contactTabPage.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Zoom</value>
   </data>
   <data name="linkLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1583,30 +1904,6 @@ Mehr infos über das modpack unter http://mechzone.net/modpack1Link</value>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="contactTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="contactTabPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 335</value>
-  </data>
-  <data name="contactTabPage.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="contactTabPage.Text" xml:space="preserve">
-    <value>Contact / Bug Reports</value>
-  </data>
-  <data name="&gt;&gt;contactTabPage.Name" xml:space="preserve">
-    <value>contactTabPage</value>
-  </data>
-  <data name="&gt;&gt;contactTabPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;contactTabPage.Parent" xml:space="preserve">
-    <value>infosMain</value>
-  </data>
-  <data name="&gt;&gt;contactTabPage.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="logTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -1636,57 +1933,6 @@ Mehr infos über das modpack unter http://mechzone.net/modpack1Link</value>
   </data>
   <data name="&gt;&gt;logTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="logTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="logTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="logTabPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>745, 335</value>
-  </data>
-  <data name="logTabPage.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="logTabPage.Text" xml:space="preserve">
-    <value>Log</value>
-  </data>
-  <data name="&gt;&gt;logTabPage.Name" xml:space="preserve">
-    <value>logTabPage</value>
-  </data>
-  <data name="&gt;&gt;logTabPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;logTabPage.Parent" xml:space="preserve">
-    <value>infosMain</value>
-  </data>
-  <data name="&gt;&gt;logTabPage.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="infosMain.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>58, 18</value>
-  </data>
-  <data name="infosMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 63</value>
-  </data>
-  <data name="infosMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>753, 361</value>
-  </data>
-  <data name="infosMain.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;infosMain.Name" xml:space="preserve">
-    <value>infosMain</value>
-  </data>
-  <data name="&gt;&gt;infosMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;infosMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;infosMain.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="sendErrorLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2120,6 +2366,12 @@ Mehr infos über das modpack unter http://mechzone.net/modpack1Link</value>
   <data name="&gt;&gt;openJavaFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;updateServerTimer.Name" xml:space="preserve">
+    <value>updateServerTimer</value>
+  </data>
+  <data name="&gt;&gt;updateServerTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>mainForm</value>
   </data>
@@ -2132,4 +2384,7 @@ Mehr infos über das modpack unter http://mechzone.net/modpack1Link</value>
   <data name="openJavaFile.Filter" xml:space="preserve">
     <value>javaw|javaw.exe</value>
   </data>
+  <metadata name="updateServerTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>336, 13</value>
+  </metadata>
 </root>

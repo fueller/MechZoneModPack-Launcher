@@ -22,6 +22,7 @@ namespace MechZoneModPack
 
         private void ErrorWindow_Load(object sender, EventArgs e)
         {
+            MechZoneModPack.mainForm.monitor.TrackException(ex);
             this.Size = new Size(this.Size.Width, 100);
             ok.Location = new Point(339, 32);
             label1.Text = ex.Message;
@@ -64,7 +65,6 @@ namespace MechZoneModPack
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             vb.sendErrorLog(error, ex);
         }
 

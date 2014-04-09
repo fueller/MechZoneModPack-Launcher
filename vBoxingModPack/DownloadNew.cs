@@ -26,7 +26,7 @@ namespace MechZoneModPack
         Stopwatch sw = new Stopwatch();
         int count = 0;
         List<bool> selected;        
-        WebClient client = new WebClient();
+        //WebClient client = new WebClient();
                         
 
         public jsonClasses.modpacks modPackList
@@ -55,7 +55,7 @@ namespace MechZoneModPack
         private void DownloadNew_Load(object sender, EventArgs e)
         {
             progressBar1.Value = 0;
-            client.Proxy = null;
+            //client.Proxy = null;
         }
 
         private void DownloadNew_Shown(object sender, EventArgs e)
@@ -75,6 +75,11 @@ namespace MechZoneModPack
                 while (downloading) { this.Update(); Application.DoEvents(); }
                 downloadFile(packs.list[id].deleteFile, vb.appdata() + "\\modpacks\\" + packs.list[id].tag + "\\temp\\delete.json", null, true, false);
                 while (downloading) { this.Update(); Application.DoEvents(); }
+                try
+                {
+                    downloadFile(vb.downloadLocation() + "modpack/modpacks/" + packs.list[id].tag + "/servers.dat", vb.appdata() + "\\modpacks\\" + packs.list[id].tag + "\\servers.dat", null, true, false);
+                    while (downloading) { this.Update(); Application.DoEvents(); }
+                }catch (Exception){} 
 
                 jsonClasses.filesList mods = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\modpacks\\" + packs.list[id].tag + "\\temp\\mods.json"));
                 jsonClasses.filesList config = JsonConvert.DeserializeObject<jsonClasses.filesList>(File.ReadAllText(vb.appdata() + "\\modpacks\\" + packs.list[id].tag + "\\temp\\config.json"));
@@ -564,7 +569,8 @@ namespace MechZoneModPack
                         {
                             Directory.CreateDirectory(outputFolder);
                         }
-
+                        WebClient client = new WebClient();
+                        client.Proxy = null;
                         //MessageBox.Show("StartDownload");
                         downloading = true;
                         progressBar2.Value = 0;

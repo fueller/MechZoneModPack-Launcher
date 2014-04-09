@@ -80,6 +80,7 @@ namespace MechZoneModPack
             extraJavaParameterText.Text = Properties.Settings.Default.extraJavaParameter;
             themeSelecter.SelectedIndex = Properties.Settings.Default.theme;
             javaPathLabel.Text = Properties.Settings.Default.javaPath;
+            updateServerTime.Checked = Properties.Settings.Default.updateServerTimer;
 
             themeSelecter_SelectedIndexChanged(null, null);
 
@@ -266,7 +267,7 @@ namespace MechZoneModPack
                         dl.modPackList = modPackList;
                         dl.select = download;
                         dl.ShowDialog();
-                        MessageBox.Show("Download Complete\nPlease login again to start the Game", "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Download Complete\nThe downloaded ModPack will be starting now.", "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }else{/*Console.WriteLine("*Do nothing*");*/}
                 }
@@ -322,7 +323,7 @@ namespace MechZoneModPack
                 {
                     vb.debug("Starting Minecraft", "Login");
                     string[] session = vb.getSessionKey(usernameText.Text, passwordText.Text);
-                    if (session[1] == "error") { Console.WriteLine("error"); }
+                    if (session[0] == "error") { Console.WriteLine("error"); }
                     else
                     {
                         string arguments = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump ";
@@ -477,7 +478,7 @@ namespace MechZoneModPack
         private void status()
         {
             monitor.TrackFeature("updateStartus");
-            dynamic data = vb.getServerStatus();
+            jsonClasses.serverStatus data = vb.getServerStatus();
 
             if (data != null)
             {
@@ -495,63 +496,69 @@ namespace MechZoneModPack
                     if (data.report.session.status == "up")
                     {
                         sessionStatus.Image = Properties.Resources.statusOn;
-                        ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\n" + data.report.session.title + "\r\n");
+                        ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\n" + data.report.session.title + "\r\n" + "Uptime: " + data.report.session.uptime + "%\r\n");
                     }
                     else
                     {
                         sessionStatus.Image = Properties.Resources.statusOff;
-                        ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\n" + data.report.session.title + "\r\n");
+                        ToolTip.SetToolTip(sessionStatus, "Session Server Status\r\n" + data.report.session.title + "\r\n" + "Offline for: " + data.report.session.downtime + "\r\n");
                     }
 
                     //Website
                     if (data.report.website.status == "up")
                     {
                         websiteStatus.Image = Properties.Resources.statusOn;
-                        ToolTip.SetToolTip(websiteStatus, "Website Status\r\n" + data.report.website.title + "\r\n");
+                        ToolTip.SetToolTip(websiteStatus, "Website Status\r\n" + data.report.website.title + "\r\n" + "Uptime: " + data.report.website.uptime + "%\r\n");
                     }
                     else
                     {
                         websiteStatus.Image = Properties.Resources.statusOff;
-                        ToolTip.SetToolTip(websiteStatus, "Website Status\r\n" + data.report.website.title + "\r\n");
+                        ToolTip.SetToolTip(websiteStatus, "Website Status\r\n" + data.report.website.title + "\r\n" + "Offline for: " + data.report.website.downtime + "\r\n");
                     }
 
                     //skins
                     if (data.report.skins.status == "up")
                     {
                         skinsStatus.Image = Properties.Resources.statusOn;
-                        ToolTip.SetToolTip(skinsStatus, "Skins Status\r\n" + data.report.skins.title + "\r\n");
+                        ToolTip.SetToolTip(skinsStatus, "Skins Status\r\n" + data.report.skins.title + "\r\n" + "Uptime: " + data.report.skins.uptime + "%\r\n");
                     }
                     else
                     {
                         skinsStatus.Image = Properties.Resources.statusOff;
-                        ToolTip.SetToolTip(skinsStatus, "Skins Status\r\n" + data.report.skins.title + "\r\n");
+                        ToolTip.SetToolTip(skinsStatus, "Skins Status\r\n" + data.report.skins.title + "\r\n" + "Offline for: " + data.report.skins.downtime + "\r\n");
                     }
 
                     //realms
                     if (data.report.realms.status == "up")
                     {
                         realmStatus.Image = Properties.Resources.statusOn;
-                        ToolTip.SetToolTip(realmStatus, "Realms Status\r\n" + data.report.realms.title + "\r\n");
+                        ToolTip.SetToolTip(realmStatus, "Realms Status\r\n" + data.report.realms.title + "\r\n" + "Uptime: " + data.report.realms.uptime + "%\r\n");
                     }
                     else
                     {
                         realmStatus.Image = Properties.Resources.statusOff;
-                        ToolTip.SetToolTip(realmStatus, "Realms Status\r\n" + data.report.realms.title + "\r\n");
+                        ToolTip.SetToolTip(realmStatus, "Realms Status\r\n" + data.report.realms.title + "\r\n" + "Offline for: " + data.report.realms.downtime + "\r\n");
                     }
 
                     //login
                     if (data.report.login.status == "up")
                     {
                         loginStatus.Image = Properties.Resources.statusOn;
-                        ToolTip.SetToolTip(loginStatus, "Login Server Status\r\n" + data.report.login.title + "\r\n");
+                        ToolTip.SetToolTip(loginStatus, "Login Server Status\r\n" + data.report.login.title + "\r\n" + "Uptime: " + data.report.login.uptime + "%\r\n");
                     }
                     else
                     {
                         loginStatus.Image = Properties.Resources.statusOff;
-                        ToolTip.SetToolTip(loginStatus, "Login Server Status\r\n" + data.report.login.title + "\r\n");
+                        ToolTip.SetToolTip(loginStatus, "Login Server Status\r\n" + data.report.login.title + "\r\n" + "Offline for: " + data.report.login.downtime + "\r\n");
                     }
                     this.Update();
                 }
+            }
+            else
+            {
+                //Properties.Settings.Default.updateServerTimer = false;
+                updateServerTime.Checked = false;
+                updateServerTimer.Stop();
             }
         }
         #endregion
@@ -654,12 +661,11 @@ namespace MechZoneModPack
         private void mainForm_Shown(object sender, EventArgs e)
         {
             this.Update();
+            vb.checkVersion();
             if (Properties.Settings.Default.noServerCheck == false)
             {
                 status();                
-            }
-
-            vb.checkVersion();
+            }            
 
             try
             {
@@ -704,6 +710,7 @@ namespace MechZoneModPack
                 err.ex = ex;
                 err.ShowDialog();
             }
+            infoBrowser.Refresh();
         }
 
         void modInfoChangelogButton_Click(object sender, EventArgs e)
@@ -857,30 +864,6 @@ namespace MechZoneModPack
         {
             List<bool> test = newVersionAvailable(Properties.Settings.Default.selectedModPack);
             MessageBox.Show("");
-            
-            /*DownloadNew test = new DownloadNew();
-            //test.packID = Properties.Settings.Default.selectedModPack;
-            test.packID = 1;
-            test.modPackList = modPackList;
-            test.ShowDialog();*/
-            /*try
-            {
-                int nix = 0;
-                int test = 100 / nix;
-            }
-            catch (Exception ex)
-            {
-                ErrorWindow err = new ErrorWindow();
-                err.ex = ex;
-                err.ShowDialog();
-            }*/
-            
-            /*Image test = Image.FromFile(@"D:\temp\test.png");
-            string result = ImageToBase64String(test, ImageFormat.Png);
-            StreamWriter write = new StreamWriter(@"D:\temp\test.txt");
-            write.Write(result);*/
-            //Console.Write("done");
-            //Console.WriteLine(result);
         }
 
         private void sendLastCrashLog_Click(object sender, EventArgs e)
@@ -1138,6 +1121,27 @@ namespace MechZoneModPack
         {
             Properties.Settings.Default.debugMode = debugCheck.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private void updateServerTimer_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.updateServerTimer = updateServerTime.Checked;
+            Properties.Settings.Default.Save();
+
+
+            if (Properties.Settings.Default.updateServerTimer)
+            {
+                updateServerTimer.Start();
+            }
+            else
+            {
+                updateServerTimer.Stop();
+            }
+        }
+
+        private void updateServerTimer_Tick(object sender, EventArgs e)
+        {
+            status();
         }
 	}
 }

@@ -179,5 +179,64 @@ namespace MechZoneModPack
             public string librariesVersion { get; set; }
         }
         #endregion
+
+        #region serverStatus
+
+        public class Session
+        {
+            public string status { get; set; }
+            public string title { get; set; }
+            public string downtime { get; set; }
+            public string uptime { get; set; }
+        }
+
+        public class Login
+        {
+            public string status { get; set; }
+            public string title { get; set; }
+            public string downtime { get; set; }
+            public string uptime { get; set; }
+        }
+
+        public class Website
+        {
+            public string status { get; set; }
+            public string title { get; set; }
+            public string downtime { get; set; }
+            public string uptime { get; set; }
+        }
+
+        public class Realms
+        {
+            public string status { get; set; }
+            public string title { get; set; }
+            public string downtime { get; set; }
+            public string uptime { get; set; }
+        }
+
+        public class Skins
+        {
+            public string status { get; set; }
+            public string title { get; set; }
+            public string downtime { get; set; }
+            public string uptime { get; set; }
+        }
+
+        public class Report
+        {
+            public Session session { get; set; }
+            public Login login { get; set; }
+            public Website website { get; set; }
+            public Realms realms { get; set; }
+            public Skins skins { get; set; }
+        }
+
+        public class serverStatus
+        {
+            public int v { get; set; }
+            public string last_updated { get; set; }
+            public Report report { get; set; }
+        }
+        #endregion
     }
 }

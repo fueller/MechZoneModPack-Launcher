@@ -97,6 +97,8 @@
             this.loginStatus = new System.Windows.Forms.PictureBox();
             this.websiteStatus = new System.Windows.Forms.PictureBox();
             this.sendLogBG = new System.Windows.Forms.PictureBox();
+            this.updateServerTime = new System.Windows.Forms.CheckBox();
+            this.updateServerTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.resHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resWidth)).BeginInit();
             this.infosMain.SuspendLayout();
@@ -348,6 +350,7 @@
             // optionTabPage
             // 
             resources.ApplyResources(this.optionTabPage, "optionTabPage");
+            this.optionTabPage.Controls.Add(this.updateServerTime);
             this.optionTabPage.Controls.Add(this.debugCheck);
             this.optionTabPage.Controls.Add(this.changeJavaPath);
             this.optionTabPage.Controls.Add(this.javaPathLabel);
@@ -619,6 +622,18 @@
             this.sendLogBG.Name = "sendLogBG";
             this.sendLogBG.TabStop = false;
             // 
+            // updateServerTime
+            // 
+            resources.ApplyResources(this.updateServerTime, "updateServerTime");
+            this.updateServerTime.Name = "updateServerTime";
+            this.updateServerTime.UseVisualStyleBackColor = true;
+            this.updateServerTime.CheckedChanged += new System.EventHandler(this.updateServerTimer_CheckedChanged);
+            // 
+            // updateServerTimer
+            // 
+            this.updateServerTimer.Interval = 6000;
+            this.updateServerTimer.Tick += new System.EventHandler(this.updateServerTimer_Tick);
+            // 
             // mainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -745,6 +760,8 @@
         private System.Windows.Forms.Button modInfoChangelogBtn;
         private System.Windows.Forms.Button modInfoDownloadBtn;
         private System.Windows.Forms.CheckBox debugCheck;
+        private System.Windows.Forms.CheckBox updateServerTime;
+        private System.Windows.Forms.Timer updateServerTimer;
 	}
 }
 
