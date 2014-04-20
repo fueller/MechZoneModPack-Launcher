@@ -102,24 +102,6 @@
     <Reference Include="fNbt">
       <HintPath>..\..\..\..\Downloads\fNbt_v0.5.0\fNbt.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis">
-      <HintPath>..\packages\Google.Apis.1.7.0-beta\lib\net40\Google.Apis.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Auth">
-      <HintPath>..\packages\Google.Apis.Auth.1.7.0-beta\lib\net40\Google.Apis.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices">
-      <HintPath>..\packages\Google.Apis.Auth.1.7.0-beta\lib\net40\Google.Apis.Auth.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Core">
-      <HintPath>..\packages\Google.Apis.Core.1.7.0-beta\lib\portable-net4+sl4+wp71+win8\Google.Apis.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Drive.v2">
-      <HintPath>..\packages\Google.Apis.Drive.v2.1.7.0.110-beta\lib\portable-net4+sl4+wp71+win8\Google.Apis.Drive.v2.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.PlatformServices">
-      <HintPath>..\packages\Google.Apis.1.7.0-beta\lib\net40\Google.Apis.PlatformServices.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\..\..\Downloads\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -171,11 +153,11 @@
     <Compile Include="Changelog.Designer.cs">
       <DependentUpon>Changelog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DownloadNew.cs">
+    <Compile Include="Download.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DownloadNew.Designer.cs">
-      <DependentUpon>DownloadNew.cs</DependentUpon>
+    <Compile Include="Download.Designer.cs">
+      <DependentUpon>Download.cs</DependentUpon>
     </Compile>
     <Compile Include="ErrorWindow.cs">
       <SubType>Form</SubType>
@@ -220,8 +202,8 @@
     <EmbeddedResource Include="Changelog.resx">
       <DependentUpon>Changelog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DownloadNew.resx">
-      <DependentUpon>DownloadNew.cs</DependentUpon>
+    <EmbeddedResource Include="Download.resx">
+      <DependentUpon>Download.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorWindow.resx">
       <DependentUpon>ErrorWindow.cs</DependentUpon>

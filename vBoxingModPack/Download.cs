@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace MechZoneModPack
 {
-    public partial class DownloadNew : Form
+    public partial class Download : Form
     {
         //bool backup = false;
         //bool first = true;
@@ -47,7 +47,7 @@ namespace MechZoneModPack
             set { selected = value; }
         }
 
-        public DownloadNew()
+        public Download()
         {
             InitializeComponent();
         }
@@ -551,7 +551,7 @@ namespace MechZoneModPack
             {                
                 if (overrideFile)
                 {
-                    vb.debug("Overwriting File: " + save, "Downloading");
+                    vb.debug("Overwriting File: " + save + " from: " + url, "Downloading");
                     if (File.Exists(save))
                     {
                         File.Delete(save);
@@ -562,7 +562,7 @@ namespace MechZoneModPack
                 {
                     try
                     {
-                        vb.debug("Downloading File: " + save + " | " + overrideFile.ToString() + " | " + File.Exists(save).ToString(), "Downloading");
+                        vb.debug("Downloading File: " + save + " from: " + url + " | " + overrideFile.ToString() + " | " + File.Exists(save).ToString(), "Downloading");
                         string outputFolder = Path.GetDirectoryName(save);
 
                         if (!Directory.Exists(outputFolder))
@@ -578,6 +578,9 @@ namespace MechZoneModPack
                         client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
                         client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
                         client.DownloadFileAsync(new Uri(url), save);
+                        //client.DownloadFileCompleted -= new AsyncCompletedEventHandler(client_DownloadFileCompleted);
+                        //client.DownloadProgressChanged -= new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+                        
                     }
                     catch (Exception ex)
                     {
@@ -602,6 +605,7 @@ namespace MechZoneModPack
                 {
                     File.Delete(save);
                     count++;
+                    vb.debug("Download try " + count, "Downloading");
                     if (count > 1)
                     {
                         MessageBox.Show("Fehler bei datei " + url);
@@ -625,12 +629,13 @@ namespace MechZoneModPack
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             //Console.WriteLine("DownloadFinished");
-            Application.DoEvents();
+            //Application.DoEvents();
             downloadSpeed.Text = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
             labelDownload.Text = string.Format("{0} MB / {1} MB",
                 (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
                 (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00"));
             progressBar2.Value = e.ProgressPercentage;
+            //vb.debug("Percentage: " + e.ProgressPercentage, "Downloading");
             //Console.WriteLine(e.ProgressPercentage);
         }
 
@@ -646,6 +651,7 @@ namespace MechZoneModPack
                 vb.debug("Download finished", "Downloading");
             }
             downloading = false;
+            sw.Stop();
             sw.Reset();
         }
 

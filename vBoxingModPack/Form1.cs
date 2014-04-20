@@ -262,7 +262,7 @@ namespace MechZoneModPack
                         {
                             download.Add(false);
                         }
-                        DownloadNew dl = new DownloadNew();
+                        Download dl = new Download();
                         dl.packID = Properties.Settings.Default.selectedModPack;
                         dl.modPackList = modPackList;
                         dl.select = download;
@@ -290,7 +290,7 @@ namespace MechZoneModPack
                         vb.debug("New Version available", "Login");
                         if (result == System.Windows.Forms.DialogResult.Yes)
                         {
-                            DownloadNew dl = new DownloadNew();
+                            Download dl = new Download();
                             dl.packID = Properties.Settings.Default.selectedModPack;
                             dl.modPackList = modPackList;
                             dl.select = versions;
@@ -333,7 +333,7 @@ namespace MechZoneModPack
                         }
                         else
                         {
-                            arguments += "-Xmx1G";
+                            arguments += "-Xmx2G";
                         }
                         arguments += " " + extraJavaParameterText.Text + " ";
                         arguments += modPackList.list[selected].arguments.Replace("%APPDATA%", vb.appdata() + "\\modpacks\\" + modPackList.list[selected].tag).Replace("%USERNAME%", Properties.Settings.Default.nickname).Replace("%UUID%", session[0]).Replace("%VERSION%", modPackList.list[selected].versionsPath).Replace("%ACCESSTOKEN%", session[1]);
@@ -1101,7 +1101,7 @@ namespace MechZoneModPack
                 {
                     download.Add(false);
                 }
-                DownloadNew dl = new DownloadNew();
+                Download dl = new Download();
                 dl.packID = Properties.Settings.Default.selectedModPack;
                 dl.modPackList = modPackList;
                 dl.select = download;

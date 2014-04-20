@@ -1,6 +1,6 @@
 ﻿namespace MechZoneModPack
 {
-    partial class DownloadNew
+    partial class Download
     {
         /// <summary>
         /// Required designer variable.

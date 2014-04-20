@@ -560,11 +560,13 @@ namespace MechZoneModPack
                         using (FileStream fs = File.Create(path))
                         {
                             fs.Write(GetBytes(debug), 0, debug.Length);
+                            Console.WriteLine(debug);
                         }
                     }
                     else
                     {
                         File.AppendAllText(path, debug);
+                        Console.WriteLine(debug);
                     }
                 }
                 catch (Exception ex)
